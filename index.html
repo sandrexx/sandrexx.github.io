@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog di Sandro Cinquegrana</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #080c18;
+      color: #cdd6f4;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      background: #0a0e1a;
+      padding: 70px 20px 50px;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    /* Canvas particelle */
+    #header-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* Linea glow in basso */
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #00d2ff, #7b2ff7, #00d2ff, transparent);
+      animation: lineScan 4s linear infinite;
+      background-size: 200% 100%;
+    }
+
+    @keyframes lineScan {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .header-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Badge sopra il titolo */
+    .header-badge {
+      display: inline-block;
+      background: rgba(0, 210, 255, 0.12);
+      border: 1px solid rgba(0, 210, 255, 0.4);
+      color: #00d2ff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 18px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+
+    header h1 {
+      font-size: 3.2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #ffffff 0%, #00d2ff 50%, #7b2ff7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 30px rgba(0,210,255,0.4));
+    }
+
+    .header-subtitle {
+      margin-top: 14px;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 1px;
+    }
+
+    .header-subtitle span {
+      color: #00d2ff;
+      font-weight: 600;
+    }
+
+    /* Typing cursor */
+    .typed-text {
+      color: #00d2ff;
+      font-weight: 700;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: #00d2ff;
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: blink 0.8s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Tags tematici */
+    .header-tags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .header-tag {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.82rem;
+      padding: 5px 14px;
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+
+    .header-tag:hover {
+      background: rgba(0,210,255,0.15);
+      border-color: #00d2ff;
+      color: #00d2ff;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: rgba(10, 14, 26, 0.97);
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 0 20px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(0,210,255,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      padding: 16px 18px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      letter-spacing: 0.3px;
+      position: relative;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%; right: 50%;
+      height: 2px;
+      background: linear-gradient(90deg, #00d2ff, #7b2ff7);
+      transition: left 0.25s, right 0.25s;
+      border-radius: 2px 2px 0 0;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    nav a:hover::after {
+      left: 10%; right: 10%;
+    }
+
+    nav a.active {
+      color: #00d2ff;
+    }
+
+    nav a.active::after {
+      left: 10%; right: 10%;
+    }
+
+    /* ── BODY ── */
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f4fb;
+      color: #1a1f36;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .container { grid-template-columns: 1fr; }
+    }
+
+    /* ── ARTICOLI ── */
+    .posts { display: flex; flex-direction: column; gap: 24px; }
+
+    .post-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f4;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .post-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(0,150,220,0.03), transparent 60%);
+      pointer-events: none;
+    }
+
+    .post-card:hover {
+      transform: translateY(-4px);
+      border-color: #00b4d8;
+      box-shadow: 0 8px 30px rgba(0,180,216,0.13);
+    }
+
+    .post-banner { height: 3px; }
+    .post-banner.c1 { background: linear-gradient(90deg, #00d2ff, #7b2ff7); }
+    .post-banner.c2 { background: linear-gradient(90deg, #1dd1a1, #00d2ff); }
+    .post-banner.c3 { background: linear-gradient(90deg, #7b2ff7, #f368e0); }
+    .post-banner.c4 { background: linear-gradient(90deg, #f368e0, #ff6b6b); }
+
+    .post-body { padding: 22px 26px; }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: #e8f4ff;
+      color: #0077b6;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border: 1px solid #b8d9f5;
+    }
+
+    .date { color: #9aa5b4; font-size: 0.82rem; }
+
+    .post-body h2 {
+      font-size: 1.25rem;
+      color: #1a1f36;
+      margin-bottom: 10px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .post-card:hover .post-body h2 { color: #0077b6; }
+
+    .post-body > p {
+      color: #5a6880;
+      line-height: 1.7;
+      font-size: 0.93rem;
+    }
+
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      padding: 8px 20px;
+      background: linear-gradient(90deg, #0077b6, #00b4d8);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .read-more:hover {
+      opacity: 0.88;
+      transform: translateX(2px);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+    .widget {
+      background: #ffffff;
+      border: 1px solid #e2e8f4;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 2px 12px rgba(0,80,150,0.06);
+    }
+
+    .widget h3 {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #0077b6;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2f0fb;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .about-avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00b4d8, #7b2ff7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.9rem;
+      margin: 0 auto 14px;
+      box-shadow: 0 4px 16px rgba(0,180,216,0.25);
+    }
+
+    .widget p { color: #5a6880; font-size: 0.9rem; line-height: 1.6; text-align: center; }
+
+    .cat-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+
+    .cat-list li a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      color: #3d4f6a;
+      font-size: 0.9rem;
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .cat-list li a:hover {
+      background: #e8f4ff;
+      color: #0077b6;
+    }
+
+    .cat-list li a span {
+      background: #e8f0ff;
+      color: #5352ed;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 12px;
+      border: 1px solid #c5caff;
+    }
+
+    .mini-posts { display: flex; flex-direction: column; gap: 14px; }
+
+    .mini-post { display: flex; gap: 12px; align-items: flex-start; }
+
+    .mini-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .mini-post a {
+      text-decoration: none;
+      color: #2d3a50;
+      font-size: 0.87rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .mini-post a:hover { color: #0077b6; }
+
+    .mini-date { color: #9aa5b4; font-size: 0.75rem; margin-top: 2px; }
+
+    .tags-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .tag-pill {
+      background: #f0f4ff;
+      color: #5352ed;
+      border: 1px solid #d0d5ff;
+      padding: 5px 13px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .tag-pill:hover {
+      background: linear-gradient(90deg, #0077b6, #00b4d8);
+      color: white;
+      border-color: transparent;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a0e1a;
+      border-top: 3px solid #0077b6;
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 50px;
+      font-size: 0.88rem;
+    }
+
+    footer span { color: #00d2ff; }
+
+    /* ── HERO SEARCH ── */
+    .search-bar {
+      display: flex;
+      margin-top: 22px;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .search-bar input {
+      padding: 11px 20px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(0,210,255,0.25);
+      border-right: none;
+      border-radius: 30px 0 0 30px;
+      font-size: 0.92rem;
+      width: 260px;
+      outline: none;
+      color: white;
+    }
+
+    .search-bar input::placeholder { color: rgba(255,255,255,0.35); }
+
+    .search-bar button {
+      padding: 11px 20px;
+      background: linear-gradient(90deg, #00d2ff, #7b2ff7);
+      color: white;
+      border: none;
+      border-radius: 0 30px 30px 0;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.92rem;
+      transition: opacity 0.2s;
+    }
+
+    .search-bar button:hover { opacity: 0.85; }
+
+    /* ── MODAL ARTICOLO ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: #ffffff;
+      border: 1px solid #dde6f0;
+      border-radius: 20px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 36px;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,80,150,0.15);
+    }
+
+    .modal-box::-webkit-scrollbar { width: 6px; }
+    .modal-box::-webkit-scrollbar-track { background: #f0f4fb; }
+    .modal-box::-webkit-scrollbar-thumb { background: #b8d4ee; border-radius: 3px; }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #9aa5b4;
+      border: none;
+      background: none;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover { color: #0077b6; }
+
+    .modal-box h2 { color: #1a1f36; margin-bottom: 16px; line-height: 1.3; font-size: 1.4rem; }
+    .modal-box .modal-meta { color: #9aa5b4; font-size: 0.85rem; margin-bottom: 20px; }
+    .modal-box p { color: #3d4f6a; line-height: 1.85; margin-bottom: 14px; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <canvas id="header-canvas"></canvas>
+  <div class="header-inner">
+    <div class="header-badge">📡 &nbsp; Tech Blog &nbsp; 2026</div>
+    <h1>Sandro Cinquegrana</h1>
+    <p class="header-subtitle">
+      Scrivo di &nbsp;<span class="typed-text" id="typedWord"></span><span class="cursor"></span>
+    </p>
+    <div class="header-tags">
+      <span class="header-tag">🤖 Intelligenza Artificiale</span>
+      <span class="header-tag">🚁 Droni</span>
+      <span class="header-tag">📻 Radioamatori</span>
+      <span class="header-tag">🖥️ PC & Hardware</span>
+      <span class="header-tag">💻 Tecnologia</span>
+    </div>
+    <div class="search-bar" style="margin-top:28px;">
+      <input type="text" placeholder="Cerca un articolo..." id="searchInput" oninput="filterPosts()" />
+      <button>🔍</button>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="active" onclick="showAll(event)">🏠 Home</a>
+  <a href="#" onclick="filterByTag('Tecnologia', event)">💻 Tecnologia</a>
+  <a href="#" onclick="filterByTag('IA', event)">🤖 Intelligenza Artificiale</a>
+  <a href="#" onclick="filterByTag('Droni', event)">🚁 Droni</a>
+  <a href="#" onclick="filterByTag('Radioamatori', event)">📻 Radioamatori</a>
+  <a href="#" onclick="filterByTag('PC', event)">🖥️ PC</a>
+</nav>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- ARTICOLI -->
+  <main class="posts" id="postList">
+
+    <article class="post-card" data-tag="IA">
+      <div class="post-banner c3"></div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="tag">IA</span>
+          <span class="date">10 Maggio 2026</span>
+        </div>
+        <h2>🤖 Claude, ChatGPT, Gemini: quale IA uso davvero ogni giorno e perché</h2>
+        <p>Dopo mesi di test con tutti i modelli principali, ho capito cosa funziona e cosa no. Non parlo di benchmark, parlo di uso reale: testi, codice, ricerche, automazioni. Ecco la mia classifica...</p>
+        <a href="#" class="read-more" onclick="openModal('IA', 'Claude, ChatGPT, Gemini: quale IA uso davvero ogni giorno e perché', '10 Maggio 2026', `
+          <p>Ho provato tutti i principali modelli di intelligenza artificiale per mesi. Ecco cosa ho scoperto nell'uso quotidiano reale — non nei test artificiali.</p>
+          <p><strong>ChatGPT (GPT-4o):</strong> il più veloce per domande rapide e codice semplice. L'interfaccia è la più rodata. Pecca sulla precisione su argomenti molto tecnici.</p>
+          <p><strong>Claude (Anthropic):</strong> il migliore per testi lunghi, analisi e ragionamento strutturato. Legge documenti enormi senza perdersi. Lo uso per tutto ciò che richiede attenzione ai dettagli.</p>
+          <p><strong>Gemini (Google):</strong> forte sull'integrazione con Google Workspace. Per chi usa Drive, Docs e Gmail è il più comodo. Sul ragionamento puro è ancora un passo indietro.</p>
+          <p><strong>La mia scelta:</strong> uso Claude per il lavoro serio, ChatGPT per le cose rapide, Gemini quando devo lavorare con file Google. Nessun modello vince su tutto — la chiave è sapere quale usare quando.</p>
+        `); return false;">Leggi tutto →</a>
+      </div>
+    </article>
+
+    <article class="post-card" data-tag="IA">
+      <div class="post-banner c1"></div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="tag">IA</span>
+          <span class="date">7 Maggio 2026</span>
+        </div>
+        <h2>🧠 Come funziona davvero un modello linguistico: spiegato senza formule</h2>
+        <p>Tutti usano ChatGPT o Claude, ma in pochi sanno cosa succede davvero dentro. Non è magia, non è un database di risposte preconfezionate. È qualcosa di più interessante. Te lo spiego con parole semplici...</p>
+        <a href="#" class="read-more" onclick="openModal('IA', 'Come funziona davvero un modello linguistico: spiegato senza formule', '7 Maggio 2026', `
+          <p>Un modello linguistico come GPT o Claude non &quot;sa&quot; le cose nel senso in cui le sa un essere umano. Fa qualcosa di diverso: predice, parola dopo parola, qual è la continuazione più probabile di un testo.</p>
+          <p><strong>Come impara:</strong> durante il training legge miliardi di testi (libri, articoli, forum, codice) e aggiusta miliardi di parametri interni per imparare quali parole tendono a stare vicine, in quali contesti, con quale significato.</p>
+          <p><strong>Il transformer:</strong> il meccanismo chiave si chiama &quot;attention&quot;. Permette al modello di capire che in &quot;la banca è chiusa, non posso prelevare&quot; la parola &quot;banca&quot; si riferisce all\'istituto finanziario, non alla riva di un fiume.</p>
+          <p><strong>Perché sbaglia:</strong> il modello non ragiona come un umano — genera testo plausibile. Se una cosa plausibile è sbagliata, la dice lo stesso. Per questo si &quot;allucina&quot;: inventa fatti con grande sicurezza.</p>
+          <p><strong>Il RLHF:</strong> dopo il training di base, i modelli vengono affinati con feedback umano (Reinforcement Learning from Human Feedback). Questo li rende più utili, più sicuri e meno inclini a produrre contenuti dannosi.</p>
+          <p>Capire questi meccanismi ti rende un utente molto più efficace: sai quando fidarti, quando verificare, e come scrivere prompt che ottengono risultati migliori.</p>
+        `); return false;">Leggi tutto →</a>
+      </div>
+    </article>
+
+    <article class="post-card" data-tag="IA">
+      <div class="post-banner c2"></div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="tag">IA</span>
+          <span class="date">3 Maggio 2026</span>
+        </div>
+        <h2>⚡ Prompt engineering: come scrivere prompt che funzionano davvero</h2>
+        <p>La differenza tra una risposta mediocre e una risposta eccellente dall'IA spesso non è il modello — sei tu. Come scrivi la domanda cambia tutto. Ecco le tecniche che uso ogni giorno...</p>
+        <a href="#" class="read-more" onclick="openModal('IA', 'Prompt engineering: come scrivere prompt che funzionano davvero', '3 Maggio 2026', `
+          <p>Il prompt engineering non è una scienza misteriosa. È semplicemente l\'arte di comunicare bene con un modello linguistico. Queste sono le tecniche che uso ogni giorno.</p>
+          <p><strong>1. Dai un ruolo al modello:</strong> invece di chiedere genericamente, dì &quot;Sei un esperto di elettronica&quot; o &quot;Comportati come un editor professionale&quot;. Il modello adatta tono, vocabolario e livello di dettaglio.</p>
+          <p><strong>2. Sii specifico sul formato:</strong> se vuoi una lista, dillo. Se vuoi un testo scorrevole, dillo. Se vuoi esattamente 3 opzioni, dillo. I modelli seguono le istruzioni quando sono chiare.</p>
+          <p><strong>3. Usa esempi (few-shot):</strong> mostra al modello cosa vuoi con un esempio concreto. &quot;Scrivi una risposta in questo stile: [esempio]&quot; funziona meglio di qualsiasi descrizione astratta.</p>
+          <p><strong>4. Chain of thought:</strong> aggiungi &quot;Ragiona passo per passo&quot; per problemi complessi. Costringe il modello a strutturare il ragionamento invece di sparare la prima risposta.</p>
+          <p><strong>5. Itera:</strong> il primo prompt raramente è il migliore. Affina, correggi, aggiungi contesto. Il dialogo è più potente della domanda singola.</p>
+          <p>Con questi 5 principi ottieni risultati notevolmente migliori — su qualsiasi modello.</p>
+        `); return false;">Leggi tutto →</a>
+      </div>
+    </article>
+
+    <article class="post-card" data-tag="IA">
+      <div class="post-banner c4"></div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="tag">IA</span>
+          <span class="date">29 Aprile 2026</span>
+        </div>
+        <h2>🔮 IA locale sul tuo PC: cos\'è Ollama e perché dovresti provarla</h2>
+        <p>Non hai bisogno di mandare i tuoi dati a OpenAI o Anthropic per usare un\'IA potente. Con Ollama puoi far girare modelli come LLaMA 3 o Mistral direttamente sul tuo PC. Ecco come...</p>
+        <a href="#" class="read-more" onclick="openModal('IA', 'IA locale sul tuo PC: cos\'è Ollama e perché dovresti provarla', '29 Aprile 2026', `
+          <p>Ollama è uno strumento open source che permette di scaricare ed eseguire modelli linguistici direttamente sul proprio computer, senza connessione a internet e senza inviare dati a nessun server esterno.</p>
+          <p><strong>Cosa ti serve:</strong> un PC con almeno 16 GB di RAM per i modelli piccoli (7B parametri), meglio 32 GB per quelli medi (13B). Una GPU NVIDIA o AMD aiuta molto ma non è obbligatoria.</p>
+          <p><strong>Installazione:</strong> scarichi Ollama dal sito ufficiale, lo installi come qualsiasi programma, poi dal terminale scrivi &quot;ollama run llama3&quot; e il modello si scarica e parte. Due comandi in tutto.</p>
+          <p><strong>Modelli consigliati per iniziare:</strong> Llama 3.1 8B per uso generale, Mistral 7B per testi in italiano, CodeLlama per il codice, Phi-3 Mini se hai poca RAM.</p>
+          <p><strong>Perché usarlo:</strong> privacy totale (nessun dato esce dal tuo PC), nessun costo, funziona offline. Ideale per documenti riservati, esperimenti, automazioni locali.</p>
+          <p><strong>Limite onesto:</strong> i modelli locali non raggiungono ancora la qualità di GPT-4 o Claude Opus. Ma per molti compiti quotidiani sono più che sufficienti — e sono tuoi.</p>
+        `); return false;">Leggi tutto →</a>
+      </div>
+    </article>
+
+    <article class="post-card" data-tag="PC">
+      <div class="post-banner c4"></div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="tag">PC</span>
+          <span class="date">2 Maggio 2026</span>
+        </div>
+        <h2>🖥️ Come ho assemblato il mio PC da zero: componenti, errori e consigli</h2>
+        <p>Il primo PC assemblato da soli è sempre una storia a sé. Parti sicuro, poi arriva il momento in cui non si accende e il cuore va a mille. Ecco tutto quello che ho imparato — anche dagli errori...</p>
+        <a href="#" class="read-more" onclick="openModal('PC', 'Come ho assemblato il mio PC da zero: componenti, errori e consigli', '2 Maggio 2026', `
+          <p>Assemblare un PC da zero è soddisfacente come poche cose nel mondo tech. Ma ci sono insidie che nessun tutorial ti dice chiaramente.</p>
+          <p><strong>I componenti scelti:</strong> CPU AMD Ryzen 7 9700X, scheda madre MSI MAG X870, 32 GB DDR5 6000 MHz, SSD NVMe 2 TB, GPU RTX 4070 Super, alimentatore 850W 80+ Gold. Case Fractal Design con buon flusso d'aria.</p>
+          <p><strong>L'errore che ho fatto:</strong> non ho montato i distanziali della scheda madre prima di inserirla nel case. Risultato: 30 minuti di smontaggio che potevo evitare. Controlla sempre prima.</p>
+          <p><strong>Cosa farei diversamente:</strong> prenderei subito un case più grande. Lo spazio per il cable management fa differenza sia per l'estetica che per le temperature.</p>
+          <p><strong>Il momento che vale tutto:</strong> il POST al primo avvio. Quella schermata del BIOS che appare significa che hai fatto tutto giusto. Soddisfazione unica.</p>
+        `); return false;">Leggi tutto →</a>
+      </div>
+    </article>
+
+    <article class="post-card" data-tag="Radioamatori">
+      <div class="post-banner c1"></div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="tag">Radioamatori</span>
+          <span class="date">25 Aprile 2026</span>
+        </div>
+        <h2>📻 Iniziare come radioamatore: patente, apparati e primi contatti</h2>
+        <p>La radio non è roba da nonni. È una delle tecnologie più affascinanti che esistano: comunicare con qualcuno a 10.000 km di distanza con una scatoletta e un filo. Ecco come ho iniziato...</p>
+        <a href="#" class="read-more" onclick="openModal('Radioamatori', 'Iniziare come radioamatore: patente, apparati e primi contatti', '25 Aprile 2026', `
+          <p>Molti pensano che la radio amatoriale sia una cosa del passato. Poi fai il tuo primo contatto in HF con qualcuno dall\'altra parte del mondo e capisci che non c\'è niente di più moderno nel senso più vero.</p>
+          <p><strong>La patente:</strong> in Italia si chiama &laquo;Certificato di Operatore&raquo; e si ottiene superando un esame MISE. L\'esame copre elettronica di base, propagazione, normativa e procedure operative. Con 2-3 mesi di studio serio si passa.</p>
+          <p><strong>Il nominativo:</strong> dopo la patente ottieni il tuo call sign unico, tipo IZ1ABC. È la tua identità in aria.</p>
+          <p><strong>Primo apparato consigliato:</strong> un ricetrasmettitore VHF/UHF portatile (Baofeng UV-5R per iniziare, poi Yaesu o Kenwood per qualcosa di serio) e un ricetrasmettitore HF entry level come l\'Icom IC-7300 se vuoi fare DX.</p>
+          <p><strong>Il primo contatto:</strong> ho chiamato CQ sulla banda dei 40 metri alle 19:00. Risposta da un operatore portoghese a 1.800 km. Segnale 5/9, audio cristallino. Non dimentico quella sera.</p>
+        `); return false;">Leggi tutto →</a>
+      </div>
+    </article>
+
+    <article class="post-card" data-tag="Tecnologia">
+      <div class="post-banner c3"></div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="tag">Tecnologia</span>
+          <span class="date">18 Aprile 2026</span>
+        </div>
+        <h2>💻 I 5 strumenti tech che uso ogni giorno nel 2026</h2>
+        <p>Non parlo delle solite app famose. Parlo di quelli che ho selezionato dopo anni di prove: uno per gli appunti, uno per l'automazione, uno per i file, uno per la privacy e uno che mi ha sorpreso...</p>
+        <a href="#" class="read-more" onclick="openModal('Tecnologia', 'I 5 strumenti tech che uso ogni giorno nel 2026', '18 Aprile 2026', `
+          <p>Dopo anni di sperimentazione, questi sono i 5 strumenti che userei su qualsiasi PC anche se dovessi ricominciare da zero.</p>
+          <p><strong>1. Obsidian</strong> — Appunti collegati in Markdown, tutto in locale. Nessun abbonamento, nessun cloud obbligatorio. I dati sono tuoi.</p>
+          <p><strong>2. Raycast</strong> — Sostituisce il classico launcher di sistema. Lancia app, esegui script, cerca file, controlla la clipboard. Impara i tasti e risparmi ore ogni settimana.</p>
+          <p><strong>3. Syncthing</strong> — Sincronizzazione file peer-to-peer tra i tuoi dispositivi senza passare da server terzi. Alternativa etica a Dropbox.</p>
+          <p><strong>4. Bitwarden</strong> — Password manager open source. Usare la stessa password ovunque nel 2026 è come lasciare le chiavi di casa sulla porta.</p>
+          <p><strong>5. uBlock Origin</strong> — Il filtro annunci che fa davvero quello che promette. Non solo blocca pubblicità: blocca tracker, malvertising e script inutili. Il web con uBlock è un posto diverso.</p>
+        `); return false;">Leggi tutto →</a>
+      </div>
+    </article>
+
+
+    <article class="post-card" data-tag="Droni">
+      <div class="post-banner c2"></div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="tag">Droni</span>
+          <span class="date">13 Maggio 2026</span>
+        </div>
+        <h2>🚁 Padroneggiare il DJI Mini 5 Pro: guida completa per i nuovi piloti</h2>
+        <p>Hai appena aperto la scatola del tuo DJI Mini 5 Pro e non sai da dove cominciare? Questa guida ti porta passo dopo passo — dall'unboxing alle prime riprese cinematografiche — in modo sicuro e consapevole...</p>
+        <a href="#" class="read-more" onclick="openModal('Tecnologia', 'Padroneggiare il DJI Mini 5 Pro: guida completa per i nuovi piloti', '13 Maggio 2026', djiContent); return false;">Leggi tutto →</a>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Chi sono -->
+    <div class="widget">
+      <h3>Chi sono</h3>
+      <div class="about-avatar">📡</div>
+      <p><strong>Sandro Cinquegrana</strong><br>Appassionato di tecnologia, droni, radioamatori e tutto ciò che ha un chip dentro. Qui condivido guide, opinioni e scoperte su IA, PC, droni e radio.</p>
+    </div>
+
+    <!-- Categorie -->
+    <div class="widget">
+      <h3>Categorie</h3>
+      <ul class="cat-list">
+        <li><a href="#" onclick="filterByTag('Tecnologia', event)">💻 Tecnologia <span>2</span></a></li>
+        <li><a href="#" onclick="filterByTag('IA', event)">🤖 Intelligenza Artificiale <span>4</span></a></li>
+        <li><a href="#" onclick="filterByTag('Droni', event)">🚁 Droni <span>1</span></a></li>
+        <li><a href="#" onclick="filterByTag('Radioamatori', event)">📻 Radioamatori <span>1</span></a></li>
+        <li><a href="#" onclick="filterByTag('PC', event)">🖥️ PC <span>1</span></a></li>
+      </ul>
+    </div>
+
+    <!-- Ultimi articoli -->
+    <div class="widget">
+      <h3>Ultimi articoli</h3>
+      <div class="mini-posts">
+        <div class="mini-post">
+          <div class="mini-dot" style="background:#48dbfb"></div>
+          <div>
+            <a href="#">🚁 Guida DJI Mini 5 Pro per principianti</a>
+            <div class="mini-date">13 Maggio 2026</div>
+          </div>
+        </div>
+        <div class="mini-post">
+          <div class="mini-dot" style="background:#f368e0"></div>
+          <div>
+            <a href="#">🤖 Claude, ChatGPT, Gemini a confronto</a>
+            <div class="mini-date">10 Maggio 2026</div>
+          </div>
+        </div>
+        <div class="mini-post">
+          <div class="mini-dot" style="background:#feca57"></div>
+          <div>
+            <a href="#">🖥️ Assemblare un PC da zero</a>
+            <div class="mini-date">2 Maggio 2026</div>
+          </div>
+        </div>
+        <div class="mini-post">
+          <div class="mini-dot" style="background:#ff6b6b"></div>
+          <div>
+            <a href="#">📻 Iniziare come radioamatore</a>
+            <div class="mini-date">25 Aprile 2026</div>
+          </div>
+        </div>
+        <div class="mini-post">
+          <div class="mini-dot" style="background:#1dd1a1"></div>
+          <div>
+            <a href="#">💻 5 strumenti tech del 2026</a>
+            <div class="mini-date">18 Aprile 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tag cloud -->
+    <div class="widget">
+      <h3>Tag</h3>
+      <div class="tags-cloud">
+        <a href="#" class="tag-pill" onclick="filterByTag('Tecnologia', event)">Tecnologia</a>
+        <a href="#" class="tag-pill" onclick="filterByTag('IA', event)">IA</a>
+        <a href="#" class="tag-pill" onclick="filterByTag('Droni', event)">Droni</a>
+        <a href="#" class="tag-pill" onclick="filterByTag('Radioamatori', event)">Radioamatori</a>
+        <a href="#" class="tag-pill" onclick="filterByTag('PC', event)">PC</a>
+        <a href="#" class="tag-pill" onclick="showAll(event)">Tutti</a>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- MODAL ARTICOLO -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="tag" id="modal-tag" style="margin-bottom:12px"></div>
+    <h2 id="modal-title"></h2>
+    <div class="modal-meta" id="modal-date"></div>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Fatto con <span>♥</span> — Blog di Sandro Cinquegrana &copy; 2026</p>
+  <p style="margin-top:6px; font-size:0.8rem; opacity:0.6;">Tutti i diritti riservati</p>
+</footer>
+
+<script>
+  // ── CONTENUTO ARTICOLO DJI MINI 5 PRO ──
+  const djiContent = `
+    <style>
+      .dji-section { margin: 28px 0 10px; }
+      .dji-section h3 { color: #1e2a4a; font-size: 1.15rem; border-left: 4px solid #48dbfb; padding-left: 12px; margin-bottom: 10px; }
+      .dji-section h4 { color: #5352ed; font-size: 1rem; margin: 16px 0 6px; }
+      .dji-tip { background: #f0fff4; border-left: 4px solid #1dd1a1; padding: 12px 16px; border-radius: 8px; margin: 12px 0; font-size: 0.93rem; color: #2d6a4f; }
+      .dji-warn { background: #fff5f5; border-left: 4px solid #ff6b6b; padding: 12px 16px; border-radius: 8px; margin: 12px 0; font-size: 0.93rem; color: #c0392b; }
+      .dji-step { display: flex; gap: 12px; align-items: flex-start; margin: 8px 0; }
+      .dji-num { background: #5352ed; color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.82rem; flex-shrink: 0; margin-top: 2px; }
+      .dji-step p { margin: 0; color: #444; font-size: 0.95rem; line-height: 1.6; }
+      .dji-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9rem; }
+      .dji-table th { background: #1e2a4a; color: white; padding: 10px 14px; text-align: left; }
+      .dji-table td { padding: 9px 14px; border-bottom: 1px solid #eee; color: #444; }
+      .dji-table tr:nth-child(even) td { background: #f8f9ff; }
+      .dji-badge { display: inline-block; background: linear-gradient(90deg,#48dbfb,#1dd1a1); color: white; font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; margin-right: 6px; }
+    </style>
+
+    <p style="font-size:1.05rem; color:#333; line-height:1.8; margin-bottom:6px;">
+      Il <strong>DJI Mini 5 Pro</strong> è il drone perfetto per chi inizia: leggero (sotto i 250 g),
+      potente e dotato di stabilizzazione avanzata. Ma "facile da usare" non significa "usare senza prepararsi".
+      Questa guida ti dà tutto quello che ti serve per volare in sicurezza fin dal primo giorno.
+    </p>
+
+    <div class="dji-tip">
+      💡 <strong>Perché il Mini 5 Pro?</strong> Meno di 250 g significa meno vincoli burocratici in molti paesi EU.
+      Telecamera con sensore più grande rispetto ai predecessori, stabilizzatore a 3 assi, ostacolo detection su più lati.
+      Un drone serio, in un corpo piccolo.
+    </div>
+
+    <!-- SEZIONE 1 -->
+    <div class="dji-section">
+      <h3>📦 Unboxing e prima accensione</h3>
+      <p style="color:#555;line-height:1.7;margin-bottom:10px;">
+        Apri la confezione con calma e verifica subito che ci sia tutto: drone, radiocomando (RC-N3 o RC2 a seconda della versione),
+        almeno una batteria, cavi di ricarica e le eliche di ricambio. Conserva la scatola — ti servirà per il trasporto.
+      </p>
+      <h4>Prima di toccare qualsiasi pulsante:</h4>
+      <div class="dji-step"><div class="dji-num">1</div><p>Carica completamente la batteria del drone <em>e</em> quella del radiocomando. Non saltare questo passaggio — un volo con batteria parziale è il modo più veloce per perdere il drone.</p></div>
+      <div class="dji-step"><div class="dji-num">2</div><p>Scarica l'app <strong>DJI Fly</strong> sul tuo smartphone (se usi l'RC-N3) oppure aggiorna il firmware dell'RC2. Segui la procedura di attivazione guidata dall'app.</p></div>
+      <div class="dji-step"><div class="dji-num">3</div><p>Aggiorna il firmware del drone appena l'app lo suggerisce. Fallo a casa, non sul campo. I bug fix e le migliorie di stabilità arrivano tramite aggiornamenti.</p></div>
+      <div class="dji-step"><div class="dji-num">4</div><p>Inserisci una microSD (consigliata: classe V30 o superiore, min. 64 GB) per registrare i video in locale. Senza SD registri solo sullo storage interno limitato.</p></div>
+    </div>
+
+    <!-- SEZIONE 2 -->
+    <div class="dji-section">
+      <h3>✅ Primi passi e nozioni essenziali pre-volo</h3>
+
+      <h4>⚙️ Configurazione iniziale</h4>
+      <p style="color:#555;line-height:1.7;margin-bottom:8px;">
+        All'interno dell'app DJI Fly imposta subito queste voci nelle <em>Impostazioni di sicurezza</em>:
+      </p>
+      <div class="dji-step"><div class="dji-num">1</div><p><strong>Altitudine massima:</strong> inizia con 50–60 m. Ti dà abbastanza campo visivo senza rischiare di perdere il controllo visivo del drone.</p></div>
+      <div class="dji-step"><div class="dji-num">2</div><p><strong>Distanza massima:</strong> imposta 100–150 m per i primi voli. Allargherai man mano che acquisisci confidenza.</p></div>
+      <div class="dji-step"><div class="dji-num">3</div><p><strong>RTH (Return to Home):</strong> attiva il rientro automatico e imposta l'altitudine di rientro almeno 10 m sopra l'ostacolo più alto nell'area di volo.</p></div>
+      <div class="dji-step"><div class="dji-num">4</div><p><strong>Modalità di volo:</strong> scegli <em>Modalità Normale</em> per i primi voli. Evita la Modalità Sport finché non hai almeno 5–6 ore di pratica.</p></div>
+
+      <h4>🧭 Calibrazione del drone</h4>
+      <p style="color:#555;line-height:1.7;margin-bottom:8px;">
+        Prima di ogni sessione in un posto nuovo, calibra la bussola e l'IMU se l'app lo richiede.
+        Non farlo vicino a strutture metalliche, auto o linee elettriche.
+      </p>
+      <div class="dji-tip">
+        💡 <strong>Bussola = orientamento.</strong> IMU = stabilità in volo. Se l'app ti avvisa di calibrare, fallo sempre.
+        Un drone non calibrato può avere derive imprevedibili in hovering.
+      </div>
+
+      <h4>🔍 Checklist pre-volo (falla ogni volta)</h4>
+      <table class="dji-table">
+        <tr><th>Cosa controllare</th><th>Perché</th></tr>
+        <tr><td>Eliche montate correttamente (clic finale)</td><td>Un'elica allentata causa crash immediato</td></tr>
+        <tr><td>Batteria drone &gt; 80% per il primo volo</td><td>Evita atterraggio forzato improvviso</td></tr>
+        <tr><td>Nessun ostacolo nei 5 m intorno</td><td>I sensori hanno angoli ciechi durante il decollo</td></tr>
+        <tr><td>Segnale GPS: almeno 8–10 satelliti</td><td>Sotto 6 il hovering è instabile</td></tr>
+        <tr><td>Vento sotto i 30 km/h</td><td>Il Mini 5 Pro regge bene, ma sopra i 35 km/h i filmati soffrono</td></tr>
+        <tr><td>Area di atterraggio pulita e pianeggiante</td><td>Prepara dove atterrerai prima di decollare</td></tr>
+      </table>
+
+      <h4>⚖️ Considerazioni legali (Italia / UE)</h4>
+      <p style="color:#555;line-height:1.7;margin-bottom:8px;">
+        Il DJI Mini 5 Pro pesa meno di 250 g, ma <strong>non è esente da ogni regola</strong>.
+        In Italia e nell'UE si applica il regolamento EASA. Ecco i punti principali:
+      </p>
+      <div class="dji-step"><div class="dji-num">1</div><p><strong>Registrazione:</strong> se voli in categoria aperta A1/A3, devi registrarti come operatore UAS sull'apposito portale dell'ente nazionale (ENAC in Italia). Costa pochi euro e si fa online.</p></div>
+      <div class="dji-step"><div class="dji-num">2</div><p><strong>Dove non volare:</strong> mai sopra assembramenti di persone, mai entro 5 km da aeroporti senza autorizzazione, mai in zone vietate (aree militari, parchi nazionali con divieto specifico).</p></div>
+      <div class="dji-step"><div class="dji-num">3</div><p><strong>Vista visiva:</strong> devi sempre tenere il drone in vista diretta. Niente occhiali FPV senza un osservatore dedicato.</p></div>
+      <div class="dji-step"><div class="dji-num">4</div><p><strong>Orari:</strong> il volo notturno richiede autorizzazione specifica. Di giorno, evita le ore di punta nei parchi pubblici affollati.</p></div>
+      <div class="dji-warn">
+        ⚠️ <strong>Attenzione:</strong> le app come AirMap o DJI FlySafe mostrano le zone di restrizione in tempo reale. Controllale sempre prima di uscire. Le sanzioni per volo non autorizzato sono salate.
+      </div>
+    </div>
+
+    <!-- SEZIONE 3 -->
+    <div class="dji-section">
+      <h3>🎮 Padroneggiare i comandi e le manovre di volo</h3>
+
+      <h4>Il radiocomando: cosa fa ogni leva</h4>
+      <p style="color:#555;line-height:1.7;margin-bottom:10px;">
+        Il Mini 5 Pro usa la configurazione <strong>Mode 2</strong> di default (la più diffusa al mondo):
+      </p>
+      <table class="dji-table">
+        <tr><th>Leva</th><th>Movimento</th><th>Effetto</th></tr>
+        <tr><td>Sinistra ↑↓</td><td>Spinta motori (Throttle)</td><td>Drone sale / scende</td></tr>
+        <tr><td>Sinistra ←→</td><td>Rotazione (Yaw)</td><td>Drone ruota su se stesso</td></tr>
+        <tr><td>Destra ↑↓</td><td>Avanti/indietro (Pitch)</td><td>Drone si inclina e avanza/retrocede</td></tr>
+        <tr><td>Destra ←→</td><td>Scivolata laterale (Roll)</td><td>Drone si sposta a destra/sinistra</td></tr>
+      </table>
+      <div class="dji-tip">
+        💡 <strong>Consiglio:</strong> esercitati sui movimenti singoli prima di combinarli.
+        Passare 10 minuti a fare solo yaw, poi solo pitch, poi solo roll — ti darà controllo molto prima di quanto pensi.
+      </div>
+
+      <h4>🛫 Decollo: i primi 3 minuti</h4>
+      <div class="dji-step"><div class="dji-num">1</div><p>Posiziona il drone su una superficie piana, lontano da te di almeno 3 m. Accendi prima il radiocomando, poi il drone.</p></div>
+      <div class="dji-step"><div class="dji-num">2</div><p>Aspetta che il GPS si agganci (icona verde nell'app, almeno 8 satelliti). Non decollare con GPS in acquisizione — il drone potrebbe andare alla deriva.</p></div>
+      <div class="dji-step"><div class="dji-num">3</div><p>Usa il tasto decollo automatico nell'app oppure spingi entrambe le leve verso il basso-esterno per armare i motori, poi alza lentamente la leva sinistra.</p></div>
+      <div class="dji-step"><div class="dji-num">4</div><p>Sali a circa 3–4 m e fermati. Lascia le leve al centro e osserva: il drone deve restare fermo in hovering. Se deriva, atterra e controlla la calibrazione.</p></div>
+
+      <h4>✈️ Manovre base da imparare nell'ordine</h4>
+      <div class="dji-step"><div class="dji-num">1</div><p><strong>Hovering stabile:</strong> tieni il drone fermo a 5 m per 60 secondi senza toccarlo. Se oscilla è normale all'inizio — i sensori compensano, tu impara a non correggere in modo eccessivo.</p></div>
+      <div class="dji-step"><div class="dji-num">2</div><p><strong>Quadrato orizzontale:</strong> avanza, laterale destra, indietro, laterale sinistra. Torna al punto di partenza. Ripeti finché il quadrato è pulito.</p></div>
+      <div class="dji-step"><div class="dji-num">3</div><p><strong>Rotazione su punto fisso:</strong> scegli un oggetto a terra, tienilo al centro dello schermo e ruota intorno ad esso usando yaw + roll. È la mossa cinematografica più usata.</p></div>
+      <div class="dji-step"><div class="dji-num">4</div><p><strong>Volo in avanti con discesa graduale:</strong> avanza e scendi lentamente in contemporanea. Crea l'effetto "reveal" — il soggetto appare mentre ti avvicini.</p></div>
+      <div class="dji-step"><div class="dji-num">5</div><p><strong>Dronie:</strong> inquadra te stesso, poi retrocedi e sali lentamente. Il Mini 5 Pro ha una modalità automatica per questo, ma impararlo a mano ti dà controllo totale.</p></div>
+
+      <h4>🎬 Prime riprese cinematografiche</h4>
+      <p style="color:#555;line-height:1.7;margin-bottom:8px;">
+        Prima di pensare alla cinepresa, impara a volare liscio. Un filmato mosso non si salva in post-produzione.
+        Poi applica queste regole base:
+      </p>
+      <div class="dji-step"><div class="dji-num">1</div><p><strong>Regola dello shutter:</strong> imposta il tempo di esposizione al doppio del framerate (es. 1/50s a 25fps). Dà il mosso naturale ai filmati, non il look "video cheap" dello shutter troppo veloce.</p></div>
+      <div class="dji-step"><div class="dji-num">2</div><p><strong>Usa il filtro ND:</strong> in giornata soleggiata, un ND8 o ND16 ti permette di rispettare la regola dello shutter senza sovraesporre. Gli ND sono il primo accessorio da comprare dopo il drone.</p></div>
+      <div class="dji-step"><div class="dji-num">3</div><p><strong>Registra in D-Log M:</strong> il profilo colore piatto del Mini 5 Pro. I filmati sembrano slavati sul momento, ma ti danno molto più margine in editing per colori e contrasto.</p></div>
+      <div class="dji-step"><div class="dji-num">4</div><p><strong>Muovi la gimbal lentamente:</strong> i tilt bruschi verso il basso o l'alto sembrano amatoriali. Usa la rotellina del gimbal con movimenti lenti e continui.</p></div>
+
+      <div class="dji-tip">
+        💡 <strong>Modalità QuickShot:</strong> il Mini 5 Pro ha manovre automatiche (Rocket, Boomerang, Helix, ecc.).
+        Usale per imparare come si muove un drone cinematografico — poi replicale a mano per avere controllo totale.
+      </div>
+    </div>
+
+    <!-- SEZIONE 4 -->
+    <div class="dji-section">
+      <h3>🔋 Gestione della batteria in volo</h3>
+      <p style="color:#555;line-height:1.7;margin-bottom:8px;">
+        Il Mini 5 Pro ha un'autonomia di circa 34 minuti in condizioni ideali. Nella realtà, vento e temperature basse la riducono.
+        Segui questa regola semplice:
+      </p>
+      <div class="dji-warn">
+        ⚠️ <strong>Regola del 30%:</strong> atterra quando la batteria è al 30%. Non aspettare il rientro automatico di emergenza (20%).
+        Lascia sempre margine per imprevist.
+      </div>
+      <p style="color:#555;line-height:1.7;">
+        Non ricaricare le batterie LiPo (quelle del drone) appena tornato dal volo — sono calde. Aspetta almeno 15–20 minuti.
+        Non lasciarle a carica completa per più di 48 ore se non le usi: le batterie DJI hanno la funzione di scarica automatica, attivala nelle impostazioni dell'app.
+      </p>
+    </div>
+
+    <!-- CONCLUSIONE -->
+    <div class="dji-section">
+      <h3>🏁 Conclusione: la pratica è tutto</h3>
+      <p style="color:#444;line-height:1.8;margin-bottom:12px;">
+        Il DJI Mini 5 Pro ti dà strumenti professionali in un formato accessibile. Ma la differenza tra un filmato mediocre
+        e uno davvero bello non la fa il drone — la fai tu con la pratica.
+      </p>
+      <p style="color:#444;line-height:1.8;margin-bottom:12px;">
+        Inizia con sessioni brevi (15–20 minuti), in spazi aperti, con poca gente. Ripeti le stesse manovre finché
+        non diventano automatiche. Solo dopo passa ai luoghi più complessi, alle riprese in movimento, ai filmati montati.
+      </p>
+      <p style="color:#444;line-height:1.8;margin-bottom:12px;">
+        La sicurezza non è una limitazione alla creatività — è quello che ti permette di volare ancora domani,
+        e dopodomani, e di migliorare ogni volta. Un pilota attento è un pilota che dura.
+      </p>
+      <div class="dji-tip">
+        ✅ <strong>Prossimi passi suggeriti:</strong> iscriviti a un corso teorico ENAC online (obbligatorio per alcune categorie),
+        entra in una community di piloti locali, guarda i filmati degli altri e analizza i movimenti — imparerai tantissimo anche senza volare.
+      </div>
+    </div>
+  `;
+
+  // Filtra per testo
+  function filterPosts() {
+    const val = document.getElementById('searchInput').value.toLowerCase();
+    document.querySelectorAll('.post-card').forEach(c => {
+      const text = c.innerText.toLowerCase();
+      c.style.display = text.includes(val) ? '' : 'none';
+    });
+  }
+
+  // Filtra per tag
+  function filterByTag(tag, e) {
+    if (e) e.preventDefault();
+    document.querySelectorAll('.post-card').forEach(c => {
+      c.style.display = (c.dataset.tag === tag) ? '' : 'none';
+    });
+    // Aggiorna nav
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    if (e && e.target) e.target.classList.add('active');
+  }
+
+  // Mostra tutti
+  function showAll(e) {
+    if (e) e.preventDefault();
+    document.querySelectorAll('.post-card').forEach(c => c.style.display = '');
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    if (e && e.target) e.target.classList.add('active');
+    document.getElementById('searchInput').value = '';
+  }
+
+  // Modal
+  function openModal(tag, title, date, content) {
+    document.getElementById('modal-tag').textContent = tag;
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-date').textContent = date;
+    document.getElementById('modal-content').innerHTML = content;
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ── PARTICELLE HEADER ──
+  (function() {
+    const canvas = document.getElementById('header-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const COUNT = 70;
+
+    function resize() {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', () => { resize(); });
+
+    function rand(min, max) { return Math.random() * (max - min) + min; }
+
+    for (let i = 0; i < COUNT; i++) {
+      particles.push({
+        x: rand(0, canvas.width),
+        y: rand(0, canvas.height),
+        r: rand(1, 2.5),
+        dx: rand(-0.3, 0.3),
+        dy: rand(-0.3, 0.3),
+        alpha: rand(0.2, 0.8)
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Linee di connessione
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(0,210,255,${0.12 * (1 - dist/120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Punti
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,210,255,${p.alpha})`;
+        ctx.fill();
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width)  p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // ── TYPING EFFECT ──
+  (function() {
+    const words = ['Intelligenza Artificiale', 'Droni', 'Radioamatori', 'PC & Hardware', 'Tecnologia'];
+    let wi = 0, ci = 0, deleting = false;
+    const el = document.getElementById('typedWord');
+
+    function type() {
+      const word = words[wi];
+      if (!deleting) {
+        el.textContent = word.slice(0, ++ci);
+        if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
+        setTimeout(type, 80);
+      } else {
+        el.textContent = word.slice(0, --ci);
+        if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(type, 300); return; }
+        setTimeout(type, 45);
+      }
+    }
+    type();
+  })();
+</script>
+
+</body>
+</html>
