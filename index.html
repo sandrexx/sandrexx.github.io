@@ -662,11 +662,6 @@ nav {
 .share-wa { background: #25d366; color: white; }
 
 /* ===== PAGINATION ===== */
-.pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 48px 0; }
-.page-btn { width: 40px; height: 40px; border-radius: var(--radius); background: var(--bg2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: var(--text2); cursor: pointer; transition: all 0.2s; }
-.page-btn:hover, .page-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
-.page-btn.dots { background: transparent; border: none; cursor: default; }
-
 /* ===== AD BANNERS ===== */
 .ad-banner {
   background: var(--bg3);
@@ -1299,6 +1294,42 @@ footer {
     <div class="main-layout">
       <div>
 
+        <!-- ⚠️ ANTEPRIMA METEO — da approvare -->
+        <div class="section" id="meteo-preview-section">
+          <div class="section-header">
+            <h2 class="section-title">🌤️ Meteo Campania</h2>
+            <span style="font-size:12px;color:var(--text3);font-style:italic;">Anteprima — dati in tempo reale</span>
+          </div>
+          <div id="meteo-widget">
+            <!-- Scheletro sempre visibile prima del caricamento API -->
+            <div style="background:linear-gradient(135deg,#1a3a5a 0%,#0d2040 100%);border-radius:var(--radius);overflow:hidden;color:white;">
+              <div style="display:grid;grid-template-columns:1fr auto;align-items:center;padding:16px 20px 12px;">
+                <div>
+                  <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.6;margin-bottom:2px;">📍 Napoli — Campania</div>
+                  <div style="font-size:44px;font-weight:900;font-family:Georgia,serif;line-height:1;" id="meteo-temp">--°<span style="font-size:20px;opacity:0.7;">C</span></div>
+                  <div style="font-size:14px;font-weight:600;margin-top:2px;" id="meteo-desc">⏳ Caricamento...</div>
+                  <div style="font-size:11px;opacity:0.65;margin-top:2px;" id="meteo-feels"></div>
+                </div>
+                <div style="text-align:right;font-size:11px;display:flex;flex-direction:column;gap:8px;opacity:0.8;">
+                  <div id="meteo-wind">💨 <strong>--</strong><br>Vento</div>
+                  <div id="meteo-hum">💧 <strong>--</strong><br>Umidità</div>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid rgba(255,255,255,0.1);" id="meteo-forecast">
+                ${['Oggi','Lun','Mar','Mer','Gio','Ven'].map((d,i)=>`
+                  <div style="padding:8px 4px;text-align:center;${i<5?'border-right:1px solid rgba(255,255,255,0.08);':''}">
+                    <div style="font-size:10px;font-weight:700;opacity:0.6;text-transform:uppercase;">${d}</div>
+                    <div style="font-size:18px;margin:4px 0;">⏳</div>
+                    <div style="font-size:11px;font-weight:700;color:#f0b030;">--°</div>
+                    <div style="font-size:10px;opacity:0.5;">--°</div>
+                  </div>`).join('')}
+              </div>
+              <div style="padding:5px 20px;font-size:9px;opacity:0.35;text-align:right;">Dati: Open-Meteo.com</div>
+            </div>
+          </div>
+        </div>
+        <div class="section-divider"></div>
+
         <!-- ULTIME NOTIZIE -->
         <div class="section">
           <div class="section-header">
@@ -1341,14 +1372,6 @@ footer {
         </div>
 
         <!-- PAGINATION -->
-        <div class="pagination">
-          <button class="page-btn active">1</button>
-          <button class="page-btn">2</button>
-          <button class="page-btn">3</button>
-          <button class="page-btn dots">…</button>
-          <button class="page-btn">8</button>
-          <button class="page-btn">›</button>
-        </div>
       </div>
 
       <!-- SIDEBAR -->
@@ -1455,12 +1478,6 @@ footer {
       <div class="main-layout">
         <div>
           <div class="grid-3" id="viaggi-cards"></div>
-          <div class="pagination">
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn">›</button>
-          </div>
         </div>
         <aside class="sidebar" id="viaggi-sidebar"></aside>
       </div>
@@ -1479,10 +1496,6 @@ footer {
       <div class="main-layout">
         <div>
           <div class="grid-3" id="softair-cards"></div>
-          <div class="pagination">
-            <button class="page-btn active">1</button>
-            <button class="page-btn">›</button>
-          </div>
         </div>
         <aside class="sidebar" id="softair-sidebar"></aside>
       </div>
@@ -3391,7 +3404,7 @@ const LEGAL_CONTENT = {
     title: '🍪 Cookie Policy',
     body: `
       <h3 style="font-size:17px;font-weight:700;margin:0 0 10px;color:var(--text);">Questo sito non usa cookie</h3>
-      <p>Il sito <strong>sandrocinquegrana.netlify.app</strong> (o dominio equivalente) non installa <strong>nessun cookie</strong> sul dispositivo dell'utente, né tecnici, né analitici, né di marketing o profilazione.</p>
+      <p>Il sito <strong>sandrexx.github.io</strong> non installa <strong>nessun cookie</strong> sul dispositivo dell'utente, né tecnici, né analitici, né di marketing o profilazione.</p>
 
       <h3 style="font-size:17px;font-weight:700;margin:20px 0 10px;color:var(--text);">Cosa usiamo al posto dei cookie</h3>
       <p>Per il contatore di visite, il sito usa il <strong>localStorage</strong> del browser — una memoria locale che:</p>
@@ -3545,13 +3558,7 @@ function setDate() {
   if (el) el.textContent = d.toLocaleDateString('it-IT', opts);
 }
 
-// ===== PAGINATION BUTTONS =====
-document.querySelectorAll('.page-btn:not(.dots)').forEach(btn=>{
-  btn.addEventListener('click', function(){
-    this.closest('.pagination')?.querySelectorAll('.page-btn').forEach(b=>b.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
+
 
 // ===== VISIT COUNTER =====
 function initVisitCounter() {
@@ -3613,6 +3620,75 @@ function updatePillCounts() {
   });
 }
 
+// ===== METEO CAMPANIA (Open-Meteo — gratuito, no API key) =====
+async function loadMeteo() {
+  const el = document.getElementById('meteo-widget');
+  if (!el) return;
+  try {
+    const url = 'https://api.open-meteo.com/v1/forecast'
+      + '?latitude=40.8522&longitude=14.2681'
+      + '&current=temperature_2m,apparent_temperature,weathercode,windspeed_10m,relativehumidity_2m'
+      + '&daily=weathercode,temperature_2m_max,temperature_2m_min'
+      + '&timezone=Europe%2FRome&forecast_days=6&wind_speed_unit=kmh';
+    const res = await fetch(url);
+    const d = await res.json();
+    const cur = d.current;
+    const daily = d.daily;
+
+    const WMO = {
+      0:['☀️','Sereno'],1:['🌤️','Poco nuvoloso'],2:['⛅','Parzialmente nuvoloso'],3:['☁️','Nuvoloso'],
+      45:['🌫️','Nebbia'],48:['🌫️','Nebbia gelata'],
+      51:['🌦️','Pioggerella'],53:['🌦️','Pioggerella'],55:['🌧️','Pioggerella intensa'],
+      61:['🌧️','Pioggia'],63:['🌧️','Pioggia moderata'],65:['🌧️','Pioggia intensa'],
+      71:['🌨️','Neve'],73:['🌨️','Neve moderata'],75:['❄️','Neve intensa'],
+      80:['🌦️','Rovesci'],81:['🌧️','Rovesci moderati'],82:['⛈️','Rovesci violenti'],
+      95:['⛈️','Temporale'],96:['⛈️','Temporale con grandine'],99:['⛈️','Temporale forte'],
+    };
+    const wmo = (code) => WMO[code] || ['🌡️','Variabile'];
+    const days = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
+    const [icon, desc] = wmo(cur.weathercode);
+
+    el.innerHTML = `
+      <div style="background:linear-gradient(135deg,#1a3a5a 0%,#0d2040 100%);border-radius:var(--radius);overflow:hidden;color:white;">
+
+        <!-- Attuale -->
+        <div style="display:grid;grid-template-columns:1fr auto;align-items:center;padding:16px 20px 12px;">
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.6;margin-bottom:2px;">📍 Napoli — Campania</div>
+            <div style="font-size:44px;font-weight:900;font-family:var(--font-display);line-height:1;">${Math.round(cur.temperature_2m)}°<span style="font-size:20px;opacity:0.7;">C</span></div>
+            <div style="font-size:14px;font-weight:600;margin-top:2px;">${icon} ${desc}</div>
+            <div style="font-size:11px;opacity:0.65;margin-top:2px;">Percepita ${Math.round(cur.apparent_temperature)}°C</div>
+          </div>
+          <div style="text-align:right;font-size:11px;display:flex;flex-direction:column;gap:8px;opacity:0.8;">
+            <div>💨 <strong>${Math.round(cur.windspeed_10m)} km/h</strong><br>Vento</div>
+            <div>💧 <strong>${cur.relativehumidity_2m}%</strong><br>Umidità</div>
+          </div>
+        </div>
+
+        <!-- Previsioni 6 giorni -->
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid rgba(255,255,255,0.1);">
+          ${daily.time.map((t,i) => {
+            const date = new Date(t);
+            const label = i === 0 ? 'Oggi' : days[date.getDay()];
+            const [ico] = wmo(daily.weathercode[i]);
+            return `
+            <div style="padding:8px 4px;text-align:center;${i<5?'border-right:1px solid rgba(255,255,255,0.08);':''}">
+              <div style="font-size:10px;font-weight:700;opacity:0.6;text-transform:uppercase;">${label}</div>
+              <div style="font-size:18px;margin:4px 0;">${ico}</div>
+              <div style="font-size:11px;font-weight:700;color:#f0b030;">${Math.round(daily.temperature_2m_max[i])}°</div>
+              <div style="font-size:10px;opacity:0.5;">${Math.round(daily.temperature_2m_min[i])}°</div>
+            </div>`;
+          }).join('')}
+        </div>
+
+        <div style="padding:5px 20px;font-size:9px;opacity:0.35;text-align:right;">Dati: Open-Meteo.com</div>
+      </div>`;
+  } catch(e) {
+    document.getElementById('meteo-widget').innerHTML =
+      '<div style="padding:24px;color:var(--text3);font-size:13px;">⚠️ Impossibile caricare i dati meteo. Controlla la connessione internet.</div>';
+  }
+}
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', ()=>{
   setDate();
@@ -3622,6 +3698,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   updatePillCounts();
   initVisitCounter();
   initReadingProgress();
+  loadMeteo();
   sliderTimer = setInterval(()=>goSlide(currentSlide+1), 5000);
 
   // Keyboard close modal
