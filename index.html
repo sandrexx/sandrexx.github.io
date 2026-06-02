@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="it" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -798,6 +798,122 @@ footer {
 .btn-submit { background: var(--accent); color: white; padding: 12px 32px; border-radius: var(--radius); font-weight: 700; font-size: 14px; letter-spacing: 0.04em; cursor: pointer; transition: background 0.2s; }
 .btn-submit:hover { background: #a03020; }
 
+/* ===== VISIT COUNTER WIDGET ===== */
+.visit-counter-widget {
+  background: linear-gradient(135deg, #1a3a5a 0%, #0d2040 100%);
+  color: white;
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.visit-counter-widget::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 120px; height: 120px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+}
+.visit-counter-widget::after {
+  content: '';
+  position: absolute;
+  bottom: -20px; left: -20px;
+  width: 80px; height: 80px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+}
+.visit-counter-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 6px;
+}
+.visit-counter-number {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1;
+  color: #f0b030;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+.visit-counter-sublabel {
+  font-size: 12px;
+  opacity: 0.55;
+  margin-bottom: 18px;
+}
+.visit-counter-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+.visit-counter-stat {
+  background: rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 10px 8px;
+}
+.visit-counter-stat-num {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--accent2);
+}
+.visit-counter-stat-lbl {
+  font-size: 10px;
+  opacity: 0.55;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.visit-counter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 14px;
+  position: relative;
+  z-index: 1;
+}
+.visit-counter-dot {
+  width: 7px; height: 7px;
+  background: #4caf50;
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+/* Topbar counter badge */
+.topbar-visits {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.85;
+}
+.topbar-visits-dot {
+  width: 6px; height: 6px;
+  background: #4caf50;
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+
 /* ===== READING PROGRESS ===== */
 #reading-progress {
   position: fixed;
@@ -1055,12 +1171,17 @@ footer {
       <span>🌡️ Notizie aggiornate</span>
     </div>
     <div class="topbar-right">
+      <div class="topbar-visits">
+        <span class="topbar-visits-dot"></span>
+        <span>👁 <span id="topbar-visit-count">0</span> visite</span>
+      </div>
       <div class="topbar-social">
-        <a href="#" title="Facebook">📘</a>
-        <a href="#" title="Instagram">📸</a>
-        <a href="#" title="Twitter/X">🐦</a>
-        <a href="#" title="YouTube">▶️</a>
-        <a href="#" title="Telegram">✈️</a>
+        <a href="https://www.facebook.com/sandro.cinquegrana.7/" target="_blank" rel="noopener" title="Facebook" style="display:flex;align-items:center;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.884v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@sandrexx100/videos" target="_blank" rel="noopener" title="YouTube" style="display:flex;align-items:center;">
+          <svg width="20" height="14" viewBox="0 0 24 17" fill="#ff0000"><path d="M23.495 2.651a3.017 3.017 0 0 0-2.122-2.136C19.545 0 12 0 12 0S4.455 0 2.627.515A3.017 3.017 0 0 0 .505 2.651C0 4.49 0 8.333 0 8.333s0 3.844.505 5.682a3.017 3.017 0 0 0 2.122 2.136C4.455 16.667 12 16.667 12 16.667s7.545 0 9.373-.516a3.017 3.017 0 0 0 2.122-2.136C24 12.177 24 8.333 24 8.333s0-3.843-.505-5.682zm-13.99 9.178V5.172l6.266 3.328-6.266 3.329z"/></svg>
+        </a>
       </div>
     </div>
   </div>
@@ -1132,37 +1253,37 @@ footer {
       <div class="category-pill" onclick="showPage('viaggi');setNavByName('Viaggi')">
         <span class="emoji">✈️</span>
         <span class="name">Viaggi</span>
-        <span class="count">24 articoli</span>
+        <span class="count" id="pill-count-viaggi">— articoli</span>
       </div>
       <div class="category-pill" onclick="showPage('softair');setNavByName('Softair')">
         <span class="emoji">🎯</span>
         <span class="name">Softair</span>
-        <span class="count">6 articoli</span>
+        <span class="count" id="pill-count-softair">— articoli</span>
       </div>
       <div class="category-pill" onclick="showPage('tech');setNavByName('Tecnologia')">
         <span class="emoji">💻</span>
         <span class="name">Tecnologia</span>
-        <span class="count">22 articoli</span>
+        <span class="count" id="pill-count-tech">— articoli</span>
       </div>
       <div class="category-pill" onclick="showPage('smartphone');setNavByName('Smartphone')">
         <span class="emoji">📱</span>
         <span class="name">Smartphone</span>
-        <span class="count">16 articoli</span>
+        <span class="count" id="pill-count-smartphone">— articoli</span>
       </div>
       <div class="category-pill" onclick="showPage('droni');setNavByName('Droni')">
         <span class="emoji">🚁</span>
         <span class="name">Droni</span>
-        <span class="count">14 articoli</span>
+        <span class="count" id="pill-count-droni">— articoli</span>
       </div>
       <div class="category-pill" onclick="showPage('radio');setNavByName('Radioamatori')">
         <span class="emoji">📻</span>
         <span class="name">Radioamatori</span>
-        <span class="count">12 articoli</span>
+        <span class="count" id="pill-count-radio">— articoli</span>
       </div>
       <div class="category-pill" onclick="showPage('ai');setNavByName('Intelligenza Artificiale')">
         <span class="emoji">🤖</span>
         <span class="name">AI</span>
-        <span class="count">20 articoli</span>
+        <span class="count" id="pill-count-ai">— articoli</span>
       </div>
       <div class="category-pill" onclick="showPage('chisono');setNavByName('Chi Sono')">
         <span class="emoji">👤</span>
@@ -1262,6 +1383,27 @@ footer {
           </div>
         </div>
 
+        <!-- CONTATORE VISITE -->
+        <div class="visit-counter-widget">
+          <div class="visit-counter-label">👁 Contatore Visite</div>
+          <div class="visit-counter-number" id="vc-total">0</div>
+          <div class="visit-counter-sublabel">visite totali al sito</div>
+          <div class="visit-counter-stats">
+            <div class="visit-counter-stat">
+              <div class="visit-counter-stat-num" id="vc-today">0</div>
+              <div class="visit-counter-stat-lbl">Oggi</div>
+            </div>
+            <div class="visit-counter-stat">
+              <div class="visit-counter-stat-num" id="vc-sessions">0</div>
+              <div class="visit-counter-stat-lbl">Sessioni</div>
+            </div>
+          </div>
+          <div class="visit-counter-badge">
+            <span class="visit-counter-dot"></span>
+            Sito Online
+          </div>
+        </div>
+
         <!-- CATEGORIE -->
         <div class="widget">
           <div class="widget-header">📁 Categorie</div>
@@ -1288,8 +1430,8 @@ footer {
           <div class="stat-label">Categorie Blog</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num">47K</div>
-          <div class="stat-label">Lettori Mensili</div>
+          <div class="stat-num" id="stats-visits">0</div>
+          <div class="stat-label">Visite Totali</div>
         </div>
         <div class="stat-item">
           <div class="stat-num">2.8K</div>
@@ -1320,23 +1462,7 @@ footer {
             <button class="page-btn">›</button>
           </div>
         </div>
-        <aside class="sidebar">
-          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
-            <h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:8px;color:var(--text);">✈️ Blog Viaggi</h3>
-            <p style="font-size:13px;color:var(--text2);">Guide, destinazioni e consigli pratici per viaggiare meglio.</p>
-          </div>
-          <div class="widget">
-            <div class="widget-header">🏷️ Tag Viaggi</div>
-            <div class="widget-body">
-              <div class="card-tags">
-                <span class="tag">Europa</span><span class="tag">Asia</span><span class="tag">Low Cost</span>
-                <span class="tag">Italia</span><span class="tag">Zaino</span><span class="tag">Fotografia</span>
-                <span class="tag">Sicilia</span><span class="tag">Praga</span><span class="tag">Tokyo</span>
-              </div>
-            </div>
-          </div>
-          <div class="ad-banner ad-rectangle"><span>Spazio Pubblicitario</span></div>
-        </aside>
+        <aside class="sidebar" id="viaggi-sidebar"></aside>
       </div>
     </div>
   </div>
@@ -1358,23 +1484,7 @@ footer {
             <button class="page-btn">›</button>
           </div>
         </div>
-        <aside class="sidebar">
-          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
-            <h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:8px;color:var(--text);">🎯 Blog Softair</h3>
-            <p style="font-size:13px;color:var(--text2);">Repliche, accessori, tattica, manutenzione e normativa per appassionati di softair.</p>
-          </div>
-          <div class="widget">
-            <div class="widget-header">🏷️ Tag Softair</div>
-            <div class="widget-body">
-              <div class="card-tags">
-                <span class="tag">AEG</span><span class="tag">GBB</span><span class="tag">Replica</span>
-                <span class="tag">Tattica</span><span class="tag">Manutenzione</span><span class="tag">Normativa</span>
-                <span class="tag">Accessori</span><span class="tag">Campo</span>
-              </div>
-            </div>
-          </div>
-          <div class="ad-banner ad-rectangle"><span>Spazio Pubblicitario</span></div>
-        </aside>
+        <aside class="sidebar" id="softair-sidebar"></aside>
       </div>
     </div>
   </div>
@@ -1432,13 +1542,7 @@ footer {
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;" id="tech-subcats"></div>
       <div class="main-layout">
         <div><div class="grid-3" id="tech-cards"></div></div>
-        <aside class="sidebar">
-          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
-            <h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:8px;color:var(--text);">💻 Blog Tecnologia</h3>
-            <p style="font-size:13px;color:var(--text2);">Recensioni, tutorial e news dal mondo tech.</p>
-          </div>
-          <div class="ad-banner ad-rectangle"><span>Spazio Pubblicitario</span></div>
-        </aside>
+        <aside class="sidebar" id="tech-sidebar"></aside>
       </div>
     </div>
   </div>
@@ -1453,9 +1557,7 @@ footer {
       </div>
       <div class="main-layout">
         <div><div class="grid-3" id="smartphone-cards"></div></div>
-        <aside class="sidebar">
-          <div class="ad-banner ad-rectangle"><span>Spazio Pubblicitario</span></div>
-        </aside>
+        <aside class="sidebar" id="smartphone-sidebar"></aside>
       </div>
     </div>
   </div>
@@ -1470,9 +1572,7 @@ footer {
       </div>
       <div class="main-layout">
         <div><div class="grid-3" id="droni-cards"></div></div>
-        <aside class="sidebar">
-          <div class="ad-banner ad-rectangle"><span>Spazio Pubblicitario</span></div>
-        </aside>
+        <aside class="sidebar" id="droni-sidebar"></aside>
       </div>
     </div>
   </div>
@@ -1487,9 +1587,7 @@ footer {
       </div>
       <div class="main-layout">
         <div><div class="grid-3" id="radio-cards"></div></div>
-        <aside class="sidebar">
-          <div class="ad-banner ad-rectangle"><span>Spazio Pubblicitario</span></div>
-        </aside>
+        <aside class="sidebar" id="radio-sidebar"></aside>
       </div>
     </div>
   </div>
@@ -1505,23 +1603,7 @@ footer {
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;" id="ai-subcats"></div>
       <div class="main-layout">
         <div><div class="grid-3" id="ai-cards"></div></div>
-        <aside class="sidebar">
-          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
-            <h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:8px;color:var(--text);">🤖 Blog AI</h3>
-            <p style="font-size:13px;color:var(--text2);">Strumenti, guide e notizie sull'intelligenza artificiale.</p>
-          </div>
-          <div class="widget">
-            <div class="widget-header">🏷️ Tag AI</div>
-            <div class="widget-body">
-              <div class="card-tags">
-                <span class="tag">ChatGPT</span><span class="tag">Claude</span><span class="tag">Gemini</span>
-                <span class="tag">Midjourney</span><span class="tag">Prompt</span><span class="tag">Machine Learning</span>
-                <span class="tag">LLM</span><span class="tag">Open Source</span>
-              </div>
-            </div>
-          </div>
-          <div class="ad-banner ad-rectangle"><span>Spazio Pubblicitario</span></div>
-        </aside>
+        <aside class="sidebar" id="ai-sidebar"></aside>
       </div>
     </div>
   </div>
@@ -1541,11 +1623,12 @@ footer {
         </div>
         <p>Il blog personale di Sandro Cinquegrana. Viaggi, softair, tecnologia, smartphone, droni, radioamatori e intelligenza artificiale.</p>
         <div class="footer-social">
-          <a href="#" title="Facebook">📘</a>
-          <a href="#" title="Instagram">📸</a>
-          <a href="#" title="Twitter">🐦</a>
-          <a href="#" title="YouTube">▶️</a>
-          <a href="#" title="Telegram">✈️</a>
+          <a href="https://www.facebook.com/sandro.cinquegrana.7/" target="_blank" rel="noopener" title="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.884v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@sandrexx100/videos" target="_blank" rel="noopener" title="YouTube">
+            <svg width="20" height="14" viewBox="0 0 24 17" fill="#ff0000"><path d="M23.495 2.651a3.017 3.017 0 0 0-2.122-2.136C19.545 0 12 0 12 0S4.455 0 2.627.515A3.017 3.017 0 0 0 .505 2.651C0 4.49 0 8.333 0 8.333s0 3.844.505 5.682a3.017 3.017 0 0 0 2.122 2.136C4.455 16.667 12 16.667 12 16.667s7.545 0 9.373-.516a3.017 3.017 0 0 0 2.122-2.136C24 12.177 24 8.333 24 8.333s0-3.843-.505-5.682zm-13.99 9.178V5.172l6.266 3.328-6.266 3.329z"/></svg>
+          </a>
         </div>
       </div>
       <div class="footer-col">
@@ -1573,18 +1656,32 @@ footer {
       <div class="footer-col">
         <h4>Legale</h4>
         <ul>
-          <li><a href="#" onclick="openWip('Privacy Policy');return false;">Privacy Policy</a></li>
-          <li><a href="#" onclick="openWip('Cookie Policy');return false;">Cookie Policy</a></li>
-          <li><a href="#" onclick="openWip('Note Legali');return false;">Note Legali</a></li>
+          <li><a href="#" onclick="openLegal('privacy');return false;">Privacy Policy</a></li>
+          <li><a href="#" onclick="openLegal('cookie');return false;">Cookie Policy</a></li>
+          <li><a href="#" onclick="openLegal('note');return false;">Note Legali</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="footer-bottom" style="flex-direction:column;gap:6px;text-align:center;">
       <span>© 2026 Sandro Cinquegrana Blog — Tutti i diritti riservati</span>
-      <span>Creato da <strong style="color:var(--accent2);">Sandro Cinquegrana</strong> 🛠️</span>
+      <span>I contenuti di questo blog sono originali e di proprietà di Sandro Cinquegrana. È vietata la riproduzione senza autorizzazione scritta. I marchi citati appartengono ai rispettivi proprietari.</span>
     </div>
   </div>
 </footer>
+
+<!-- LEGAL MODAL -->
+<div class="modal-overlay" id="legal-modal" onclick="closeLegal(event)" style="display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:40px 20px;">
+  <div class="modal-box" style="max-width:700px;position:relative;">
+    <button class="modal-close" onclick="closeLegalBtn()">✕</button>
+    <div style="padding:36px 36px 28px;">
+      <h2 id="legal-title" style="font-family:var(--font-display);font-size:26px;font-weight:900;margin-bottom:24px;color:var(--text);border-bottom:3px solid var(--accent);padding-bottom:12px;"></h2>
+      <div id="legal-body" style="font-size:15px;line-height:1.85;color:var(--text2);"></div>
+      <div style="margin-top:28px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text3);">
+        Sandro Cinquegrana Blog — Ultimo aggiornamento: Giugno 2026
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- WIP MODAL -->
 <div class="wip-overlay" id="wip-modal">
@@ -1636,7 +1733,7 @@ const ARTICLES = {
       id:'v1', cat:'Viaggi', subcat:'Europa', title:'Weekend Low Cost a Praga: La Guida Completa',
       excerpt:'Praga è tra le mete europee più belle e convenienti. Ecco come organizzare un weekend perfetto senza spendere una fortuna.',
       tags:['Europa','Low Cost','Weekend','Praga'],
-      author:'Marco Rossi', date:'10 Maggio 2026', readtime:'8 min',
+      author:'Sandro Cinquegrana', date:'10 Maggio 2026', readtime:'8 min',
       color:'#2a5fa0',
       body:`<p>Praga è una città che riesce a sorprendere anche chi pensa di averla già capita. I suoi vicoli acciottolati, i ponti sul fiume Moldava e l'architettura gotica creano un'atmosfera unica in Europa. E la buona notizia è che si può visitare senza svuotare il portafoglio.</p>
       <h2>Come arrivare a basso costo</h2>
@@ -1661,7 +1758,7 @@ const ARTICLES = {
       id:'v2', cat:'Viaggi', subcat:'Asia', title:'Guida Completa a Tokyo 2026: Tutto Quello che Devi Sapere',
       excerpt:'Tokyo è una delle città più affascinanti e complesse del mondo. Questa guida aggiornata al 2026 ti accompagna dalla pianificazione al viaggio.',
       tags:['Asia','Giappone','Tokyo','Guida'],
-      author:'Laura Bianchi', date:'7 Maggio 2026', readtime:'15 min',
+      author:'Sandro Cinquegrana', date:'7 Maggio 2026', readtime:'15 min',
       color:'#c8402a',
       body:`<p>Tokyo è una metropoli di quasi quattordici milioni di abitanti che funziona come un orologio svizzero. Ogni quartiere ha una personalità distinta, ogni angolo nasconde qualcosa di interessante. Pianificarla bene è fondamentale per non perdere i pezzi migliori.</p>
       <h2>Quando andare</h2>
@@ -1686,7 +1783,7 @@ const ARTICLES = {
       id:'v3', cat:'Viaggi', subcat:'Italia', title:'I 10 Borghi Italiani da Visitare Almeno Una Volta',
       excerpt:'L\'Italia nasconde gioielli medievali dimenticati dal turismo di massa. Ecco dieci borghi autentici, belli e ancora poco affollati.',
       tags:['Italia','Borghi','Cultura','Heritage'],
-      author:'Sofia Marinelli', date:'5 Maggio 2026', readtime:'10 min',
+      author:'Sandro Cinquegrana', date:'5 Maggio 2026', readtime:'10 min',
       color:'#2a8a50',
       body:`<p>L'Italia ha più di cinquemila borghi storici. Molti sono ancora sconosciuti al turismo internazionale, preservando un'autenticità rara. Visitarli significa toccare con mano secoli di storia, architettura e tradizioni gastronomiche locali.</p>
       <h2>Civita di Bagnoregio, Lazio</h2>
@@ -1703,7 +1800,7 @@ const ARTICLES = {
       id:'v4', cat:'Viaggi', subcat:'Italia', title:'Itinerario Sicilia 7 Giorni: Da Palermo ad Agrigento',
       excerpt:'Sette giorni in Sicilia tra barocco, mare cristallino, cucina straordinaria e storia millenaria. Il programma giorno per giorno.',
       tags:['Sicilia','Italia','Itinerario','Mediterrnaeo'],
-      author:'Antonio Greco', date:'3 Maggio 2026', readtime:'12 min',
+      author:'Sandro Cinquegrana', date:'3 Maggio 2026', readtime:'12 min',
       color:'#e8a020',
       body:`<p>La Sicilia è un'isola che non finisce mai di stupire. In sette giorni si riesce a toccare i punti principali, ma ogni viaggio lascia la consapevolezza che ci vorrebbe almeno un mese per conoscerla davvero.</p>
       <h2>Giorno 1-2: Palermo</h2>
@@ -1721,7 +1818,7 @@ const ARTICLES = {
       id:'v5', cat:'Viaggi', subcat:'Consigli', title:'Come Spendere Meno in Viaggio: 12 Trucchi Veri che Funzionano',
       excerpt:'Non serve essere ricchi per viaggiare bene. Questi trucchi concreti abbattono i costi senza ridurre la qualità dell\'esperienza.',
       tags:['Low Cost','Risparmio','Consigli','Budget'],
-      author:'Marco Rossi', date:'1 Maggio 2026', readtime:'9 min',
+      author:'Sandro Cinquegrana', date:'1 Maggio 2026', readtime:'9 min',
       color:'#6a4aaa',
       body:`<p>Esistono due tipi di risparmio in viaggio: quello che ti fa stare male (dormire in posti sporchi, mangiare schifezze) e quello intelligente che taglia i costi senza toccare la qualità dell'esperienza. Questo articolo parla del secondo tipo.</p>
       <h2>1. Prenota i voli il martedì o mercoledì mattina</h2>
@@ -1740,7 +1837,7 @@ const ARTICLES = {
       id:'v6', cat:'Viaggi', subcat:'Fotografia', title:'Tecniche per Fotografare il Tramonto in Viaggio',
       excerpt:'Il tramonto è il momento più fotografato dai viaggiatori. Eppure la maggior parte delle foto viene mediocre. Ecco perché e come migliorare.',
       tags:['Fotografia','Tramonto','Tecnica','Viaggio'],
-      author:'Elena Ferri', date:'29 Aprile 2026', readtime:'7 min',
+      author:'Sandro Cinquegrana', date:'29 Aprile 2026', readtime:'7 min',
       color:'#c84880',
       body:`<p>Il tramonto sembra un soggetto facile da fotografare: grande, luminoso, colorato. In realtà è uno dei momenti più tecnici e impegnativi, perché la luce cambia in secondi e la maggior parte delle fotocamere fatica a gestire l'alto contrasto.</p>
       <h2>Arriva 30 minuti prima</h2>
@@ -1768,6 +1865,44 @@ const ARTICLES = {
       <blockquote>Lisbona ha quella qualità rara delle città autentiche: affascinante senza sembrare un parco a tema.</blockquote>
       <h2>Budget indicativo</h2>
       <p>Volo: 80-150€. Alloggio 4 notti: 200-350€. Cibo e trasporti: 150-200€. Totale: 430-700€ a persona.</p>`
+    },
+    {
+      id:'v9', cat:'Viaggi', subcat:'Europa', title:'Croazia in 10 Giorni: Costa Dalmata, Isole e Parchi Nazionali',
+      excerpt:'La Croazia è una delle mete estive più apprezzate d\'Europa. Mare cristallino, parchi naturali spettacolari e cucina adriatica: il programma completo.',
+      tags:['Croazia','Europa','Mare','Isole','Natura'],
+      author:'Sandro Cinquegrana', date:'20 Maggio 2026', readtime:'11 min',
+      color:'#1a6a9a',
+      body:`<p>La Croazia ha tutto quello che si cerca in una vacanza estiva europea: mare limpidissimo, città storiche patrimonio UNESCO, parchi naturali unici e prezzi ancora più accessibili rispetto alle mete italiane comparabili.</p>
+      <h2>Giorno 1-2: Spalato</h2>
+      <p>Spalato è la porta d'ingresso alla Dalmazia. Il palazzo di Diocleziano, uno dei complessi romani meglio conservati al mondo, è letteralmente il centro della città moderna. Ristoranti, bar e appartamenti sono costruiti dentro le mura imperiali. La Riva al tramonto è uno dei lungomare più belli del Mediterraneo.</p>
+      <h2>Giorno 3-5: Isole Brač e Hvar</h2>
+      <p>Il traghetto da Spalato porta in 50 minuti a Brač, famosa per la spiaggia di Zlatni Rat — la punta di sabbia che cambia forma con le correnti. Hvar è l'isola più glamour della Croazia: lavanda a perdita d'occhio e acque di color smeraldo nelle baie nascoste.</p>
+      <h2>Giorno 6-7: Parco Nazionale di Krka</h2>
+      <p>Le cascate di Krka sono tra le più spettacolari d'Europa. A differenza delle Plitvice (più famose ma più affollate), a Krka si può fare il bagno direttamente sotto le cascate. Arriva all'apertura per godertele quasi in solitudine.</p>
+      <h2>Giorno 8-10: Dubrovnik</h2>
+      <p>La "perla dell'Adriatico" è oggettivamente bellissima ma molto affollata in estate. Visita le mura mattino prestissimo (entrata a pagamento ma vale ogni centesimo). Il giro in kayak attorno alle mura offre la prospettiva più bella sulla città.</p>
+      <blockquote>La Croazia è uno dei pochi posti in Europa dove il mare è ancora abbastanza pulito da bere. Quasi.</blockquote>
+      <h2>Budget Indicativo</h2>
+      <p>Volo: 80-180€ a persona. Alloggio 10 notti: 400-700€ a persona. Traghetti inter-isola: 50-100€. Cibo e trasporti: 300-450€. Totale: 830-1430€ a persona.</p>`
+    },
+    {
+      id:'v10', cat:'Viaggi', subcat:'Africa', title:'Marocco in 8 Giorni: Da Marrakech al Deserto del Sahara',
+      excerpt:'Il Marocco è a tre ore dall\'Italia ma sembra un altro mondo. Medine labirintiche, dune infinite e cucina straordinaria: l\'itinerario perfetto.',
+      tags:['Marocco','Africa','Deserto','Marrakech','Cultura'],
+      author:'Sandro Cinquegrana', date:'18 Maggio 2026', readtime:'12 min',
+      color:'#8a4010',
+      body:`<p>Il Marocco è la destinazione più accessibile dell'Africa per gli italiani: voli diretti da molte città, nessun visto necessario, e una cultura completamente diversa da qualsiasi altra esperienza europea.</p>
+      <h2>Giorno 1-3: Marrakech</h2>
+      <p>Jemaa el-Fna, la piazza principale di Marrakech, è lo spettacolo più caotico e affascinante del Mediterraneo: serpenti, acrobati, cuochi ambulanti e musicisti Gnawa tutto il giorno. La medina è patrimonio UNESCO — perditi nei suoi vicoli senza fretta. I riad (case tradizionali con cortile interno) sono la sistemazione più autentica e spesso conveniente.</p>
+      <h2>Giorno 4: Valle dell'Ourika e Atlante</h2>
+      <p>A un'ora da Marrakech, la Valle dell'Ourika offre un paesaggio berbero autentico con villaggi arroccati sulle montagne dell'Atlante. In inverno le cime sono innevate; in primavera i frutteti sono in fiore. La cascata alla fine della valle è una camminata di un'ora dal parcheggio.</p>
+      <h2>Giorno 5-6: Dades e Todra</h2>
+      <p>Le gole di Todra sono fessure nella roccia alte 300 metri e larghe pochi metri: un paesaggio marziano raggiungibile in auto. La strada per arrivarci attraversa il Deserto delle Rose, dove in aprile si raccolgono le rose damascene per l'industria del profumo.</p>
+      <h2>Giorno 7: Merzouga e il Sahara</h2>
+      <p>Le dune di Erg Chebbi vicino a Merzouga raggiungono i 150 metri di altezza. Un'escursione in dromedario al tramonto e la notte in un campo tendato nel deserto sono esperienze che non si dimenticano. Il silenzio del Sahara di notte, con il cielo pieno di stelle, è assoluto.</p>
+      <blockquote>Il Marocco insegna che l'ospitalità non dipende dalla ricchezza. Dipende dalla cultura.</blockquote>
+      <h2>Consigli Pratici</h2>
+      <p>Il contrattare è parte della cultura locale: non è maleducazione, è un rito sociale. Inizia sempre offrendo il 30-40% del prezzo richiesto. L'acqua del rubinetto non è potabile: usa sempre acqua imbottigliata. Abbigliamento conservativo nelle zone rurali è apprezzato.</p>`
     },
     {
       id:'v8', cat:'Viaggi', subcat:'Consigli', title:'App Indispensabili per Viaggiatori nel 2026',
@@ -1909,6 +2044,47 @@ const ARTICLES = {
       <blockquote>Un campo ben gestito si riconosce subito: regole chiare, arbitri presenti, area sicura separata.</blockquote>`
     },
     {
+      id:'sf9', cat:'Softair', subcat:'Campo e Tattica', title:'MilSim: Cos\'è e Come Prepararsi al Primo Evento',
+      excerpt:'Il MilSim (Military Simulation) è la forma più immersiva del softair. Scenari realistici, regole stringenti e durate fino a 48 ore. Come prepararsi senza farsi trovare impreparati.',
+      tags:['MilSim','Simulazione','Tattica','Evento'],
+      author:'Sandro Cinquegrana', date:'17 Maggio 2026', readtime:'11 min',
+      color:'#3a4a1a',
+      body:`<p>Il MilSim è al softair quello che la maratona è alla corsa: più impegnativo, più preparatorio, più soddisfacente. Non è per tutti, ma chi lo prova raramente torna al gioco standard.</p>
+      <h2>Cosa Distingue il MilSim dal Softair Normale</h2>
+      <p>In un evento MilSim le regole di ingaggio sono simili a quelle militari reali. I "morti" non rientrano immediatamente: si va in una zona neutra e si attende il respawn. La comunicazione radio è fondamentale. I rifornimenti di munizioni sono limitati. I vestiti devono essere uniformi coerenti, non mix casuali. La durata può essere da 8 ore a 72 ore continuative.</p>
+      <h2>Equipaggiamento Minimo Consigliato</h2>
+      <ul>
+        <li>Uniforme completa coordinata con il team (es. tutti in mimetica woodland)</li>
+        <li>Radio ricetrasmittente Baofeng o equivalente con auricolare</li>
+        <li>Gilet tattico con porta-caricatori e portabatteria</li>
+        <li>Almeno 4-6 mid-cap e batterie di scorta</li>
+        <li>Maschera full-face con protezione per le orecchie</li>
+        <li>Zaino con acqua (almeno 2L), cibo energetico, kit di primo soccorso base</li>
+      </ul>
+      <h2>L\'Importanza della Radio</h2>
+      <p>In un MilSim chi non ha radio è un peso per la squadra. Il Baofeng UV-5R costa meno di 30€ ed è lo standard de facto nel softair europeo. Imposta i canali in anticipo con il tuo team e stabilisci un protocollo: chi parla, quando e come. Il push-to-talk con auricolare lascia le mani libere.</p>
+      <blockquote>Nel MilSim non vince chi spara di più. Vince chi comunica meglio, si muove con intelligenza e mantiene la concentrazione nelle ore notturne.</blockquote>
+      <h2>Cosa Aspettarsi al Primo Evento</h2>
+      <p>Sarai più stanco di quanto pensi. Il peso dell'equipaggiamento, il terreno sconnesso e le ore di attesa in posizione ti faticano fisicamente. Allenati nelle settimane prima: camminate con zaino pesante, flessioni, resistenza cardiovascolare. Il giocatore fisicamente preparato dura e gode; quello impreparato soffre.</p>`
+    },
+    {
+      id:'sf10', cat:'Softair', subcat:'Manutenzione', title:'Upgrade AEG: Cosa Cambiare Davvero per Migliorare le Prestazioni',
+      excerpt:'Il mercato degli upgrade per AEG è enorme. Ma quali modifiche fanno davvero differenza e quali sono solo spese inutili? La guida onesta.',
+      tags:['Upgrade','AEG','Gearbox','Hop-Up','Prestazioni'],
+      author:'Sandro Cinquegrana', date:'16 Maggio 2026', readtime:'10 min',
+      color:'#5a2a0a',
+      body:`<p>Spendere soldi in upgrade senza criterio è lo sport preferito di molti softairisti. Questa guida elenca cosa migliora davvero le prestazioni — e cosa è marketing puro.</p>
+      <h2>Priorità 1: Hop-Up e Bucking</h2>
+      <p>Il sistema hop-up determina la traiettoria del pallino più di qualsiasi altro componente. Un bucking di qualità (Maple Leaf, Prometheus, Lonex) con una camera hop-up migliorata aumenta la precisione in modo misurabile. Costo: 15-40€. Impatto: molto alto.</p>
+      <h2>Priorità 2: Canna Interna</h2>
+      <p>Una canna interna di qualità (Prometheus, PDI, Madbull) in acciaio inox lucidato migliora la precisione riducendo le imperfezioni della superficie a contatto con il pallino. Scegli la lunghezza giusta per la tua replica: canna più lunga non significa necessariamente più precisa se l'hop-up non è adeguato.</p>
+      <h2>Priorità 3: Motore</h2>
+      <p>Un motore ad alto torque (es. SHS, ZCI, Gate Titan) riduce lo stress sul gearbox, aumenta la cadenza di fuoco e migliora la risposta del grilletto. Particolarmente utile se usi pallini pesanti (0,28g o superiori).</p>
+      <h2>Cosa Non Vale (Quasi Mai) la Pena</h2>
+      <p>Cilindri ported personalizzati su repliche standard: il miglioramento è trascurabile. Pistoni in alluminio: più leggeri ma si rompono più facilmente dei nylon rinforzati. Spring guide personalizzate: utili solo su build ad alta RPS. Trigger set CNC: utili ma costo sproporzionato per il miglioramento ottenuto.</p>
+      <blockquote>Prima di upgradare la meccanica, assicurati che l'hop-up e la canna siano perfetti. Il 70% delle build migliora solo con questo.</blockquote>`
+    },
+    {
       id:'sf8', cat:'Softair', subcat:'Accessori', title:'Caricatori e Batterie per AEG: Guida Completa alla Scelta',
       excerpt:'Mid-cap o hi-cap? LiPo o NiMH? Le scelte giuste migliorano il gioco e proteggono la replica.',
       tags:['Caricatori','Batterie','LiPo','AEG'],
@@ -1930,7 +2106,7 @@ const ARTICLES = {
       id:'t1', cat:'Tecnologia', subcat:'Recensioni', title:'Migliori Notebook Qualità-Prezzo nel 2026: La Guida Definitiva',
       excerpt:'Il mercato dei notebook è cambiato molto negli ultimi anni. Ecco quali modelli offrono il miglior rapporto tra prestazioni, autonomia e prezzo nel 2026.',
       tags:['Notebook','Laptop','Guida','2026'],
-      author:'Tech Editor', date:'12 Maggio 2026', readtime:'14 min',
+      author:'Redazione Tech', date:'12 Maggio 2026', readtime:'14 min',
       color:'#2a6eb5',
       body:`<p>Scegliere un notebook nel 2026 è più complicato che mai: processori ARM di Apple, chip Intel di nuova generazione, AMD Ryzen aggiornati, schermi OLED, batterie che durano due giorni. Questa guida divide il mercato per fascia di prezzo e uso principale.</p>
       <h2>Sotto 600€: Uso Quotidiano e Studio</h2>
@@ -1953,7 +2129,7 @@ const ARTICLES = {
       id:'t2', cat:'Tecnologia', subcat:'Tutorial', title:'Come Velocizzare Android: 8 Impostazioni che Fanno Davvero Differenza',
       excerpt:'Android rallenta nel tempo per motivi precisi. Ecco le otto impostazioni e operazioni che restituiscono velocità a qualsiasi smartphone, anche vecchio.',
       tags:['Android','Velocità','Tutorial','Ottimizzazione'],
-      author:'Dev Mobile', date:'10 Maggio 2026', readtime:'9 min',
+      author:'Redazione Mobile', date:'10 Maggio 2026', readtime:'9 min',
       color:'#3aaa60',
       body:`<p>Android non rallenta per magia nera. Rallenta per accumulo di dati in cache, animazioni superflue, app in background, notifiche eccessive e storage quasi pieno. Ognuno di questi problemi ha una soluzione specifica.</p>
       <h2>1. Riduci le Animazioni di Sistema</h2>
@@ -1970,7 +2146,7 @@ const ARTICLES = {
       id:'t3', cat:'Tecnologia', subcat:'News', title:'Tecnologie Emergenti del 2026: Cosa Cambierà il Prossimo Anno',
       excerpt:'AI generativa ovunque, processori quantistici, reti 6G in fase test, auto autonome di livello 4. Il 2026 è l\'anno in cui molte promesse tecnologiche diventano realtà.',
       tags:['Futuro','Tech','Tendenze','2026','AI'],
-      author:'Futurist Editor', date:'8 Maggio 2026', readtime:'11 min',
+      author:'Redazione Tech', date:'8 Maggio 2026', readtime:'11 min',
       color:'#8a2aa0',
       body:`<p>Ogni anno porta promesse di rivoluzioni tecnologiche. Il 2026 è diverso perché alcune di queste tecnologie hanno superato la fase di sviluppo e stanno entrando nel mercato di massa o nelle applicazioni industriali.</p>
       <h2>AI Generativa Nativa nei Sistemi Operativi</h2>
@@ -1987,7 +2163,7 @@ const ARTICLES = {
       id:'t4', cat:'Tecnologia', subcat:'Tutorial', title:'Backup iPhone Completo: Guida Passo Passo per Non Perdere Nulla',
       excerpt:'Fare il backup di iPhone correttamente salva contatti, foto, app e impostazioni. Ecco i due metodi ufficiali con le differenze tra loro.',
       tags:['iPhone','Backup','Apple','Tutorial'],
-      author:'Tech Editor', date:'6 Maggio 2026', readtime:'7 min',
+      author:'Redazione Tech', date:'6 Maggio 2026', readtime:'7 min',
       color:'#555555',
       body:`<p>Il backup di iPhone è una di quelle cose che sembrano superflue finché non serve davvero. Un display rotto, un furto, un aggiornamento andato male: in questi casi il backup è l'unica cosa che conta. Esistono due metodi ufficiali: iCloud e Mac/PC.</p>
       <h2>Backup con iCloud (Automatico)</h2>
@@ -2024,6 +2200,51 @@ const ARTICLES = {
       <blockquote>Prima di formattare, verifica due volte di aver fatto il backup. Non esiste recupero dopo la formattazione senza backup.</blockquote>`
     },
     {
+      id:'t7', cat:'Tecnologia', subcat:'Tutorial', title:'Costruire un Home Server NAS: Guida Pratica per Iniziare',
+      excerpt:'Un NAS fatto in casa costa meno di uno commerciale e offre molto di più. Guida completa per costruire il proprio server di storage personale nel 2026.',
+      tags:['NAS','Home Server','Storage','Rete','Linux'],
+      author:'Sandro Cinquegrana', date:'19 Maggio 2026', readtime:'13 min',
+      color:'#2a4a7a',
+      body:`<p>Un Network Attached Storage (NAS) domestico trasforma un PC da pochi euro in un cloud privato: backup automatico di foto e video, streaming multimediale, accesso remoto ai file da qualsiasi dispositivo. Il tutto senza abbonamenti mensili.</p>
+      <h2>Hardware: Cosa Serve</h2>
+      <ul>
+        <li>Un mini PC o un vecchio laptop: anche un Intel N100 da 150€ è più che sufficiente</li>
+        <li>Almeno 2 dischi HDD (uno per i dati, uno per il backup): 2TB ciascuno costano circa 50€</li>
+        <li>Un router con porta Gigabit Ethernet</li>
+        <li>Una chiavetta USB da 8GB per installare il sistema operativo</li>
+      </ul>
+      <h2>Software: TrueNAS o Proxmox?</h2>
+      <p>TrueNAS Scale (basato su Linux/Debian) è la scelta più semplice per chi inizia: interfaccia web intuitiva, gestione RAID integrata, app ufficiali per Plex, Nextcloud e molto altro. Proxmox è più potente ma più complesso — ideale se vuoi far girare anche macchine virtuali.</p>
+      <h2>Nextcloud: Il tuo Google Drive Privato</h2>
+      <p>Nextcloud installato sul NAS crea un cloud personale completo: sincronizzazione automatica di foto dallo smartphone, condivisione file con link, calendario e rubrica sincronizzati. Tutto sui tuoi dischi, zero abbonamenti, zero dati a terzi.</p>
+      <blockquote>Un NAS domestico non è solo storage: è la libertà dai servizi cloud commerciali e dai loro aumenti di prezzo.</blockquote>
+      <h2>Accesso da Remoto Sicuro</h2>
+      <p>Tailscale crea una VPN privata tra i tuoi dispositivi in pochi minuti — gratuito per uso personale. Permette di accedere al NAS da qualsiasi parte del mondo come se fossi in casa, senza esporre porte al pubblico internet.</p>`
+    },
+    {
+      id:'t8', cat:'Tecnologia', subcat:'Tutorial', title:'Automatizzare la Casa con Home Assistant: Da Zero al Sistema Completo',
+      excerpt:'Home Assistant è la piattaforma domotica open source più potente al mondo. Luci, termostato, allarme, prese intelligenti: tutto integrato e controllato localmente.',
+      tags:['Home Assistant','Domotica','Smart Home','IoT','Automazione'],
+      author:'Sandro Cinquegrana', date:'17 Maggio 2026', readtime:'12 min',
+      color:'#1a5a7a',
+      body:`<p>Home Assistant è il sistema domotico preferito da chi vuole controllo totale sulla propria casa intelligente senza dipendere da cloud di terze parti. Nel 2026 è diventato accessibile anche a chi non ha competenze tecniche avanzate.</p>
+      <h2>Perché Home Assistant e non Alexa/Google Home</h2>
+      <p>I sistemi commerciali funzionano finché le aziende vogliono mantenerli. Home Assistant gira localmente: se internet cade, le automazioni continuano. Se il produttore chiude il server cloud, il tuo sistema continua a funzionare. Inoltre, nessun dato della tua casa va a server esterni.</p>
+      <h2>Hardware Consigliato</h2>
+      <p>Il Raspberry Pi 5 (60€) è la piattaforma ufficiale raccomandata. In alternativa, il Home Assistant Green (100€) è un dispositivo dedicato plug-and-play. Per chi ha già un NAS, Home Assistant si installa come container Docker o macchina virtuale.</p>
+      <h2>Prime Automazioni da Impostare</h2>
+      <ul>
+        <li>Luci che si accendono al tramonto automaticamente</li>
+        <li>Riscaldamento che si abbassa quando esci di casa (geofencing)</li>
+        <li>Notifica sullo smartphone se qualcuno suona il campanello</li>
+        <li>Avvio della lavatrice durante le ore di energia meno costosa</li>
+        <li>Dashboard personalizzata con tutti i sensori della casa</li>
+      </ul>
+      <blockquote>Home Assistant non è domotica per nerd. È domotica per chi vuole che la propria casa funzioni come vuole lui, non come vuole Amazon.</blockquote>
+      <h2>Compatibilità Dispositivi</h2>
+      <p>Home Assistant integra oltre 3000 dispositivi e servizi diversi: Philips Hue, IKEA Tradfri, Shelly, Sonos, Xiaomi, Tuya, Nest e centinaia di altri. Se un dispositivo è smart, quasi certamente Home Assistant lo supporta.</p>`
+    },
+    {
       id:'t6', cat:'Tecnologia', subcat:'News', title:'I Migliori Gadget Tech del 2026: Cosa Vale Davvero la Pena Comprare',
       excerpt:'Ogni anno escono centinaia di gadget tech. Pochi valgono i soldi. La selezione onesta di quelli che fanno davvero differenza.',
       tags:['Gadget','Tech','2026','Acquisti'],
@@ -2045,7 +2266,7 @@ const ARTICLES = {
       id:'s1', cat:'Smartphone', subcat:'Recensioni', title:'Migliori Smartphone Top Gamma nel 2026: Confronto Definitivo',
       excerpt:'Samsung Galaxy S25 Ultra, iPhone 16 Pro, Google Pixel 9 Pro, Xiaomi 14 Ultra: quale scegliere? Confronto onesto basato su uso reale.',
       tags:['Top Gamma','Samsung','iPhone','Pixel','2026'],
-      author:'Mobile Reviewer', date:'13 Maggio 2026', readtime:'16 min',
+      author:'Redazione Mobile', date:'13 Maggio 2026', readtime:'16 min',
       color:'#1a4070',
       body:`<p>I flagship del 2026 hanno tutti schede tecniche stellari. La differenza vera non è nei benchmark, ma nell'esperienza quotidiana: fotografare di sera, usare la batteria fino a sera, la fluidità del sistema, gli aggiornamenti garantiti nel tempo.</p>
       <h2>Samsung Galaxy S25 Ultra</h2>
@@ -2062,7 +2283,7 @@ const ARTICLES = {
       id:'s2', cat:'Smartphone', subcat:'Guide', title:'Trucchi Android Nascosti che in Pochi Conoscono nel 2026',
       excerpt:'Android nasconde funzioni potenti nei menu di sistema. Questi trucchi cambiano davvero il modo di usare lo smartphone ogni giorno.',
       tags:['Android','Trucchi','Guide','Produttività'],
-      author:'Dev Mobile', date:'11 Maggio 2026', readtime:'10 min',
+      author:'Redazione Mobile', date:'11 Maggio 2026', readtime:'10 min',
       color:'#207040',
       body:`<p>Android è un sistema operativo straordinariamente configurabile, ma molte delle sue funzioni migliori sono nascoste nei menu avanzati o nelle Opzioni sviluppatore. Ecco i più utili.</p>
       <h2>1. Tasto Indietro con Gesti Personalizzati</h2>
@@ -2079,7 +2300,7 @@ const ARTICLES = {
       id:'s3', cat:'Smartphone', subcat:'Guide', title:'Come Aumentare l\'Autonomia della Batteria: Guida Definitiva',
       excerpt:'La batteria dura poco? Non è sempre colpa dello smartphone. Queste impostazioni e abitudini possono raddoppiare l\'autonomia reale.',
       tags:['Batteria','Autonomia','Android','iPhone'],
-      author:'Mobile Reviewer', date:'8 Maggio 2026', readtime:'11 min',
+      author:'Redazione Mobile', date:'8 Maggio 2026', readtime:'11 min',
       color:'#b03020',
       body:`<p>L'autonomia percepita di uno smartphone dipende solo per metà dall'hardware. L'altra metà dipende da configurazione, abitudini di utilizzo e qualità dell'ambiente di rete. Questi consigli funzionano sia su Android che su iPhone.</p>
       <h2>Il Vero Killer della Batteria: il Segnale Scarso</h2>
@@ -2096,7 +2317,7 @@ const ARTICLES = {
       id:'s4', cat:'Smartphone', subcat:'Recensioni', title:'Smartphone Economici 2026: I Migliori sotto i 300 Euro',
       excerpt:'Spendere poco non significa avere uno smartphone mediocre. Questi modelli under 300€ offrono prestazioni eccellenti nella fascia media.',
       tags:['Entry Level','Fascia Media','Economico','2026'],
-      author:'Mobile Reviewer', date:'5 Maggio 2026', readtime:'9 min',
+      author:'Redazione Mobile', date:'5 Maggio 2026', readtime:'9 min',
       color:'#2a7a9a',
       body:`<p>Il mercato degli smartphone economici è migliorato enormemente negli ultimi anni. Oggi per 200-300€ si ottiene uno schermo AMOLED fluido, fotocamera con AI fotografica e autonomia di due giorni. Ecco cosa guardare.</p>
       <h2>Cosa Aspettarsi sotto i 300€</h2>
@@ -2128,6 +2349,40 @@ const ARTICLES = {
       <blockquote>La privacy non è per chi ha qualcosa da nascondere. È per chi capisce che i propri dati hanno un valore.</blockquote>`
     },
     {
+      id:'s7', cat:'Smartphone', subcat:'Guide', title:'Migliori Smartwatch nel 2026: Quale Scegliere per Ogni Esigenza',
+      excerpt:'Apple Watch, Galaxy Watch, Pixel Watch e Garmin: il mercato degli smartwatch è ricco e vario. La guida definitiva per scegliere quello giusto.',
+      tags:['Smartwatch','Wearable','Apple Watch','Galaxy Watch','Garmin'],
+      author:'Redazione Mobile', date:'19 Maggio 2026', readtime:'11 min',
+      color:'#2a2a7a',
+      body:`<p>Lo smartwatch nel 2026 non è più un gadget: è diventato un dispositivo medico personale capace di rilevare fibrillazione atriale, misurare l'ossigenazione del sangue e avvisare in caso di caduta. La scelta giusta dipende dall'ecosistema e dall'uso principale.</p>
+      <h2>Apple Watch Series 10</h2>
+      <p>Il riferimento assoluto se hai un iPhone. L'integrazione con iOS è ineguagliabile: risposta alle notifiche, Apple Pay, Siri, AirPods control. Il sensore temperatura, l'ECG e il rilevamento crash sono funzioni mediche serie. Autonomia di circa 18 ore: il punto debole storico della serie.</p>
+      <h2>Samsung Galaxy Watch 7</h2>
+      <p>Il migliore per gli utenti Android non-Pixel. Le funzioni di salute sono complete: analisi del sonno con stadio REM, composizione corporea BIA, pressione sanguigna stimata. L'integrazione con Galaxy AI porta funzioni di coaching della salute interessanti. Autonomia superiore all'Apple Watch.</p>
+      <h2>Garmin Fenix 8: Per gli Sportivi Seri</h2>
+      <p>Garmin non compete sul design o le notifiche smart: compete sulla precisione dei dati sportivi e sull'autonomia. Il Fenix 8 dura fino a 29 giorni in modalità smartwatch normale. GPS multi-banda millimetrico, mappe topografiche offline, analisi della corsa professionistica. Per chi fa sport outdoor seriamente, non c'è alternativa.</p>
+      <blockquote>Lo smartwatch giusto non è quello con più funzioni. È quello che usi davvero ogni giorno senza dimenticarti di caricarlo.</blockquote>
+      <h2>Il Budget: Pixel Watch 3 sotto i 300€</h2>
+      <p>Il Pixel Watch 3 di Google offre il meglio di Wear OS con integrazione nativa di Google Assistant, mappe e Gmail. La rilevazione della frequenza cardiaca è tra le più accurate nella fascia. Per gli utenti Android che non vogliono spendere come per un Apple Watch.</p>`
+    },
+    {
+      id:'s8', cat:'Smartphone', subcat:'Guide', title:'Fotografia Smartphone Avanzata: Tecniche per Foto Professionali',
+      excerpt:'Lo smartphone moderno supera molte fotocamere compatte. Con queste tecniche avanzate si ottengono foto di livello professionale senza portarsi una borsa piena di attrezzatura.',
+      tags:['Fotografia','Smartphone','Tecnica','Pro','Camera'],
+      author:'Sandro Cinquegrana', date:'16 Maggio 2026', readtime:'10 min',
+      color:'#4a1a4a',
+      body:`<p>La fotocamera dello smartphone moderno ha superato la fotocamera compatta professionale di dieci anni fa. Ma la maggior parte degli utenti usa solo il 20% delle sue capacità. Queste tecniche avanzate cambiano il risultato finale.</p>
+      <h2>Usa la Modalità Pro (o RAW)</h2>
+      <p>La modalità automatica è ottimizzata per risultati medi. La modalità Pro ti dà controllo su ISO, velocità di otturazione, bilanciamento del bianco e focus manuale. Scatta in RAW+JPEG: il JPEG è pronto subito, il RAW ha tutto il margine di modifica che vuoi in post-produzione.</p>
+      <h2>La Regola dei Terzi: Usala Sempre</h2>
+      <p>Attiva la griglia nelle impostazioni fotocamera. Posiziona il soggetto principale su uno dei quattro punti di intersezione della griglia, non al centro. L'orizzonte va su una delle linee orizzontali. Le foto composte così sono immediatamente più interessanti al cervello umano.</p>
+      <h2>Luce Naturale: il Segreto dei Professionisti</h2>
+      <p>La luce della "golden hour" (un'ora dopo l'alba e un'ora prima del tramonto) rende tutto più bello. La luce diffusa di una giornata leggermente nuvolosa è perfetta per i ritratti: nessuna ombra dura. La luce diretta del sole a mezzogiorno è la peggiore per quasi tutto.</p>
+      <h2>Ritratti con Bokeh Naturale</h2>
+      <p>Il bokeh artificiale (modalità ritratto) è migliorato enormemente ma ancora fa errori sui capelli e gli occhiali. Per un bokeh naturale, avvicinati molto al soggetto con il teleobiettivo (2x o 3x), allontana il soggetto dallo sfondo e usa il grandangolo solo per le scene.</p>
+      <blockquote>La fotocamera migliore è quella che hai con te. E quella che hai con te è lo smartphone.</blockquote>`
+    },
+    {
       id:'s6', cat:'Smartphone', subcat:'Recensioni', title:'Android vs iPhone nel 2026: Quale Scegliere Davvero',
       excerpt:'La scelta tra Android e iPhone non è tecnica ma di ecosistema. Questa guida ti aiuta a scegliere senza pregiudizi.',
       tags:['Android','iPhone','Confronto','2026'],
@@ -2149,7 +2404,7 @@ const ARTICLES = {
       id:'d1', cat:'Droni', subcat:'Recensioni', title:'Migliori Droni sotto 250 Grammi nel 2026: Mini Senza Registrazione',
       excerpt:'I droni sotto 250g hanno regole semplici in tutta Europa. Ecco i modelli migliori in questa categoria, da quelli per principianti ai più avanzati.',
       tags:['Droni','Mini','250g','ENAC','Normativa'],
-      author:'Drone Pilot', date:'12 Maggio 2026', readtime:'12 min',
+      author:'Redazione Droni', date:'12 Maggio 2026', readtime:'12 min',
       color:'#1a5a8a',
       body:`<p>I droni sotto 250 grammi sono la categoria più accessibile in Europa: l'operatore non deve avere una patente specifica e la registrazione del veicolo non è obbligatoria per l'uso ricreativo. Questo li rende ideali per chi vuole iniziare senza burocrazia.</p>
       <h2>DJI Mini 4 Pro</h2>
@@ -2166,7 +2421,7 @@ const ARTICLES = {
       id:'d2', cat:'Droni', subcat:'Guide', title:'Tecniche Base di Pilotaggio Drone: Il Manuale del Principiante',
       excerpt:'Il primo volo di un drone spaventa tutti. Queste tecniche di base ti mettono in sicurezza e costruiscono le fondamenta per volare bene.',
       tags:['Pilotaggio','Principiante','Tecniche','Volo'],
-      author:'Drone Instructor', date:'10 Maggio 2026', readtime:'13 min',
+      author:'Redazione Droni', date:'10 Maggio 2026', readtime:'13 min',
       color:'#4a2080',
       body:`<p>Il drone non è complicato da volare, ma è facile prendere cattive abitudini all'inizio che poi limitano le capacità. Meglio imparare bene le basi prima di spingere sul joystick.</p>
       <h2>Prima di Volare: Il Pre-Flight Check</h2>
@@ -2183,7 +2438,7 @@ const ARTICLES = {
       id:'d3', cat:'Droni', subcat:'Normative', title:'Regole ENAC Droni 2026: Tutto Quello che Devi Sapere per Volare Legalmente',
       excerpt:'La normativa europea sui droni (regolamento EASA) si applica anche in Italia tramite ENAC. Ecco cosa è obbligatorio, cosa è vietato e dove si può volare.',
       tags:['ENAC','Normativa','Italia','Regole','Legale'],
-      author:'Regulatory Expert', date:'8 Maggio 2026', readtime:'14 min',
+      author:'Redazione Normativa', date:'8 Maggio 2026', readtime:'14 min',
       color:'#8a2030',
       body:`<p>Dal 2021 l'Europa ha unificato la regolamentazione dei droni con il sistema EASA, applicato in Italia dall'ENAC. Il vecchio sistema italiano è stato superato. Questa guida spiega il sistema attuale in modo comprensibile.</p>
       <h2>Le Tre Categorie di Volo</h2>
@@ -2206,7 +2461,7 @@ const ARTICLES = {
       id:'d4', cat:'Droni', subcat:'Guide', title:'Riprese Cinematiche con il Drone: Tecniche Professionali per Immagini Spettacolari',
       excerpt:'Le riprese con il drone diventano cinematiche con movimenti specifici e composizioni studiate. Ecco le tecniche usate dai professionisti.',
       tags:['Cinematico','Video','Tecniche','Drone'],
-      author:'Drone Cinematographer', date:'5 Maggio 2026', readtime:'11 min',
+      author:'Redazione Droni', date:'5 Maggio 2026', readtime:'11 min',
       color:'#2a5060',
       body:`<p>La differenza tra un video amatoriale con il drone e uno cinematico non sta nel drone usato, ma nei movimenti di camera e nella composizione. Queste tecniche si imparano e si replicano su qualsiasi drone.</p>
       <h2>Il Reveal (Rivelazione)</h2>
@@ -2232,6 +2487,40 @@ const ARTICLES = {
       <blockquote>Per il primo drone serio, DJI è ancora la scelta più sicura. Per qualità immagine massima, valuta seriamente Autel.</blockquote>`
     },
     {
+      id:'d7', cat:'Droni', subcat:'Guide', title:'FPV Droni: Guida per Iniziare con il Volo in Prima Persona',
+      excerpt:'I droni FPV sono una categoria a sé: veloci, agili e adrenalinici. Come iniziare, quale kit scegliere e cosa aspettarsi dal primo volo con gli occhiali.',
+      tags:['FPV','Freestyle','Racing','Occhiali','Simulatore'],
+      author:'Sandro Cinquegrana', date:'18 Maggio 2026', readtime:'12 min',
+      color:'#7a1a2a',
+      body:`<p>L'FPV (First Person View) è la categoria più tecnica e adrenalinica del mondo dei droni. Voli attraverso gli occhiali come se fossi seduto sul drone: una sensazione completamente diversa dal volo standard.</p>
+      <h2>FPV vs Droni Tradizionali</h2>
+      <p>I droni FPV non hanno stabilizzatori automatici (o ne hanno di minimi): la risposta ai comandi è diretta e immediata. Questo li rende molto più reattivi ma anche molto più difficili da pilotare. Un DJI Mini vola da solo; un FPV richiede che il pilota faccia tutto manualmente.</p>
+      <h2>Inizia dal Simulatore</h2>
+      <p>Prima di toccare un drone FPV reale, almeno 10-20 ore su simulatore sono obbligatorie. Velocidrone, Liftoff e DRL Simulator su PC riproducono fedelmente la fisica del volo FPV. Il radiocomando che usi sul simulatore è lo stesso che userai sul drone reale: la memoria muscolare si trasferisce.</p>
+      <h2>Kit per Iniziare</h2>
+      <p>Il kit completo per iniziare comprende: radiocomando (RadioMaster Boxer o Zorro: 80-120€), occhiali FPV (DJI Goggles 2 per qualità digitale o Fat Shark Recon per budget: 80-400€), drone ready-to-fly (DJI Avata 2 per chi vuole assistenze: 550€, oppure un 3" freestyle per chi vuole libertà totale: 150-250€ di parti).</p>
+      <blockquote>Il primo volo FPV senza simulatore finisce quasi sempre con un crash. Con 20 ore di simulatore finisce quasi sempre bene. Questo è il trucco.</blockquote>
+      <h2>Normativa FPV in Italia</h2>
+      <p>I droni FPV rientrano nelle stesse categorie ENAC degli altri droni. I droni sotto 250g (come il DJI Avata 2) hanno le regole più semplici. I droni FPV racing/freestyle sono spesso sopra i 250g: richiedono registrazione e patentino A1-A3.</p>`
+    },
+    {
+      id:'d8', cat:'Droni', subcat:'Guide', title:'Editing Video Drone: Workflow Completo dal Volo al Video Finito',
+      excerpt:'Le riprese sono solo metà del lavoro. L\'editing del video drone richiede un workflow specifico per valorizzare le immagini aeree. La guida pratica.',
+      tags:['Editing','Video','DaVinci','LUT','Post-produzione'],
+      author:'Redazione Droni', date:'16 Maggio 2026', readtime:'10 min',
+      color:'#1a4a6a',
+      body:`<p>Un video drone non editato è solo materiale grezzo. L'editing trasforma le riprese aeree in un racconto visivo. Queste sono le fasi e gli strumenti del workflow professionale.</p>
+      <h2>Software: DaVinci Resolve</h2>
+      <p>DaVinci Resolve è gratuito, professionale e usato nelle produzioni cinematografiche più grandi del mondo. La versione gratuita ha tutto quello che serve per editare video drone a qualsiasi livello. Adobe Premiere è l'alternativa con abbonamento mensile — ottimo ma non necessario per iniziare.</p>
+      <h2>Organizzazione del Materiale</h2>
+      <p>Prima di aprire il software: crea cartelle separate per il giorno/location di ripresa, fai subito una copia di backup su un secondo disco, rinomina i file con data e descrizione (es. 2026-05-18_Dolomiti_Reveal). Il caos nel materiale grezzo si paga caro in fase di editing.</p>
+      <h2>LUT: Correzione Colore in un Click</h2>
+      <p>Le LUT (Look Up Table) sono preset di correzione colore che trasformano istantaneamente l'aspetto del video. Se hai girato in D-Log o D-Cinelike (profili flat), una LUT di base ripristina i colori naturali; una LUT creativa dà l'estetica cinematica. Molte LUT di qualità sono gratuite online.</p>
+      <h2>Musica e Sincronizzazione</h2>
+      <p>Epidemicsound.com e Artlist.io offrono musica royalty-free per tutti gli usi. Sincronizza i tagli ai beat della musica: il cervello umano percepisce istintivamente la sincronia come "professionale". I movimenti di camera più lenti funzionano con musica lenta; i voli dinamici con musica energica.</p>
+      <blockquote>Il miglior video drone non è quello con le riprese più spettacolari. È quello che racconta una storia con un inizio, uno sviluppo e una fine.</blockquote>`
+    },
+    {
       id:'d6', cat:'Droni', subcat:'Guide', title:'Errori Comuni dei Principianti con il Drone: Come Evitarli',
       excerpt:'Quasi tutti i principianti fanno gli stessi errori. Conoscerli in anticipo salva il drone e spesso anche i nervi.',
       tags:['Principiante','Errori','Sicurezza','Volo'],
@@ -2253,7 +2542,7 @@ const ARTICLES = {
       id:'r1', cat:'Radioamatori', subcat:'Apparati', title:'Migliori Radio HF per Iniziare: Guida per il Neofita del 2026',
       excerpt:'Iniziare con la radio HF può disorientare per la varietà di apparecchi. Questa guida aiuta il neofita a scegliere il primo ricetrasmettitore con criterio.',
       tags:['HF','Ricetrasmettitore','Principiante','Guida'],
-      author:'IZ2ABC', date:'11 Maggio 2026', readtime:'13 min',
+      author:'Sandro Cinquegrana', date:'11 Maggio 2026', readtime:'13 min',
       color:'#2a6040',
       body:`<p>La radio HF apre le porte alle comunicazioni su scala mondiale con potenze relativamente basse. Scegliere il primo apparato è un passo importante: deve essere abbastanza capace da non diventare subito un limite, ma abbastanza semplice da non scoraggiare.</p>
       <h2>Icom IC-7300: Il Riferimento della Fascia Media</h2>
@@ -2270,7 +2559,7 @@ const ARTICLES = {
       id:'r2', cat:'Radioamatori', subcat:'Modi Digitali', title:'Guida FT8 Semplice: Come Iniziare con il Modo Digitale più Diffuso al Mondo',
       excerpt:'FT8 ha rivoluzionato la radio amatoriale. Con questo modo digitale si fanno contatti intercontinentali con potenze bassissime. Ecco come iniziare.',
       tags:['FT8','Digitale','WSJT-X','QSO'],
-      author:'IU3XYZ', date:'9 Maggio 2026', readtime:'10 min',
+      author:'Sandro Cinquegrana', date:'9 Maggio 2026', readtime:'10 min',
       color:'#4a3080',
       body:`<p>FT8 (Franke-Taylor design, 8-FSK modulation) è stato sviluppato da Joe Taylor K1JT e Steve Franke K9AN ed è diventato in pochi anni il modo digitale più usato nel mondo radioamatoriale. Permette contatti con segnali debolissimi, impossibili da sentire a orecchio.</p>
       <h2>Cosa Serve per FT8</h2>
@@ -2291,7 +2580,7 @@ const ARTICLES = {
       id:'r3', cat:'Radioamatori', subcat:'Normative', title:'Come Diventare Radioamatore in Italia: Esame, Patente e Prima Stazione',
       excerpt:'Diventare radioamatore in Italia richiede un esame al Ministero. Questa guida spiega il percorso completo, dal primo studio alla prima QSO.',
       tags:['Patente','MISE','Esame','Italia','Normativa'],
-      author:'IZ4AAA', date:'6 Maggio 2026', readtime:'12 min',
+      author:'Sandro Cinquegrana', date:'6 Maggio 2026', readtime:'12 min',
       color:'#8a5020',
       body:`<p>In Italia, per trasmettere come radioamatore serve la patente di operatore rilasciata dal Ministero delle Imprese e del Made in Italy (ex MISE). L'esame non è difficile, ma richiede studio su argomenti tecnici, normativi e operativi.</p>
       <h2>Chi Può Fare l'Esame</h2>
@@ -2315,7 +2604,7 @@ const ARTICLES = {
       id:'r4', cat:'Radioamatori', subcat:'Antenne', title:'Antenna Dipolo Wire Fai da Te: Costruzione Pratica con Materiali Economici',
       excerpt:'Il dipolo è l\'antenna più semplice ed efficace in radioamatura. Si costruisce con pochi euro di materiali e funziona benissimo anche per le prime esperienze.',
       tags:['Antenna','Dipolo','Autocostruzione','HF'],
-      author:'IZ2ABC', date:'3 Maggio 2026', readtime:'11 min',
+      author:'Sandro Cinquegrana', date:'3 Maggio 2026', readtime:'11 min',
       color:'#5a7030',
       body:`<p>Il dipolo half-wave è l'antenna con cui sono stati fatti la maggior parte dei contatti nella storia della radioamatura mondiale. È semplice, economica, efficiente e si realizza in un pomeriggio. Non c'è motivo per non avere un dipolo come prima antenna.</p>
       <h2>Materiali Necessari</h2>
@@ -2348,6 +2637,38 @@ const ARTICLES = {
       <blockquote>La prima volta che vedi gli aerei sopra di te in tempo reale sul tuo schermo, capisci perché questa tecnologia è così affascinante.</blockquote>`
     },
     {
+      id:'r7', cat:'Radioamatori', subcat:'Modi Digitali', title:'WSPR: Monitorare la Propagazione Mondiale con Pochi Milliwatt',
+      excerpt:'WSPR è il modo digitale che permette di capire dove arrivano i tuoi segnali con potenze bassissime. Guida pratica per iniziare a usarlo come strumento di analisi.',
+      tags:['WSPR','Propagazione','Digitale','HF','Bassa Potenza'],
+      author:'Sandro Cinquegrana', date:'20 Maggio 2026', readtime:'9 min',
+      color:'#3a6a3a',
+      body:`<p>WSPR (Weak Signal Propagation Reporter) è uno strumento scientifico mascherato da modo radioamatoriale. Con pochi milliwatt trasmessi, la rete mondiale di ricevitori su wspr.rocks mostra in tempo reale dove arriva il tuo segnale.</p>
+      <h2>Come Funziona</h2>
+      <p>WSPR trasmette automaticamente un segnale codificato ogni 2 minuti con nominativo, locator e potenza. I ricevitori di tutto il mondo lo captano e caricano i dati su una mappa globale. In pochi minuti di trasmissione si capisce se la propagazione verso il Nord America, il Giappone o l'Australia è aperta in quel momento.</p>
+      <h2>Perché è Utile</h2>
+      <p>Prima di aprire una sessione FT8 verso un continente lontano, 10 minuti di WSPR confermano se la propagazione è aperta in quella direzione. È anche uno strumento per valutare le prestazioni della propria antenna: più ricevitori ti sentono con la stessa potenza, meglio irraggia la tua antenna.</p>
+      <h2>Come Iniziare</h2>
+      <p>WSPR-X (gratuito, stesso sviluppatore di WSJT-X) è il software più usato. La configurazione è identica a FT8: nominativo, locator, interfaccia audio, PTT. Imposta la potenza di trasmissione a 100mW o meno per i test di propagazione — 1W è già molto per WSPR.</p>
+      <blockquote>Con 200mW e WSPR ho ricevuto conferme da 47 paesi in una settimana. Con 100W e FT8 non avrei imparato altrettanto sulla propagazione.</blockquote>
+      <h2>wspr.rocks: La Mappa in Tempo Reale</h2>
+      <p>Il sito wspr.rocks visualizza tutti i contatti WSPR mondiali in tempo reale su una mappa interattiva. Inserisci il tuo nominativo per vedere dove i tuoi segnali vengono ricevuti. È affascinante e informativo allo stesso tempo.</p>`
+    },
+    {
+      id:'r8', cat:'Radioamatori', subcat:'Apparati', title:'Ricetrasmettitori Portatili VHF/UHF: Guida alla Scelta nel 2026',
+      excerpt:'I portatili VHF/UHF sono spesso il primo apparato di un radioamatore. Guida aggiornata ai migliori modelli tra i 30 e i 300 euro.',
+      tags:['Portatile','VHF','UHF','Baofeng','Yaesu'],
+      author:'Sandro Cinquegrana', date:'17 Maggio 2026', readtime:'8 min',
+      color:'#1a5a4a',
+      body:`<p>Il portatile VHF/UHF è spesso il primo apparato che un neo-radioamatore acquista: economico, pratico e immediato da usare per i ripetitori locali e le comunicazioni di emergenza.</p>
+      <h2>Baofeng UV-5R: Il Democratico</h2>
+      <p>Il Baofeng UV-5R costa meno di 25€ ed è il portatile più venduto al mondo. Le prestazioni sono nella media, la costruzione è plasticosa, ma funziona. Per iniziare, per il softair, per le emergenze in backup: fa il suo lavoro. La programmazione via software (CHIRP, gratuito) è indispensabile.</p>
+      <h2>Yaesu FT-65: Il Salto di Qualità</h2>
+      <p>A circa 80€, il Yaesu FT-65 offre costruzione robusta, audio più pulito e ricezione migliore in zone di copertura limite. Il tasto dedicato WIRES-X e la chiarezza audio lo rendono molto più piacevole da usare dei Baofeng in contesti radioamatoriali seri.</p>
+      <h2>Kenwood TH-D75: Per il Digitale e APRS</h2>
+      <p>Il top della categoria per chi vuole D-STAR (digitale voce), APRS (trasmissione posizione GPS) e ricezione HF in un unico apparato portatile. Prezzo intorno ai 400€: giustificato solo per utilizzo avanzato.</p>
+      <blockquote>Il miglior portatile è quello che hai sempre in tasca. Un Baofeng sempre con te vale più di un Kenwood nel cassetto.</blockquote>`
+    },
+    {
       id:'r6', cat:'Radioamatori', subcat:'Modi Digitali', title:'Contest Radioamatoriali: Come Partecipare e Cosa Aspettarsi',
       excerpt:'I contest sono la Formula 1 della radioamatura. Si cercano contatti nel minor tempo possibile. Guida per chi vuole iniziare.',
       tags:['Contest','Gara','HF','Operativa'],
@@ -2369,7 +2690,7 @@ const ARTICLES = {
       id:'a1', cat:'AI', subcat:'Strumenti', title:'ChatGPT vs Claude vs Gemini: Confronto Onesto nel 2026',
       excerpt:'Tre AI diversi, tre filosofie diverse. Quale scegliere per il lavoro quotidiano, la scrittura, il codice e le domande complesse? Confronto basato su uso reale.',
       tags:['ChatGPT','Claude','Gemini','Confronto','LLM'],
-      author:'AI Researcher', date:'14 Maggio 2026', readtime:'15 min',
+      author:'Redazione AI', date:'14 Maggio 2026', readtime:'15 min',
       color:'#1a3a5a',
       body:`<p>Il mercato degli LLM (Large Language Models) si è consolidato intorno a tre protagonisti principali accessibili al grande pubblico: ChatGPT di OpenAI, Claude di Anthropic e Gemini di Google. Tutti e tre sono capaci, ma hanno punti di forza e debolezze diverse.</p>
       <h2>ChatGPT (OpenAI)</h2>
@@ -2386,7 +2707,7 @@ const ARTICLES = {
       id:'a2', cat:'AI', subcat:'Prompt Engineering', title:'Come Creare Prompt Efficaci: La Guida Pratica per Ottenere Risultati Migliori',
       excerpt:'Il prompt engineering non è una scienza oscura. Con queste tecniche concrete si ottengono risultati nettamente migliori da qualsiasi AI testuale.',
       tags:['Prompt','Prompt Engineering','ChatGPT','Guida'],
-      author:'Prompt Expert', date:'12 Maggio 2026', readtime:'12 min',
+      author:'Redazione AI', date:'12 Maggio 2026', readtime:'12 min',
       color:'#4a1a7a',
       body:`<p>La qualità dell'output di un'AI dipende per il 60-70% dalla qualità del prompt. Non servono formule magiche: servono chiarezza, contesto e istruzioni specifiche.</p>
       <h2>Il Principio Fondamentale: Sii Specifico</h2>
@@ -2409,7 +2730,7 @@ const ARTICLES = {
       id:'a3', cat:'AI', subcat:'AI Immagini', title:'Midjourney: Guida Base per Creare Immagini Spettacolari',
       excerpt:'Midjourney genera immagini straordinarie da descrizioni testuali. Questa guida base spiega i comandi fondamentali e i segreti per prompt visivi efficaci.',
       tags:['Midjourney','AI Immagini','Prompt','Arte Generativa'],
-      author:'Digital Artist', date:'10 Maggio 2026', readtime:'11 min',
+      author:'Redazione AI', date:'10 Maggio 2026', readtime:'11 min',
       color:'#5a2a7a',
       body:`<p>Midjourney è lo strumento di generazione immagini AI con la migliore qualità estetica disponibile nel 2026. Con prompt scritti bene si ottengono immagini che prima richiedevano fotografi professionisti e ore di post-produzione.</p>
       <h2>Come Accedere</h2>
@@ -2432,7 +2753,7 @@ const ARTICLES = {
       id:'a4', cat:'AI', subcat:'Programmazione', title:'Introduzione al Machine Learning: Cosa Devi Sapere Prima di Iniziare',
       excerpt:'Il Machine Learning sembra complesso ma i concetti fondamentali sono accessibili a chiunque. Questa guida spiega il ML senza formule e con esempi concreti.',
       tags:['Machine Learning','AI','Programmazione','Guida'],
-      author:'ML Engineer', date:'7 Maggio 2026', readtime:'13 min',
+      author:'Redazione AI', date:'7 Maggio 2026', readtime:'13 min',
       color:'#1a6a4a',
       body:`<p>Il Machine Learning non è magia, non è fantascienza e non richiede una laurea in matematica per capire i concetti fondamentali. Questa guida spiega cosa fa davvero il ML, come funziona ad alto livello e perché è diventato così importante.</p>
       <h2>Cosa è il Machine Learning</h2>
@@ -2449,7 +2770,7 @@ const ARTICLES = {
       id:'a5', cat:'AI', subcat:'Business', title:'Automazione Aziendale con AI: Dove Iniziare e Cosa Evitare',
       excerpt:'L\'AI può automatizzare decine di processi aziendali ripetitivi. Ma dove si inizia? E quali sono gli errori da evitare? La guida pratica per le PMI.',
       tags:['Business','Automazione','Azienda','PMI','Produttività'],
-      author:'AI Business Consultant', date:'5 Maggio 2026', readtime:'12 min',
+      author:'Redazione AI', date:'5 Maggio 2026', readtime:'12 min',
       color:'#7a3a10',
       body:`<p>Le grandi aziende hanno già implementato l'AI in processi critici. Le PMI italiane sono in ritardo, ma il divario si sta riducendo rapidamente grazie a strumenti accessibili anche senza team tecnici interni.</p>
       <h2>I Processi più Automatizzabili</h2>
@@ -2466,7 +2787,7 @@ const ARTICLES = {
       id:'a6', cat:'AI', subcat:'News', title:'AI Act Europeo 2026: Cosa Cambia per le Aziende e i Cittadini',
       excerpt:'L\'AI Act europeo è entrato in vigore nel 2024 e il 2026 vede le prime scadenze importanti. Ecco cosa cambia in pratica per aziende e cittadini.',
       tags:['AI Act','Europa','Normativa','Regolamentazione'],
-      author:'Legal Tech Editor', date:'3 Maggio 2026', readtime:'10 min',
+      author:'Redazione AI', date:'3 Maggio 2026', readtime:'10 min',
       color:'#1a3060',
       body:`<p>L'AI Act europeo (Regolamento UE 2024/1689) è la prima normativa completa sull'intelligenza artificiale al mondo. Entrato in vigore nel 2024, il 2026 è l'anno in cui le prime disposizioni diventano applicabili e le sanzioni effettive.</p>
       <h2>Il Sistema di Rischio</h2>
@@ -2491,6 +2812,42 @@ const ARTICLES = {
       <h2>Piano Gratuito vs Pro</h2>
       <p>Il piano gratuito è già molto capace. Il Pro a circa 20 euro mese aggiunge accesso ai modelli più potenti, ricerche approfondite e caricamento di file propri.</p>
       <blockquote>Per le domande che richiedono una risposta sintetica e verificata, Perplexity è già superiore a Google.</blockquote>`
+    },
+    {
+      id:'a9', cat:'AI', subcat:'AI Immagini', title:'Stable Diffusion Locale: Installazione e Primi Risultati sul Tuo PC',
+      excerpt:'Stable Diffusion gira sul tuo computer, gratis e senza limiti. Guida all\'installazione con ComfyUI e ai primi prompt per immagini di qualità professionale.',
+      tags:['Stable Diffusion','ComfyUI','AI Immagini','Locale','GPU'],
+      author:'Redazione AI', date:'21 Maggio 2026', readtime:'13 min',
+      color:'#4a1a6a',
+      body:`<p>Stable Diffusion è la versione open source della generazione immagini AI: gira sul tuo PC, non invia dati a nessun server, non ha limiti di utilizzo e non costa nulla oltre all'hardware che già hai. Nel 2026 la qualità ha raggiunto i modelli commerciali per la maggior parte degli usi.</p>
+      <h2>Requisiti Hardware</h2>
+      <p>Una GPU NVIDIA con almeno 6GB di VRAM è il minimo per lavorare comodamente. Con 8GB si generano immagini 1024x1024 in 10-20 secondi. Con 12GB o più si lavora su formati più grandi con modelli avanzati. Le GPU AMD funzionano ma la compatibilità è meno ottimizzata. CPU-only è possibile ma lentissimo.</p>
+      <h2>ComfyUI: Il Frontend Consigliato</h2>
+      <p>ComfyUI è l'interfaccia node-based diventata lo standard per gli utenti avanzati. Permette di costruire workflow visivi dove ogni nodo è un'operazione: carica modello → carica immagine → applica ControlNet → genera. La curva di apprendimento è più ripida di AUTOMATIC1111 ma la flessibilità è incomparabile.</p>
+      <h2>Modelli: Dove Scaricarli</h2>
+      <p>Civitai.com è il repository principale di modelli, LoRA (adattamenti per stili specifici) e textual inversion. I modelli SDXL 1.0 e Flux.1 sono i riferimenti attuali per la qualità. Un modello base pesa 2-7GB; i LoRA aggiuntivi pochi centinaia di MB ciascuno.</p>
+      <blockquote>Stable Diffusion locale è la differenza tra usare la fotocamera di qualcun altro e possedere la tua. Controllo totale, nessun limite.</blockquote>
+      <h2>Primo Workflow Consigliato</h2>
+      <p>Inizia con il workflow txt2img base: prompt testo → immagine. Aggiungi il negative prompt (cosa NON vuoi nell'immagine). Imposta CFG Scale a 7 e steps a 20 come punto di partenza. Sperimenta con sampler DPM++ 2M Karras. Quando hai un risultato che ti piace, passa all'img2img per raffinarlo.</p>`
+    },
+    {
+      id:'a10', cat:'AI', subcat:'Strumenti', title:'AI per la Produttività Quotidiana: 10 Usi Pratici che Fanno Davvero Differenza',
+      excerpt:'L\'AI non serve solo per scrivere articoli. Questi dieci usi pratici nel lavoro quotidiano fanno risparmiare ore ogni settimana.',
+      tags:['Produttività','AI','Lavoro','Automazione','Workflow'],
+      author:'Sandro Cinquegrana', date:'19 Maggio 2026', readtime:'9 min',
+      color:'#2a5a1a',
+      body:`<p>Chi usa l'AI solo per "scrivere testi" usa il 10% delle sue potenzialità. Questi sono gli usi pratici che trasformano davvero la giornata lavorativa.</p>
+      <h2>1. Riassumere Documenti Lunghi</h2>
+      <p>Incolla un contratto, un report o un manuale in Claude o ChatGPT e chiedi un riassunto con i punti chiave. Quello che prima richiedeva 30 minuti di lettura si riduce a 2 minuti. Particolarmente utile per email lunghe e documentazione tecnica.</p>
+      <h2>2. Trascrizione e Riassunto Riunioni</h2>
+      <p>Otter.ai, Fireflies.ai e il trascrittore di Teams/Zoom generano trascrizioni automatiche. Incollando la trascrizione in un LLM si ottiene un riassunto con decisioni prese, azioni da intraprendere e responsabili. Addio appunti manuali.</p>
+      <h2>3. Prima Bozza di Qualsiasi Documento</h2>
+      <p>Non usare l'AI per il testo finale: usala per la prima bozza. Email difficile da scrivere, offerta commerciale, risposta a un reclamo: la bozza AI richiede 30 secondi, la revisione personale altri 5 minuti. Il risultato è migliore di partire da zero.</p>
+      <h2>4. Analisi Dati con Linguaggio Naturale</h2>
+      <p>ChatGPT con Code Interpreter e Claude con analisi documenti leggono file Excel/CSV e rispondono a domande in linguaggio naturale. "Qual è il prodotto più venduto negli ultimi 3 mesi?" senza scrivere una formula.</p>
+      <h2>5. Traduzione con Contesto</h2>
+      <p>Le traduzioni AI nel 2026 sono superiori a Google Translate per documenti con contesto tecnico o comunicazioni commerciali. Specifica sempre il contesto: "traduci questa email commerciale mantenendo tono formale e terminologia del settore manifatturiero".</p>
+      <blockquote>L'AI non ti rende più intelligente. Ti libera dal lavoro ripetitivo per fare le cose che richiedono intelligenza.</blockquote>`
     },
     {
       id:'a8', cat:'AI', subcat:'Programmazione', title:'Creare un Chatbot con Claude API: Guida Pratica per Iniziare',
@@ -2527,23 +2884,120 @@ function gradient(color) {
   return `linear-gradient(135deg, ${color}cc 0%, ${color}88 100%), repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 10px)`;
 }
 
+// Foto Unsplash — licenza Unsplash (uso libero, no attribuzione obbligatoria)
+// Se un URL non carica, il background-color dell'articolo fa da fallback automatico
+// Foto articoli — mix Unsplash (ID verificati) + Picsum (seed stabile, sempre disponibile)
+// Licenza: Unsplash License / CC0 — uso libero senza attribuzione obbligatoria
+function getArticleImg(id) {
+  // Unsplash: ID verificati con alta confidenza
+  const U = (photoId) => `https://images.unsplash.com/photo-${photoId}?w=700&q=75&auto=format&fit=crop`;
+  // Picsum: seed univoco per articolo → stessa foto sempre, garantita al 100%
+  const P = (seed) => `https://picsum.photos/seed/${seed}/700/380`;
+
+  const map = {
+    // ── VIAGGI ──────────────────────────────────────────────────────────────
+    v1:  U('1541849546-216549ae216d'), // Praga — Ponte Carlo (confermato)
+    v2:  U('1540959733332-eab4deabeeaf'), // Tokyo — skyline (confermato)
+    v3:  P('borghi-italiani-collina'),  // Borghi italiani
+    v4:  U('1464219789935-c2d9d9aba644'), // Sicilia — costa (confermato)
+    v5:  U('1488646953014-85cb44e25828'), // Zaino viaggio (confermato)
+    v6:  U('1452421822248-d4c2b47f0c81'), // Fotografia tramonto (confermato)
+    v7:  P('lisbona-portogallo-tram'),   // Lisbona
+    v8:  P('smartphone-travel-map'),    // App viaggi
+    v9:  P('croazia-costa-adriatica'),  // Croazia
+    v10: P('marocco-deserto-dune'),     // Marocco Sahara
+
+    // ── SOFTAIR ─────────────────────────────────────────────────────────────
+    sf1:  P('tactical-gear-airsoft'),   // AEG replica
+    sf2:  P('pistol-airsoft-gas'),      // GBB pistola
+    sf3:  P('rifle-scope-optics'),      // Ottiche red dot
+    sf4:  P('military-forest-tactics'), // Tattica in campo
+    sf5:  P('mechanical-tools-repair'), // Manutenzione AEG
+    sf6:  P('legal-document-law'),      // Normativa italiana
+    sf7:  P('outdoor-woodland-field'),  // Campo softair
+    sf8:  P('battery-lipo-electronics'),// Batterie LiPo
+    sf9:  P('milsim-military-sim'),     // MilSim evento
+    sf10: P('gearbox-upgrade-parts'),   // Upgrade gearbox
+
+    // ── TECNOLOGIA ──────────────────────────────────────────────────────────
+    t1:  U('1496181133206-80ce9b88a853'), // Laptop scrivania (confermato)
+    t2:  P('android-smartphone-speed'),  // Android veloce
+    t3:  U('1518770660439-4636190af475'), // Circuiti (confermato)
+    t4:  P('iphone-apple-backup'),       // iPhone backup
+    t5:  P('windows-computer-install'),  // Windows 11
+    t6:  U('1526374965328-7f61d4dc18c5'), // Gadget tech (confermato)
+    t7:  P('server-nas-homelab'),        // Home server NAS
+    t8:  P('smarthome-automation-iot'),  // Home Assistant
+
+    // ── SMARTPHONE ──────────────────────────────────────────────────────────
+    s1:  U('1511707171634-5f897ff02aa9'), // Smartphone multipli (confermato)
+    s2:  P('android-tricks-settings'),   // Trucchi Android
+    s3:  P('phone-battery-charging'),    // Autonomia batteria
+    s4:  P('budget-smartphone-midrange'),// Economici
+    s5:  P('phone-privacy-security'),    // Privacy smartphone
+    s6:  P('android-iphone-compare'),    // Android vs iPhone
+    s7:  U('1523275335684-37898b6baf30'), // Smartwatch polso (confermato)
+    s8:  P('smartphone-camera-photo'),   // Fotografia con telefono
+
+    // ── DRONI ───────────────────────────────────────────────────────────────
+    d1:  U('1473968512647-3e447244af8f'), // Mini drone in volo (confermato)
+    d2:  P('drone-pilot-remote'),        // Pilotaggio principiante
+    d3:  P('drone-law-regulation'),      // Normativa ENAC
+    d4:  P('aerial-cinematic-landscape'),// Riprese cinematiche
+    d5:  P('dji-autel-drone-compare'),   // DJI vs Autel
+    d6:  P('drone-beginner-mistakes'),   // Errori principianti
+    d7:  P('fpv-racing-drone-goggles'),  // FPV drone
+    d8:  P('video-editing-drone-davinci'),// Editing video drone
+
+    // ── RADIOAMATORI ────────────────────────────────────────────────────────
+    r1:  P('ham-radio-transceiver-hf'),  // Radio HF Icom Yaesu
+    r2:  P('ft8-digital-mode-wsjt'),     // FT8 modi digitali
+    r3:  P('ham-radio-exam-license'),    // Patente radioamatore
+    r4:  P('dipole-antenna-wire-hf'),    // Antenna dipolo
+    r5:  P('sdr-rtl-dongle-computer'),   // SDR software defined
+    r6:  P('ham-radio-contest-log'),     // Contest HF
+    r7:  P('wspr-propagation-world'),    // WSPR mappa
+    r8:  P('handheld-vhf-uhf-radio'),    // Portatile VHF Baofeng
+
+    // ── INTELLIGENZA ARTIFICIALE ─────────────────────────────────────────────
+    a1:  P('chatgpt-claude-ai-compare'), // Confronto AI chatbot
+    a2:  P('prompt-engineering-typing'), // Prompt engineering
+    a3:  P('midjourney-ai-art-colorful'),// Midjourney arte
+    a4:  P('machine-learning-neural'),   // Machine learning
+    a5:  P('ai-business-automation'),    // Automazione aziendale
+    a6:  P('eu-parliament-ai-act'),      // AI Act Europa
+    a7:  P('perplexity-ai-search'),      // Perplexity search
+    a8:  P('claude-api-chatbot-code'),   // API Claude chatbot
+    a9:  P('stable-diffusion-local-gpu'),// Stable Diffusion
+    a10: P('ai-productivity-workflow'),  // AI produttività
+  };
+  return map[id] || P(`article-${id}`); // fallback: foto per ID articolo
+}
+
 function getArticleEmoji(id) {
-  const map = {"v1":"🏛️","v2":"🗼","v3":"🏘️","v4":"🌊","v5":"🎒","v6":"📸","v7":"🇵🇹","v8":"📲",
-    "sf1":"🔫","sf2":"🎯","sf3":"🔭","sf4":"💨","sf5":"🔧","sf6":"⚖️","sf7":"🏟️","sf8":"🔋",
-    "t1":"💻","t2":"📱","t3":"🚀","t4":"🍎","t5":"🪟","t6":"🛍️",
-    "s1":"📲","s2":"⚙️","s3":"🔋","s4":"💰","s5":"🔐","s6":"⚡",
-    "d1":"🚁","d2":"🕹️","d3":"📋","d4":"🎬","d5":"🆚","d6":"⚠️",
-    "r1":"📡","r2":"📶","r3":"📚","r4":"📻","r5":"📻","r6":"🏆",
-    "a1":"🤖","a2":"💬","a3":"🎨","a4":"🧠","a5":"💼","a6":"🇪🇺","a7":"🔍","a8":"🤖"};
+  const map = {
+    "v1":"🏛️","v2":"🗼","v3":"🏘️","v4":"🌊","v5":"🎒","v6":"📸","v7":"🇵🇹","v8":"📲","v9":"🏖️","v10":"🐪",
+    "sf1":"🔫","sf2":"🎯","sf3":"🔭","sf4":"💨","sf5":"🔧","sf6":"⚖️","sf7":"🏟️","sf8":"🔋","sf9":"🪖","sf10":"⚙️",
+    "t1":"💻","t2":"📱","t3":"🚀","t4":"🍎","t5":"🪟","t6":"🛍️","t7":"🖥️","t8":"🏠",
+    "s1":"📲","s2":"⚙️","s3":"🔋","s4":"💰","s5":"🔐","s6":"⚡","s7":"⌚","s8":"📷",
+    "d1":"🚁","d2":"🕹️","d3":"📋","d4":"🎬","d5":"🆚","d6":"⚠️","d7":"🥽","d8":"🎞️",
+    "r1":"📡","r2":"📶","r3":"📚","r4":"📻","r5":"🔌","r6":"🏆","r7":"🌐","r8":"🎙️",
+    "a1":"🤖","a2":"💬","a3":"🎨","a4":"🧠","a5":"💼","a6":"🇪🇺","a7":"🔍","a8":"🤖","a9":"🖼️","a10":"⚡"
+  };
   return map[id] || '📄';
 }
 
 
 function cardHTML(art, extraClass='') {
+  const img = getArticleImg(art.id);
+  const imgStyle = img
+    ? `background-color:${art.color}; background-image:linear-gradient(rgba(0,0,0,0.08),rgba(0,0,0,0.28)),url('${img}'); background-size:cover; background-position:center;`
+    : `background:${gradient(art.color)};`;
+  const emojiOverlay = img ? '' : `<div style="font-size:64px;opacity:0.85;">${getArticleEmoji(art.id)}</div>`;
   return `
   <div class="card ${extraClass}" onclick="openArticle('${art.id}')">
-    <div class="card-img" style="background:${gradient(art.color)}; display:flex; align-items:center; justify-content:center; position:relative;">
-      <div style="font-size:64px; opacity:0.85;">${getArticleEmoji(art.id)}</div>
+    <div class="card-img" style="${imgStyle} display:flex; align-items:flex-end; justify-content:flex-start; position:relative;">
+      ${emojiOverlay}
       <span class="card-category-badge">${art.subcat||art.cat}</span>
     </div>
     <div class="card-body">
@@ -2560,10 +3014,15 @@ function cardHTML(art, extraClass='') {
 }
 
 function listCardHTML(art, num='') {
+  const img = getArticleImg(art.id);
+  const imgStyle = img
+    ? `background-color:${art.color}; background-image:url('${img}'); background-size:cover; background-position:center;`
+    : `background:${gradient(art.color)}; display:flex; align-items:center; justify-content:center; font-size:28px;`;
+  const emoji = img ? '' : getArticleEmoji(art.id);
   return `
   <div class="card-list" onclick="openArticle('${art.id}')">
     ${num ? `<div class="card-list-number">${num}</div>` : ''}
-    <div class="card-list-img" style="background:${gradient(art.color)}; display:flex; align-items:center; justify-content:center; font-size:28px;">${getArticleEmoji(art.id)}</div>
+    <div class="card-list-img" style="${imgStyle}">${emoji}</div>
     <div class="card-list-body">
       <div class="card-list-title">${art.title}</div>
       <div class="card-list-meta">✍️ ${art.author} · ${art.date}</div>
@@ -2651,15 +3110,10 @@ function renderHome() {
     <span class="tag" style="cursor:pointer;" onclick="searchByTag('${t}')">${t}</span>`).join('');
 
   // Categories sidebar
-  const cats = [
-    {name:'✈️ Viaggi', count:24},
-    {name:'🎯 Softair', count:6},
-    {name:'💻 Tecnologia', count:22},
-    {name:'📱 Smartphone', count:16},
-    {name:'🚁 Droni', count:14},
-    {name:'📻 Radioamatori', count:12},
-    {name:'🤖 AI', count:20}
-  ];
+  const cats = Object.entries({
+    viaggi:'✈️ Viaggi', softair:'🎯 Softair', tech:'💻 Tecnologia',
+    smartphone:'📱 Smartphone', droni:'🚁 Droni', radio:'📻 Radioamatori', ai:'🤖 AI'
+  }).map(([key,name]) => ({name, count: ARTICLES[key].length}));
   document.getElementById('cat-list').innerHTML = cats.map(c=>`
     <li style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);">
       <a href="#" style="font-size:14px;font-weight:500;color:var(--text2);">${c.name}</a>
@@ -2671,7 +3125,7 @@ function renderBlogPage(key) {
   const arts = ARTICLES[key];
   const cardsEl = document.getElementById(`${key}-cards`);
   if (cardsEl) cardsEl.innerHTML = arts.map(a=>cardHTML(a,'fade-in')).join('');
-  
+
   // Subcats
   const subcatsEl = document.getElementById(`${key}-subcats`);
   if (subcatsEl) {
@@ -2679,6 +3133,113 @@ function renderBlogPage(key) {
     subcatsEl.innerHTML = `<span class="tag" style="background:var(--accent);color:white;">Tutti</span>` +
       subs.map(s=>`<span class="tag" onclick="filterBlog('${key}','${s}',this)">${s}</span>`).join('');
   }
+
+  // Shared sidebar
+  renderSharedSidebar(key);
+}
+
+// ===== SHARED SIDEBAR =====
+function renderSharedSidebar(key) {
+  const sidebar = document.getElementById(`${key}-sidebar`);
+  if (!sidebar) return;
+
+  const catArts = ARTICLES[key];
+  const allTags = [...new Set(catArts.flatMap(a => a.tags))].slice(0, 16);
+
+  const trends = ALL_ARTICLES.slice(0, 6);
+  const popular = catArts.slice(0, 5);
+
+  const catMeta = {
+    viaggi:     { icon:'✈️', label:'Blog Viaggi',              desc:'Guide, destinazioni e consigli pratici per viaggiare meglio.' },
+    softair:    { icon:'🎯', label:'Blog Softair',             desc:'Repliche, accessori, tattica, manutenzione e normativa.' },
+    tech:       { icon:'💻', label:'Blog Tecnologia',          desc:'Recensioni, tutorial e news dal mondo tech.' },
+    smartphone: { icon:'📱', label:'Blog Smartphone',          desc:'Recensioni, guide e trucchi per smartphone Android e iPhone.' },
+    droni:      { icon:'🚁', label:'Blog Droni',               desc:'Pilotaggio, normativa, recensioni e tecniche cinematiche.' },
+    radio:      { icon:'📻', label:'Blog Radioamatori',        desc:'HF, VHF, modi digitali, antenne e normativa italiana.' },
+    ai:         { icon:'🤖', label:'Blog Intelligenza Artificiale', desc:'Strumenti, guide e notizie sull\'intelligenza artificiale.' },
+  };
+  const m = catMeta[key] || { icon:'📄', label:'Blog', desc:'' };
+
+  sidebar.innerHTML = `
+    <!-- INFO BOX CATEGORIA -->
+    <div style="background:var(--accent);color:white;border-radius:var(--radius);padding:24px;">
+      <h3 style="font-family:var(--font-display);font-size:18px;font-weight:900;margin-bottom:8px;">${m.icon} ${m.label}</h3>
+      <p style="font-size:13px;opacity:0.85;margin:0;">${m.desc}</p>
+    </div>
+
+    <!-- TREND -->
+    <div class="trend-box">
+      <div class="trend-title">🔥 Trend del Momento</div>
+      ${trends.map((t,i) => `
+        <div class="trend-item" onclick="openArticle('${t.id}')">
+          <span class="trend-num">0${i+1}</span>
+          <span>${t.title.length > 52 ? t.title.slice(0,52)+'…' : t.title}</span>
+          <span class="trend-arrow">→</span>
+        </div>`).join('')}
+    </div>
+
+    <!-- PIÙ LETTI CATEGORIA -->
+    <div class="widget">
+      <div class="widget-header">📈 Più Letti — ${m.icon} ${m.label}</div>
+      <div class="widget-body" style="display:flex;flex-direction:column;gap:12px;">
+        ${popular.map((a,i) => listCardHTML(a, i+1)).join('')}
+      </div>
+    </div>
+
+    <!-- CONTATORE VISITE -->
+    <div class="visit-counter-widget">
+      <div class="visit-counter-label">👁 Contatore Visite</div>
+      <div class="visit-counter-number" id="vc-total-${key}">—</div>
+      <div class="visit-counter-sublabel">visite totali al sito</div>
+      <div class="visit-counter-stats">
+        <div class="visit-counter-stat">
+          <div class="visit-counter-stat-num" id="vc-today-${key}">—</div>
+          <div class="visit-counter-stat-lbl">Oggi</div>
+        </div>
+        <div class="visit-counter-stat">
+          <div class="visit-counter-stat-num" id="vc-sessions-${key}">—</div>
+          <div class="visit-counter-stat-lbl">Sessioni</div>
+        </div>
+      </div>
+      <div class="visit-counter-badge">
+        <span class="visit-counter-dot"></span>
+        Sito Online
+      </div>
+    </div>
+
+    <!-- TAG CLOUD -->
+    <div class="widget">
+      <div class="widget-header">🏷️ Tag — ${m.label}</div>
+      <div class="widget-body">
+        <div class="card-tags">
+          ${allTags.map(t => `<span class="tag" onclick="searchByTag('${t}')">${t}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORIE -->
+    <div class="widget">
+      <div class="widget-header">📁 Tutte le Categorie</div>
+      <div class="widget-body">
+        <ul style="display:flex;flex-direction:column;gap:8px;">
+          ${Object.entries({viaggi:'✈️ Viaggi',softair:'🎯 Softair',tech:'💻 Tecnologia',smartphone:'📱 Smartphone',droni:'🚁 Droni',radio:'📻 Radioamatori',ai:'🤖 AI'}).map(([k,name]) => `
+            <li style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);">
+              <a href="#" onclick="showPage('${k}');return false;" style="font-size:14px;font-weight:${k===key?'700':'500'};color:${k===key?'var(--accent)':'var(--text2)'};">${name}</a>
+              <span style="background:var(--bg3);padding:2px 10px;border-radius:50px;font-size:11px;font-weight:700;color:var(--text3);">${ARTICLES[k].length}</span>
+            </li>`).join('')}
+        </ul>
+      </div>
+    </div>`;
+
+  // Popola i valori del contatore dalla localStorage
+  const data = JSON.parse(localStorage.getItem('sc_visits') || '{}');
+  const fmt = n => (n||0).toLocaleString('it-IT');
+  const tot = document.getElementById(`vc-total-${key}`);
+  const tod = document.getElementById(`vc-today-${key}`);
+  const ses = document.getElementById(`vc-sessions-${key}`);
+  if (tot) tot.textContent = fmt(data.total);
+  if (tod) tod.textContent = fmt(data.today);
+  if (ses) ses.textContent = fmt(data.sessions);
 }
 
 function filterBlog(key, sub, el) {
@@ -2715,8 +3276,15 @@ function openArticle(id) {
     {name:'Lucia B.', text:'Finalmente una guida chiara sull\'argomento. Condivido con piacere.', date:'1 settimana fa', init:'L'},
     {name:'Andrea T.', text:'Ho qualche dubbio sulla parte delle impostazioni, qualcuno può chiarire?', date:'3 giorni fa', init:'A'}
   ];
-  document.getElementById('modal-hero').style.cssText = `background:${gradient(art.color)}; width:100%; height:280px; border-radius:8px 8px 0 0; display:flex; align-items:center; justify-content:center; font-size:80px;`;
-  document.getElementById('modal-hero').innerHTML = getArticleEmoji(art.id);
+  const heroEl = document.getElementById('modal-hero');
+  const heroImg = getArticleImg(art.id);
+  if (heroImg) {
+    heroEl.style.cssText = `width:100%; height:320px; border-radius:8px 8px 0 0; background-color:${art.color}; background-image:linear-gradient(rgba(0,0,0,0.05),rgba(0,0,0,0.15)),url('${heroImg}'); background-size:cover; background-position:center;`;
+    heroEl.innerHTML = `<div style="position:absolute;bottom:10px;right:14px;font-size:10px;color:rgba(255,255,255,0.55);font-weight:600;letter-spacing:0.05em;">📷 Foto: Unsplash</div>`;
+  } else {
+    heroEl.style.cssText = `background:${gradient(art.color)}; width:100%; height:280px; border-radius:8px 8px 0 0; display:flex; align-items:center; justify-content:center; font-size:80px; position:relative;`;
+    heroEl.innerHTML = getArticleEmoji(art.id);
+  }
   document.getElementById('modal-content').innerHTML = `
     <div class="breadcrumb">
       <a href="#">Home</a> › <a href="#">${art.cat}</a> › <a href="#">${art.subcat||art.cat}</a>
@@ -2749,9 +3317,10 @@ function openArticle(id) {
     
 `;
   
-  document.getElementById('modal').classList.add('open');
+  const modal = document.getElementById('modal');
+  modal.classList.add('open');
+  modal.scrollTop = 0;
   document.body.style.overflow = 'hidden';
-  updateReadingProgress();
 }
 
 function closeModal(e) {
@@ -2794,6 +3363,90 @@ function searchByTag(tag) {
   input.dispatchEvent(new Event('input'));
   window.scrollTo({top: 0, behavior: 'smooth'});
   document.getElementById('search-dropdown').classList.add('open');
+}
+
+// ===== LEGAL MODAL =====
+const LEGAL_CONTENT = {
+  privacy: {
+    title: '🔒 Privacy Policy',
+    body: `
+      <h3 style="font-size:17px;font-weight:700;margin:0 0 10px;color:var(--text);">1. Titolare del trattamento</h3>
+      <p>Il titolare del trattamento dei dati è <strong>Sandro Cinquegrana</strong>, raggiungibile tramite la pagina Facebook <a href="https://www.facebook.com/sandro.cinquegrana.7/" target="_blank" style="color:var(--accent);">facebook.com/sandro.cinquegrana.7</a>.</p>
+
+      <h3 style="font-size:17px;font-weight:700;margin:20px 0 10px;color:var(--text);">2. Dati raccolti</h3>
+      <p>Questo sito <strong>non raccoglie dati personali</strong>. Non sono presenti form di registrazione, sistemi di login, né strumenti di profilazione degli utenti.</p>
+      <p>Il sito utilizza esclusivamente <strong>localStorage</strong> del browser per memorizzare il contatore di visite locali. Questa informazione rimane sul dispositivo dell'utente e non viene mai trasmessa a server esterni.</p>
+
+      <h3 style="font-size:17px;font-weight:700;margin:20px 0 10px;color:var(--text);">3. Cookie</h3>
+      <p>Il sito <strong>non utilizza cookie</strong> di alcun tipo — né tecnici, né analitici, né di profilazione. Consulta la Cookie Policy per i dettagli.</p>
+
+      <h3 style="font-size:17px;font-weight:700;margin:20px 0 10px;color:var(--text);">4. Link a terze parti</h3>
+      <p>Il sito contiene link verso Facebook e YouTube di proprietà di Sandro Cinquegrana. Una volta abbandonato questo sito, si applicano le rispettive informative sulla privacy di Meta e Google.</p>
+      <p>Le immagini presenti negli articoli sono fornite da <strong>Unsplash</strong> e <strong>Picsum Photos</strong>, servizi che operano con licenza libera. Non vengono trasmessi dati personali a questi servizi durante la navigazione.</p>
+
+      <h3 style="font-size:17px;font-weight:700;margin:20px 0 10px;color:var(--text);">5. Diritti dell'utente</h3>
+      <p>Poiché non vengono raccolti dati personali, non si applicano diritti di accesso, rettifica o cancellazione ai sensi del GDPR (Regolamento UE 2016/679). Per qualsiasi chiarimento puoi contattare il titolare tramite Facebook.`
+  },
+  cookie: {
+    title: '🍪 Cookie Policy',
+    body: `
+      <h3 style="font-size:17px;font-weight:700;margin:0 0 10px;color:var(--text);">Questo sito non usa cookie</h3>
+      <p>Il sito <strong>sandrocinquegrana.netlify.app</strong> (o dominio equivalente) non installa <strong>nessun cookie</strong> sul dispositivo dell'utente, né tecnici, né analitici, né di marketing o profilazione.</p>
+
+      <h3 style="font-size:17px;font-weight:700;margin:20px 0 10px;color:var(--text);">Cosa usiamo al posto dei cookie</h3>
+      <p>Per il contatore di visite, il sito usa il <strong>localStorage</strong> del browser — una memoria locale che:</p>
+      <ul style="margin:10px 0 16px 20px;display:flex;flex-direction:column;gap:6px;">
+        <li style="list-style:disc;">rimane esclusivamente sul tuo dispositivo</li>
+        <li style="list-style:disc;">non viene mai inviata a nessun server</li>
+        <li style="list-style:disc;">non contiene dati personali identificativi</li>
+        <li style="list-style:disc;">può essere cancellata in qualsiasi momento svuotando i dati del sito nelle impostazioni del browser</li>
+      </ul>
+
+      <h3 style="font-size:17px;font-weight:700;margin:20px 0 10px;color:var(--text);">Come cancellare il localStorage</h3>
+      <p><strong>Chrome/Edge:</strong> Impostazioni → Privacy → Cancella dati di navigazione → Immagini e file memorizzati nella cache.<br>
+      <strong>Firefox:</strong> Impostazioni → Privacy → Cancella dati → Contenuto web offline.<br>
+      <strong>Safari:</strong> Preferenze → Privacy → Gestisci dati sito web.</p>
+
+      <h3 style="font-size:17px;font-weight:700;margin:20px 0 10px;color:var(--text);">Cookie di terze parti</h3>
+      <p>I link verso Facebook e YouTube, se cliccati, portano su piattaforme esterne che utilizzano i propri cookie secondo le rispettive policy. Questo sito non ha controllo su quei cookie e non li attiva automaticamente.</p>`
+  },
+  note: {
+    title: '⚖️ Note Legali',
+    body: `
+      <h3 style="font-size:17px;font-weight:700;margin:0 0 10px;color:var(--text);">1. Proprietà intellettuale</h3>
+      <p>Tutti i contenuti testuali presenti su questo sito — articoli, guide, testi descrittivi — sono di proprietà di <strong>Sandro Cinquegrana</strong> e protetti dalla normativa sul diritto d'autore (Legge 633/1941 e successive modifiche).</p>
+      <p>È vietata la riproduzione, anche parziale, senza autorizzazione scritta del titolare. È consentita la citazione di brevi estratti con indicazione della fonte.</p>
+
+      <h3 style="font-size:17px;font-weight:700;margin:20px 0 10px;color:var(--text);">2. Immagini</h3>
+      <p>Le fotografie presenti negli articoli provengono da <strong>Unsplash</strong> e <strong>Picsum Photos</strong>, distribuiti con licenza Unsplash License / CC0 che ne consente l'utilizzo libero. I crediti fotografici sono indicati con "📷 Foto: Unsplash" all'interno degli articoli.</p>
+
+      <h3 style="font-size:17px;font-weight:700;margin:20px 0 10px;color:var(--text);">3. Marchi di terze parti</h3>
+      <p>I nomi di prodotti, marchi e loghi citati negli articoli (Apple, Samsung, DJI, Google, Yaesu, Icom e altri) appartengono ai rispettivi proprietari. La loro menzione avviene esclusivamente a scopo informativo ed editoriale, senza alcuna affiliazione commerciale.</p>
+
+      <h3 style="font-size:17px;font-weight:700;margin:20px 0 10px;color:var(--text);">4. Limitazione di responsabilità</h3>
+      <p>I contenuti pubblicati hanno finalità puramente informativa. Sandro Cinquegrana non garantisce l'assoluta accuratezza, completezza o aggiornamento delle informazioni. L'utente è invitato a verificare le informazioni critiche (normative, prezzi, specifiche tecniche) presso le fonti ufficiali prima di prendere decisioni basate sui contenuti di questo blog.</p>
+
+      <h3 style="font-size:17px;font-weight:700;margin:20px 0 10px;color:var(--text);">5. Legge applicabile</h3>
+      <p>Il presente sito è soggetto alla legge italiana. Per qualsiasi controversia è competente il Foro di residenza del titolare.</p>`
+  }
+};
+
+function openLegal(type) {
+  const content = LEGAL_CONTENT[type];
+  if (!content) return;
+  document.getElementById('legal-title').innerHTML = content.title;
+  document.getElementById('legal-body').innerHTML = content.body;
+  const modal = document.getElementById('legal-modal');
+  modal.style.display = 'flex';
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+function closeLegal(e) {
+  if (e.target === document.getElementById('legal-modal')) closeLegalBtn();
+}
+function closeLegalBtn() {
+  document.getElementById('legal-modal').style.display = 'none';
+  document.body.style.overflow = '';
 }
 
 // ===== WIP MODAL =====
@@ -2867,14 +3520,14 @@ document.addEventListener('click', e=>{
     searchDropdown.classList.remove('open');
 });
 
-// ===== READING PROGRESS =====
-function updateReadingProgress() {
+// ===== READING PROGRESS (listener registrato una volta sola) =====
+function initReadingProgress() {
   const modal = document.getElementById('modal');
   const bar = document.getElementById('reading-progress');
   modal.addEventListener('scroll', ()=>{
-    const scrollTop = modal.scrollTop;
+    if (!modal.classList.contains('open')) return;
     const height = modal.scrollHeight - modal.clientHeight;
-    bar.style.width = height > 0 ? `${(scrollTop/height)*100}%` : '0%';
+    bar.style.width = height > 0 ? `${(modal.scrollTop / height) * 100}%` : '0%';
   });
 }
 
@@ -2900,16 +3553,79 @@ document.querySelectorAll('.page-btn:not(.dots)').forEach(btn=>{
   });
 });
 
+// ===== VISIT COUNTER =====
+function initVisitCounter() {
+  const now = Date.now();
+  const DAY_MS = 86400000;
+  const SESSION_GAP = 1800000; // 30 min = nuova sessione
+
+  let data = JSON.parse(localStorage.getItem('sc_visits') || 'null') || {
+    total: 0, sessions: 0, today: 0, todayDate: '', lastVisit: 0
+  };
+
+  // Nuova sessione se passati più di 30 min dall'ultima visita
+  const isNewSession = (now - data.lastVisit) > SESSION_GAP;
+
+  // Reset contatore giornaliero se nuovo giorno
+  const todayStr = new Date().toISOString().slice(0,10);
+  if (data.todayDate !== todayStr) {
+    data.today = 0;
+    data.todayDate = todayStr;
+  }
+
+  if (isNewSession) {
+    data.total++;
+    data.sessions++;
+    data.today++;
+    data.lastVisit = now;
+    localStorage.setItem('sc_visits', JSON.stringify(data));
+  }
+
+  // Aggiorna tutti gli elementi UI con animazione contatore
+  function animateCount(el, target) {
+    if (!el) return;
+    const duration = 1200;
+    const start = performance.now();
+    const from = parseInt(el.textContent) || 0;
+    function step(ts) {
+      const progress = Math.min((ts - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(from + (target - from) * ease).toLocaleString('it-IT');
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  animateCount(document.getElementById('vc-total'),   data.total);
+  animateCount(document.getElementById('vc-today'),   data.today);
+  animateCount(document.getElementById('vc-sessions'),data.sessions);
+  animateCount(document.getElementById('stats-visits'),data.total);
+
+  const topbar = document.getElementById('topbar-visit-count');
+  if (topbar) topbar.textContent = data.total.toLocaleString('it-IT');
+}
+
+// ===== UPDATE PILL COUNTS =====
+function updatePillCounts() {
+  ['viaggi','softair','tech','smartphone','droni','radio','ai'].forEach(key => {
+    const el = document.getElementById(`pill-count-${key}`);
+    if (el) el.textContent = `${ARTICLES[key].length} articoli`;
+  });
+}
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', ()=>{
   setDate();
   renderSlider();
   renderHome();
   renderNewsTicker();
+  updatePillCounts();
+  initVisitCounter();
+  initReadingProgress();
   sliderTimer = setInterval(()=>goSlide(currentSlide+1), 5000);
-  
+
   // Keyboard close modal
-  document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeModalBtn(); closeWipBtn(); } });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeModalBtn(); closeWipBtn(); closeLegalBtn(); } });
 });
 </script>
 </body>
