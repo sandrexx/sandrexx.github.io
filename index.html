@@ -1362,13 +1362,12 @@ footer {
                 </div>
               </div>
               <div style="display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid rgba(255,255,255,0.1);" id="meteo-forecast">
-                ${['Oggi','Lun','Mar','Mer','Gio','Ven'].map((d,i)=>`
-                  <div style="padding:8px 4px;text-align:center;${i<5?'border-right:1px solid rgba(255,255,255,0.08);':''}">
-                    <div style="font-size:10px;font-weight:700;opacity:0.6;text-transform:uppercase;">${d}</div>
-                    <div style="font-size:18px;margin:4px 0;">⏳</div>
-                    <div style="font-size:11px;font-weight:700;color:#f0b030;">--°</div>
-                    <div style="font-size:10px;opacity:0.5;">--°</div>
-                  </div>`).join('')}
+                <div style="padding:8px 4px;text-align:center;border-right:1px solid rgba(255,255,255,0.08);"><div style="font-size:10px;font-weight:700;opacity:0.6;text-transform:uppercase;">Oggi</div><div style="font-size:18px;margin:4px 0;">⏳</div><div style="font-size:11px;font-weight:700;color:#f0b030;">--°</div><div style="font-size:10px;opacity:0.5;">--°</div></div>
+                <div style="padding:8px 4px;text-align:center;border-right:1px solid rgba(255,255,255,0.08);"><div style="font-size:10px;font-weight:700;opacity:0.6;text-transform:uppercase;">Dom</div><div style="font-size:18px;margin:4px 0;">⏳</div><div style="font-size:11px;font-weight:700;color:#f0b030;">--°</div><div style="font-size:10px;opacity:0.5;">--°</div></div>
+                <div style="padding:8px 4px;text-align:center;border-right:1px solid rgba(255,255,255,0.08);"><div style="font-size:10px;font-weight:700;opacity:0.6;text-transform:uppercase;">Lun</div><div style="font-size:18px;margin:4px 0;">⏳</div><div style="font-size:11px;font-weight:700;color:#f0b030;">--°</div><div style="font-size:10px;opacity:0.5;">--°</div></div>
+                <div style="padding:8px 4px;text-align:center;border-right:1px solid rgba(255,255,255,0.08);"><div style="font-size:10px;font-weight:700;opacity:0.6;text-transform:uppercase;">Mar</div><div style="font-size:18px;margin:4px 0;">⏳</div><div style="font-size:11px;font-weight:700;color:#f0b030;">--°</div><div style="font-size:10px;opacity:0.5;">--°</div></div>
+                <div style="padding:8px 4px;text-align:center;border-right:1px solid rgba(255,255,255,0.08);"><div style="font-size:10px;font-weight:700;opacity:0.6;text-transform:uppercase;">Mer</div><div style="font-size:18px;margin:4px 0;">⏳</div><div style="font-size:11px;font-weight:700;color:#f0b030;">--°</div><div style="font-size:10px;opacity:0.5;">--°</div></div>
+                <div style="padding:8px 4px;text-align:center;"><div style="font-size:10px;font-weight:700;opacity:0.6;text-transform:uppercase;">Gio</div><div style="font-size:18px;margin:4px 0;">⏳</div><div style="font-size:11px;font-weight:700;color:#f0b030;">--°</div><div style="font-size:10px;opacity:0.5;">--°</div></div>
               </div>
               <div style="padding:5px 20px;font-size:9px;opacity:0.35;text-align:right;">Dati: Open-Meteo.com</div>
             </div>
@@ -1998,6 +1997,33 @@ const ARTICLES = {
       <p>Wise per pagamenti senza commissioni estere. XE Currency per i tassi di cambio in tempo reale. Revolut come carta virtuale per emergenze.</p>
       <blockquote>La migliore app di viaggio è quella che scarichi prima di partire, non quella che cerchi disperatamente senza connessione.</blockquote>`
     }
+    ,{id:'v11',cat:'Viaggi',subcat:'Europa',title:'Islanda d\'Inverno: Aurora Boreale e Paesaggi Lunari',
+      excerpt:'L\'Islanda in inverno è uno dei viaggi più spettacolari del mondo. Aurora boreale, geyser e cascate ghiacciate.',
+      tags:['Islanda','Aurora Boreale','Inverno','Europa','Natura'],
+      author:'Sandro Cinquegrana',date:'30 Maggio 2026',readtime:'12 min',color:'#1a3a5a',
+      body:`<p>L'Islanda d'inverno è un'esperienza che non assomiglia a nessun altro viaggio europeo. Il paesaggio è alieno e le aurore boreali sono il momento più indimenticabile.</p><h2>Quando Andare per le Aurore</h2><p>Da ottobre a marzo le notti sono abbastanza scure. Gennaio e febbraio offrono le notti più lunghe. L'aurora non è garantita: serve attività solare K-index 3+, cielo sereno.</p><h2>Come Muoversi</h2><p>Noleggio 4x4 obbligatorio in inverno. Molte strade sono chiuse. Concentrati su Reykjavik, penisola di Snæfellsnes e Golden Circle.</p><h2>Budget</h2><p>Volo: 150-300€. Noleggio auto 7 giorni: 400-700€. Alloggio: 80-150€/notte. Cibo economico: 40-70€/giorno.</p><blockquote>L'aurora boreale non la pianifichi. La aspetti. E quando arriva, capisci perché sei venuto fin qui.</blockquote>`
+    },{id:'v12',cat:'Viaggi',subcat:'Europa',title:'Istanbul in 4 Giorni: Dove Oriente e Occidente si Incontrano',
+      excerpt:'Istanbul è l\'unica città al mondo su due continenti. Moschee, bazar, Bosforo e cucina straordinaria.',
+      tags:['Istanbul','Turchia','Europa','Asia','Cultura'],
+      author:'Sandro Cinquegrana',date:'28 Maggio 2026',readtime:'10 min',color:'#8a3a10',
+      body:`<p>Istanbul non è come nessun'altra città. È Europa e Asia, laica e religiosa, moderna e secolare in modo simultaneo.</p><h2>Giorno 1-2: Sultanahmet</h2><p>Hagia Sophia, Moschea Blu, palazzo di Topkapi e Grand Bazaar. Il Bazaar delle Spezie profuma di luoghi lontani.</p><h2>Giorno 3: Bosforo</h2><p>Il traghetto pubblico sul Bosforo: il modo più economico di attraversare due continenti. Palazzo di Dolmabahçe: sfarzo e dimensioni impressionanti.</p><h2>Giorno 4: Beyoğlu</h2><p>Istiklal pedonale, mercato Balık Pazarı per pesce fresco. Tramonto dalla Torre di Galata.</p><blockquote>Istanbul: puoi fare colazione in Europa e cena in Asia. E la cucina è straordinaria in entrambi i continenti.</blockquote>`
+    },{id:'v13',cat:'Viaggi',subcat:'Europa',title:'Amsterdam in 3 Giorni: Canali, Musei e Cultura Olandese',
+      excerpt:'Amsterdam è una delle capitali europee più vivibili. Canali, biciclette e musei di livello mondiale.',
+      tags:['Amsterdam','Olanda','Europa','Musei','City Break'],
+      author:'Sandro Cinquegrana',date:'26 Maggio 2026',readtime:'9 min',color:'#1a5a4a',
+      body:`<p>Amsterdam è compatta, ciclabile e piena di vita. Tre giorni bastano per i punti principali.</p><h2>Giorno 1: Canali e Jordaan</h2><p>Giro in barca sui canali storici. Il quartiere Jordaan: strade pittoresche con case a timpano del 1600. Mercato del sabato Noordermarkt.</p><h2>Giorno 2: I Musei</h2><p>Rijksmuseum: Rembrandt e Vermeer originali. Van Gogh Museum: la collezione più grande al mondo. Prenota online: le code sono enormi.</p><h2>Giorno 3: Anne Frank House</h2><p>Prenotazione obbligatoria con settimane di anticipo. Esperienza emotivamente intensa. Vondelpark nel pomeriggio.</p><blockquote>Amsterdam si vive in bicicletta. Noleggiarne una è la prima cosa da fare.</blockquote>`
+    },{id:'v14',cat:'Viaggi',subcat:'Italia',title:'Trekking nelle Dolomiti: i 5 Percorsi più Belli per Ogni Livello',
+      excerpt:'Le Dolomiti sono patrimonio UNESCO. Cinque percorsi dal più semplice al più impegnativo.',
+      tags:['Dolomiti','Trekking','Italia','Montagna','Natura'],
+      author:'Sandro Cinquegrana',date:'24 Maggio 2026',readtime:'11 min',color:'#5a4a2a',
+      body:`<p>Le Dolomiti offrono trekking per tutti i livelli, da passeggiate familiari a percorsi alpinistici.</p><h2>Facile: Lago di Braies</h2><p>3 km, dislivello quasi nullo, paesaggio spettacolare. Arriva prima delle 8 in estate per evitare le code al parcheggio.</p><h2>Medio: Alpe di Siusi</h2><p>L'altopiano più grande d'Europa. In luglio i prati fioriti con le Dolomiti sullo sfondo sono indimenticabili.</p><h2>Impegnativo: Tre Cime di Lavaredo</h2><p>10 km, 500m dislivello, uno dei trek più fotografati delle Alpi. Partenza dal rifugio Auronzo.</p><blockquote>Le Dolomiti si visitano in silenzio. Il rumore dei passi sulla ghiaia è la colonna sonora giusta.</blockquote>`
+    },{id:'v15',cat:'Viaggi',subcat:'Africa',title:'Kenya Safari: Come Organizzarlo Senza Agenzia',
+      excerpt:'Un safari in Kenya non richiede un\'agenzia costosa. Guida completa per organizzarlo in autonomia.',
+      tags:['Kenya','Safari','Africa','Natura','Wildlife'],
+      author:'Sandro Cinquegrana',date:'22 Maggio 2026',readtime:'13 min',color:'#5a3a0a',
+      body:`<p>Il Kenya ospita alcuni dei parchi naturali più famosi. Organizzare in autonomia dà flessibilità e risparmio.</p><h2>Parchi Principali</h2><p>Masai Mara: la grande migrazione luglio-ottobre. Amboseli: elefanti con il Kilimangiaro sullo sfondo. Samburu: specie rare non presenti nel Mara.</p><h2>Come Muoversi</h2><p>Noleggio 4x4 con conducente locale obbligatorio dentro i parchi. Il conducente conosce gli avvistamenti recenti.</p><h2>Budget</h2><p>Volo: 600-900€. Lodge base: 80-150€/notte. Fee parchi: 60-80$/giorno. 10 giorni con budget attento: 1800-2500€ tutto incluso.</p><blockquote>Il safari cambia la prospettiva. Vedere un leone a 20 metri ricorda che siamo ospiti in un mondo che non ci appartiene.</blockquote>`
+    }
+
   ],
 
   softair: [
@@ -2178,6 +2204,33 @@ const ARTICLES = {
       <p>Più robuste, tollerano meglio la scarica profonda. Ideali per chi inizia. Prestazioni leggermente inferiori alle LiPo ma affidabilità superiore.</p>
       <blockquote>Una LiPo danneggiata può gonfiarsi. Conservala sempre in una borsa ignifuga.</blockquote>`
     }
+    ,{id:'sf11',cat:'Softair',subcat:'Accessori',title:'Maschere e Protezioni Softair: Guida alla Sicurezza',
+      excerpt:'La maschera è l\'unico accessorio obbligatorio nel softair. Guida completa per scegliere la protezione giusta.',
+      tags:['Maschera','Protezione','Sicurezza','CQB'],
+      author:'Sandro Cinquegrana',date:'29 Maggio 2026',readtime:'9 min',color:'#2a4a1a',
+      body:`<p>La maschera non è un optional. Un pallino a 100 m/s può causare danni permanenti agli occhi.</p><h2>Occhiali vs Full Face</h2><p>Occhiali ballistici per outdoor (distanze alte). Maschera full face obbligatoria in CQB (distanze ravvicinate).</p><h2>Standard di Protezione</h2><p>Certificazione ANSI Z87.1 o EN166. Evita protezioni senza marchi certificati visibili.</p><h2>Anti-Appannamento</h2><p>Doppia lente con camera d'aria, ventola elettrica, o trattamenti anti-fog periodici.</p><blockquote>Non esiste la maschera perfetta. Esiste quella che usi sempre, senza mai toglierla in campo.</blockquote>`
+    },{id:'sf12',cat:'Softair',subcat:'Armi e Repliche',title:'Repliche Sniper Bolt Action: Guida per il Cecchino Softair',
+      excerpt:'Le bolt action sono le più accurate nel softair. Come funzionano, quali scegliere e come ottimizzarle.',
+      tags:['Sniper','Bolt Action','VSR-10','Precisione'],
+      author:'Sandro Cinquegrana',date:'27 Maggio 2026',readtime:'12 min',color:'#3a5a2a',
+      body:`<p>Il ruolo del cecchino nel softair è tra i più tecnici e soddisfacenti. Richiede pazienza e una replica ottimizzata.</p><h2>Piattaforme Principali</h2><p>Tokyo Marui VSR-10: il riferimento assoluto. Maggior numero di upgrade compatibili al mondo. Well MB series: economica per iniziare senza investire subito.</p><h2>Distanza di Ingaggio</h2><p>Con pallini 0.30-0.40g: precisione fino a 60-70 metri. Oltre questa distanza la traiettoria dipende troppo dal vento.</p><h2>Upgrade Prioritari</h2><p>Bucking Maple Leaf 70°: miglioramento più immediato. Canna inox. Cilindro e pistone matchati.</p><blockquote>Un cecchino softair sopravvive fino al tiro decisivo usando il cervello, non la replica.</blockquote>`
+    },{id:'sf13',cat:'Softair',subcat:'Campo e Tattica',title:'Come Organizzare un Evento Softair: Guida per Organizzatori',
+      excerpt:'Organizzare un evento softair richiede logistica, sicurezza e comunicazione. Guida pratica per un gioco memorabile.',
+      tags:['Evento','Organizzazione','Campo','Sicurezza'],
+      author:'Sandro Cinquegrana',date:'25 Maggio 2026',readtime:'11 min',color:'#1a3a1a',
+      body:`<p>Un buon evento softair si distingue per organizzazione, sicurezza e divertimento garantito a tutti.</p><h2>Prima dell'Evento</h2><p>Sopralluogo campo: identifica punti pericolosi e confini. Regole chiare: potenza max, pallini consentiti, distanza minima. Minimo un arbitro ogni 20 giocatori.</p><h2>Scenario e Bilanciamento</h2><p>Scenari asimmetrici richiedono bilanciamento numerico o vantaggi compensativi. Obiettivi chiari evitano stalli e frustrazione.</p><h2>Sicurezza</h2><p>Safe zone fisica separata. Maschera obbligatoria dall'ingresso. Cronografazione di ogni replica prima della partita.</p><blockquote>Un evento sicuro è quello dove tutti tornano l'anno dopo.</blockquote>`
+    },{id:'sf14',cat:'Softair',subcat:'Accessori',title:'Abbigliamento Tattico Softair: Cosa Serve Davvero',
+      excerpt:'Il mercato tattico è enorme. Cosa vale la pena comprare e come costruire un kit funzionale senza spendere troppo.',
+      tags:['Abbigliamento','Uniforme','Tattico','Mimetica'],
+      author:'Sandro Cinquegrana',date:'23 Maggio 2026',readtime:'10 min',color:'#4a5a2a',
+      body:`<p>L'abbigliamento tattico bilancia funzionalità, protezione e budget. Non serve il kit più costoso.</p><h2>La Mimetica</h2><p>Bosco: Multicam, Woodland o ATACS-FG. Urbano/CQB: All-Black o All-Tan. MilSim: uniforme coordinata con il team.</p><h2>Il Gilet Tattico</h2><p>JPC leggero per gioco dinamico. Rig completo per MilSim. Testa i portacaricatori con i tuoi caricatori prima di comprare.</p><h2>Calzature</h2><p>Stivaletti mid-cut con suola Vibram per bosco. Trail running per CQB veloce.</p><blockquote>Il softairista peggio vestito che sa muoversi elimina più avversari del più bello equipaggiato che corre allo scoperto.</blockquote>`
+    },{id:'sf15',cat:'Softair',subcat:'Armi e Repliche',title:'HPA nel Softair: Il Sistema ad Alta Pressione che Cambia Tutto',
+      excerpt:'L\'HPA usa aria compressa per propulsione. Consistenza assoluta, regolazione fine e silenziosità rispetto alle AEG.',
+      tags:['HPA','Alta Pressione','Wolverine','Avanzato'],
+      author:'Sandro Cinquegrana',date:'21 Maggio 2026',readtime:'11 min',color:'#2a3a1a',
+      body:`<p>L'HPA usa aria compressa da un serbatoio esterno. A differenza delle AEG, ogni colpo ha la stessa potenza indipendentemente dalla temperatura.</p><h2>Come Funziona</h2><p>Un regolatore riduce la pressione del serbatoio (200 bar) a 70-120 PSI operativi. Il serbatoio si ricarica in qualsiasi negozio di diving o paintball.</p><h2>Vantaggi</h2><p>Consistenza assoluta tra un colpo e l'altro. Riduzione rumore fino al 50%. Funziona perfettamente a -10°C.</p><h2>Kit Consigliati</h2><p>Wolverine Inferno: compatibile con quasi tutte le AEG. Polarstar Fusion Engine: il top assoluto. Serbatoio 0.8L Carbon Fiber + regolatore Ninja.</p><blockquote>Chi prova l'HPA difficilmente torna alla AEG. La differenza si sente davvero.</blockquote>`
+    }
+
   ],
 
   tech: [
@@ -2338,6 +2391,33 @@ const ARTICLES = {
       <p>Aggiunge HDMI, USB-A, lettore SD, ethernet e ricarica passthrough. Anker e Ugreen offrono prodotti affidabili tra 40 e 80€.</p>
       <blockquote>Il miglior gadget tech è quello che usi ogni giorno senza pensarci. Se dopo una settimana è nel cassetto, acquisto sbagliato.</blockquote>`
     }
+    ,{id:'t9',cat:'Tecnologia',subcat:'Recensioni',title:'iPad 2026: Quale Modello Scegliere per Ogni Esigenza',
+      excerpt:'iPad base, Mini, Air o Pro: guida definitiva per scegliere il modello giusto senza spendere troppo.',
+      tags:['iPad','Apple','Tablet','2026'],
+      author:'Redazione Tech',date:'29 Maggio 2026',readtime:'10 min',color:'#1a3a6a',
+      body:`<p>La gamma iPad nel 2026 copre ogni esigenza ma può essere disorientante.</p><h2>iPad Base — Per Chi Inizia</h2><p>Display 10.9 pollici, chip A14, compatibile con Apple Pencil 1a gen. Per studio e consumo di contenuti. Circa 499€.</p><h2>iPad Air M2 — Il Più Equilibrato</h2><p>Chip M2, 11 o 13 pollici, Apple Pencil Pro. Giusto compromesso per lavoro secondario.</p><h2>iPad Pro M4 — Per Professionisti</h2><p>Display OLED, chip M4. Per video editing e uso come workstation portatile. Ha senso solo se sfrutti davvero la potenza.</p><blockquote>L'iPad giusto non è il più potente. È quello che usi al 100% ogni giorno senza rimpianti.</blockquote>`
+    },{id:'t10',cat:'Tecnologia',subcat:'Recensioni',title:'Monitor Gaming 2026: Hz, ms e Pannelli — Cosa Conta Davvero',
+      excerpt:'IPS, VA, OLED, 144Hz, 240Hz: il mercato dei monitor gaming è pieno di sigle. Cosa conta davvero e cosa è marketing.',
+      tags:['Monitor','Gaming','Hz','IPS','OLED'],
+      author:'Redazione Tech',date:'27 Maggio 2026',readtime:'11 min',color:'#2a2a6a',
+      body:`<p>Questa guida separa ciò che conta davvero da ciò che è solo un numero di marketing.</p><h2>Refresh Rate</h2><p>60 vs 144Hz: differenza enorme. 144 vs 240Hz: solo per FPS competitivo. Per la maggior parte, 144Hz è il punto ottimale.</p><h2>Tipo di Pannello</h2><p>IPS: colori accurati, angoli ottimi. VA: contrasto alto, nero profondo. OLED: il meglio, attenzione al burn-in su contenuti statici.</p><h2>Risoluzione</h2><p>1440p QHD a 27 pollici: il sweet spot qualità-performance nel 2026.</p><blockquote>Un monitor 144Hz a 1440p dura 5-7 anni senza rimpianti. Uno 60Hz si rimpiange dopo sei mesi.</blockquote>`
+    },{id:'t11',cat:'Tecnologia',subcat:'Tutorial',title:'VPN: Cos\'è, Quando Serve e Quale Scegliere nel 2026',
+      excerpt:'Le VPN non servono solo per il download. Privacy, sicurezza su Wi-Fi pubblici e contenuti: guida pratica.',
+      tags:['VPN','Privacy','Sicurezza','NordVPN','Proton'],
+      author:'Sandro Cinquegrana',date:'25 Maggio 2026',readtime:'9 min',color:'#3a1a5a',
+      body:`<p>La VPN non è solo per pirati. È uno strumento di privacy con senso in diversi scenari quotidiani.</p><h2>Quando Ha Senso</h2><p>Su Wi-Fi pubblici: cifra il traffico. Per la privacy dall'ISP. Per contenuti geo-bloccati.</p><h2>Quando NON Serve</h2><p>A casa per uso normale. Per essere "anonimi": i cookie rimangono tracciabili anche con VPN.</p><h2>Quale Scegliere</h2><p>Proton VPN: gratuito senza limiti, svizzero, privacy-first. NordVPN: velocità eccellente, 5€/mese. Mullvad: il più anonimo, 5€/mese fissi.</p><blockquote>Una VPN gratuita di dubbia origine è peggio di nessuna VPN.</blockquote>`
+    },{id:'t12',cat:'Tecnologia',subcat:'Tutorial',title:'Stampante 3D per Casa: Guida per Chi Non Ha Mai Stampato',
+      excerpt:'Le stampanti 3D nel 2026 costano meno di 300€ e sono facili da usare. Guida completa da zero.',
+      tags:['Stampante 3D','FDM','Bambu Lab','Creality','Maker'],
+      author:'Sandro Cinquegrana',date:'23 Maggio 2026',readtime:'11 min',color:'#5a3a1a',
+      body:`<p>Le stampanti 3D consumer nel 2026 sono affidabili, veloci e non richiedono più calibrazioni notturne.</p><h2>Come Funziona FDM</h2><p>Fonde filamento plastico depositandolo strato per strato. Il risultato è un oggetto fisico da un file digitale.</p><h2>Modelli Consigliati</h2><p>Bambu Lab A1 Mini: autolivellante, velocissima, circa 280€. Creality Ender 3 V3: economica, comunità enorme, circa 180€.</p><h2>Cosa si Stampa</h2><p>Ricambi, supporti personalizzati, gadget, prototipi. Thingiverse e Printables: milioni di modelli gratuiti.</p><blockquote>La prima cosa che stampi sarà un cubo di calibrazione. La seconda sarà qualcosa di cui avevi davvero bisogno.</blockquote>`
+    },{id:'t13',cat:'Tecnologia',subcat:'Tutorial',title:'Sicurezza del PC Windows: 10 Impostazioni da Fare Subito',
+      excerpt:'Windows 11 è sicuro se configurato correttamente. Queste 10 impostazioni aumentano la protezione senza software aggiuntivo.',
+      tags:['Sicurezza','Windows','PC','Protezione','Privacy'],
+      author:'Sandro Cinquegrana',date:'21 Maggio 2026',readtime:'10 min',color:'#2a4a5a',
+      body:`<p>Windows 11 ha strumenti di sicurezza ottimi integrati che la maggior parte degli utenti non configura mai.</p><h2>Aggiornamenti Automatici</h2><p>Windows Update → Opzioni avanzate → attiva aggiornamenti per altri prodotti Microsoft.</p><h2>Windows Defender</h2><p>Protezione in tempo reale ON. Analisi settimanale attiva. Cloud Protection ON.</p><h2>BitLocker</h2><p>Pannello di controllo → Crittografia BitLocker → Attiva per disco C. Se il PC viene rubato, i dati sono illeggibili.</p><h2>Windows Hello</h2><p>PIN 6+ cifre con biometria: più sicuro di una password complessa digitata ogni volta.</p><blockquote>Il 95% degli attacchi ai PC consumer sfrutta configurazioni deboli, non vulnerabilità zero-day.</blockquote>`
+    }
+
   ],
 
   smartphone: [
@@ -2476,6 +2556,33 @@ const ARTICLES = {
       <p>Apple ha costruito la propria identità sulla privacy. Android ha fatto enormi passi avanti. La differenza reale oggi è minore di quanto si pensi.</p>
       <blockquote>Nel 2026 non esiste la scelta sbagliata. Esiste la scelta giusta per te, basata su come usi davvero il telefono.</blockquote>`
     }
+    ,{id:'s9',cat:'Smartphone',subcat:'Guide',title:'Come Trasferire Tutti i Dati da Android a iPhone',
+      excerpt:'Cambiare da Android a iPhone è semplice con l\'app ufficiale Apple. Guida passo per passo senza perdere nulla.',
+      tags:['Android','iPhone','Migrazione','Dati'],
+      author:'Redazione Mobile',date:'29 Maggio 2026',readtime:'8 min',color:'#1a3a5a',
+      body:`<p>Migrare da Android a iPhone è diventato semplice grazie all'app ufficiale Apple.</p><h2>App Muovi su iOS</h2><p>Scarica "Muovi su iOS" dal Play Store prima di configurare il nuovo iPhone. Durante il setup scegli "Trasferisci dati da Android".</p><h2>Cosa si Trasferisce</h2><p>Contatti, messaggi, foto, video, email e calendario. WhatsApp ha una funzione di migrazione dedicata.</p><blockquote>La migrazione da Android a iPhone nel 2026 richiede 30 minuti. Nel 2019 richiedeva un weekend.</blockquote>`
+    },{id:'s10',cat:'Smartphone',subcat:'Guide',title:'Le Migliori App Gratuite per Android e iPhone nel 2026',
+      excerpt:'App gratuite che valgono quanto le migliori a pagamento. La selezione delle 10 app indispensabili del 2026.',
+      tags:['App','Gratis','Android','iPhone','2026'],
+      author:'Redazione Mobile',date:'27 Maggio 2026',readtime:'9 min',color:'#2a5a3a',
+      body:`<p>Il mercato delle app gratuite nel 2026 offre strumenti di qualità professionale.</p><h2>Produttività</h2><p>Notion gratuito per uso personale. Todoist free: 5 progetti. Google Keep: note rapide sincronizzate.</p><h2>Fotografia</h2><p>Snapseed: editor professionale completo e gratuito. Lightroom Mobile free: elaborazione RAW.</p><h2>Sicurezza</h2><p>Bitwarden: gestore password open source illimitato. Signal: messaggistica cifrata. ProtonMail: email cifrata 1GB free.</p><blockquote>Le app migliori non sono le più costose. Sono quelle che usi ogni giorno senza pensarci.</blockquote>`
+    },{id:'s11',cat:'Smartphone',subcat:'Guide',title:'Accessori Indispensabili per lo Smartphone nel 2026',
+      excerpt:'Cover, caricatori, auricolari e supporti: gli accessori che migliorano davvero l\'esperienza quotidiana.',
+      tags:['Accessori','Cover','Caricatore','Auricolari'],
+      author:'Sandro Cinquegrana',date:'25 Maggio 2026',readtime:'8 min',color:'#5a2a4a',
+      body:`<p>Gli accessori giusti trasformano l'esperienza con lo smartphone quotidianamente.</p><h2>Protezione</h2><p>Cover TPU con protezione angoli + vetro temperato: la combinazione minima per proteggere un device da 1000€.</p><h2>Carica Rapida</h2><p>Caricatore GaN da 65W: carica iPhone e Android alla massima velocità. Anker e Ugreen: 25-45€.</p><h2>Audio</h2><p>AirPods seconda generazione per iPhone. Nothing Ear (2) per Android: ottima qualità a metà prezzo dei Sony.</p><blockquote>L'accessorio migliore è quello che compri una volta e non pensi mai più.</blockquote>`
+    },{id:'s12',cat:'Smartphone',subcat:'Guide',title:'Riparare lo Schermo Rotto: Vale la Pena o Meglio Cambiare?',
+      excerpt:'Lo schermo rotto è il danno più comune. Guida per decidere se riparare, far riparare o cambiare dispositivo.',
+      tags:['Riparazione','Schermo','Costo','Decisione'],
+      author:'Redazione Mobile',date:'23 Maggio 2026',readtime:'7 min',color:'#3a2a1a',
+      body:`<p>Schermo rotto: riparare, far riparare o cambiare telefono?</p><h2>Il Costo</h2><p>Apple ufficiale: 280-450€. Samsung Care+: 80-200€. Riparatori terzi certificati: 80-180€. Fai-da-te: 30-80€ di ricambio con rischio rottura.</p><h2>Quando Conviene Riparare</h2><p>Meno di 2 anni e costo riparazione sotto il 40% del valore sostitutivo: ripara. Più di 3 anni con costo oltre il 50% di un nuovo entry-level: considera il cambio.</p><blockquote>Un telefono riparato bene dura altri due anni. Cambiarlo per paura della riparazione costa tre volte tanto.</blockquote>`
+    },{id:'s13',cat:'Smartphone',subcat:'Recensioni',title:'Fotocamere Smartphone 2026: Chi Scatta Meglio',
+      excerpt:'iPhone 16 Pro, Samsung S25 Ultra, Google Pixel 9 Pro e Xiaomi 14 Ultra nelle condizioni reali di utilizzo.',
+      tags:['Fotocamera','iPhone','Samsung','Pixel','Confronto'],
+      author:'Redazione Mobile',date:'21 Maggio 2026',readtime:'13 min',color:'#1a4a3a',
+      body:`<p>Le fotocamere smartphone del 2026 hanno capacità che prima richiedevano mirrorless professionali.</p><h2>Luce Diurna</h2><p>Tutti eccellenti. Xiaomi 14 Ultra con ottiche Leica ha la resa cromatica più naturale.</p><h2>Notturna</h2><p>Google Pixel 9 Pro rimane il re della fotografia notturna computazionale. Night Sight imbattibile.</p><h2>Teleobbiettivo</h2><p>Samsung S25 Ultra con zoom 10x ottico: nessun rivale per le distanze lunghe.</p><blockquote>La migliore fotocamera smartphone non ha più megapixel. Sbaglia meno negli scatti importanti.</blockquote>`
+    }
+
   ],
 
   droni: [
@@ -2614,6 +2721,33 @@ const ARTICLES = {
       <p>Il vento in quota può essere molto più forte di quello a terra. Se il drone fatica a mantenere la posizione, è il momento di atterrare.</p>
       <blockquote>Il pilota più bravo non è quello che fa le manovre più spettacolari. È quello che non ha mai avuto un incidente.</blockquote>`
     }
+    ,{id:'d9',cat:'Droni',subcat:'Guide',title:'Composizione Fotografica con il Drone: Regole e Tecniche',
+      excerpt:'Le regole compositive valgono anche dall\'alto. Queste tecniche trasformano una foto aerea in un\'immagine davvero bella.',
+      tags:['Composizione','Fotografia','Drone','Tecnica'],
+      author:'Redazione Droni',date:'28 Maggio 2026',readtime:'9 min',color:'#2a5a6a',
+      body:`<p>La composizione fotografica vale in aria come a terra. Conoscere le regole base cambia completamente il risultato.</p><h2>Regola dei Terzi Aerea</h2><p>L'orizzonte va su una linea della griglia. Il soggetto principale su un punto di intersezione, non al centro.</p><h2>Le Linee Guida</h2><p>Strade, fiumi e coste creano linee naturali che guidano l'occhio. Dal drone si trovano facilmente linee diagonali dinamiche.</p><h2>Altitudine</h2><p>A bassa quota i soggetti restano riconoscibili. In alto emergono geometrie e pattern. Sperimenta entrambe.</p><blockquote>La foto aerea più bella non è scattata più in alto. È scattata dall'altezza giusta per il soggetto.</blockquote>`
+    },{id:'d10',cat:'Droni',subcat:'Recensioni',title:'DJI Mini 4 Pro vs DJI Air 3: Quale Scegliere nel 2026',
+      excerpt:'Sub-250g definitivo contro prosumer equilibrato. Confronto onesto tra i due droni più venduti di DJI.',
+      tags:['DJI','Mini 4 Pro','Air 3','Confronto','2026'],
+      author:'Redazione Droni',date:'26 Maggio 2026',readtime:'11 min',color:'#1a4a5a',
+      body:`<p>DJI Mini 4 Pro e Air 3: stessa qualità d'immagine sulla carta, esperienze molto diverse nella pratica.</p><h2>DJI Mini 4 Pro</h2><p>Sotto 250g: regole semplificate in Europa. Sensore 1/1.3 pollici, 4K 100fps, evitamento ostacoli omnidirezionale.</p><h2>DJI Air 3</h2><p>Doppio tele 3x integrato. Sensore più grande, autonomia superiore. Richiede registrazione ENAC in Italia.</p><h2>La Scelta</h2><p>Mini 4 Pro per viaggi e uso ricreativo. Air 3 per content creator che vogliono versatilità cinematica.</p><blockquote>Il drone migliore è quello che ti porti davvero dietro. Un Mini 4 Pro sempre con te vale più di un Air 3 a casa.</blockquote>`
+    },{id:'d11',cat:'Droni',subcat:'Normative',title:'Assicurazione RC per Droni: Obbligatoria e Spesso Dimenticata',
+      excerpt:'In Europa l\'assicurazione RC per droni è obbligatoria per legge. Cosa copre, quanto costa e dove farla in pochi minuti.',
+      tags:['Assicurazione','RC','ENAC','Legge','Europa'],
+      author:'Redazione Normativa',date:'24 Maggio 2026',readtime:'8 min',color:'#5a3a1a',
+      body:`<p>Dal 2021 il regolamento EASA richiede l'assicurazione RC per tutti i droni, inclusi quelli sotto 250g in spazi con persone.</p><h2>Cosa Copre</h2><p>Danni a terze persone o proprietà durante il volo. Non copre i danni al drone stesso.</p><h2>Costo</h2><p>Polizze annuali dedicate: 30-80€ per uso hobbistico. Alcune polizze casa coprono già i droni — verifica con il tuo assicuratore.</p><h2>Dove Farla</h2><p>Coverdrone, Flock e piattaforme specializzate online. Rinnovo in pochi minuti.</p><blockquote>Un volo senza assicurazione in area pubblica non è solo illegale. È un rischio finanziario enorme.</blockquote>`
+    },{id:'d12',cat:'Droni',subcat:'Guide',title:'Manutenzione del Drone: Checklist Prima e Dopo il Volo',
+      excerpt:'Un drone ben mantenuto dura anni. Una checklist sistematica evita guasti e prolunga la vita della batteria.',
+      tags:['Manutenzione','Checklist','Batteria','Eliche'],
+      author:'Sandro Cinquegrana',date:'22 Maggio 2026',readtime:'9 min',color:'#3a4a2a',
+      body:`<p>La manutenzione regolare è la differenza tra un drone che dura cinque anni e uno che si rompe dopo sei mesi.</p><h2>Prima del Volo</h2><ul><li>Controlla le eliche: nessuna crepa</li><li>Batteria sopra il 50%</li><li>Calibra bussola in zone nuove</li><li>Controlla spazio aereo con D-Flight</li></ul><h2>Dopo il Volo</h2><p>Pulisci sensori con microfibra. Controlla eliche per micro-crepe. Carica batteria non oltre il 90% per conservazione lunga.</p><blockquote>I droni non si rompono per uso intenso. Si rompono per manutenzione zero.</blockquote>`
+    },{id:'d13',cat:'Droni',subcat:'Guide',title:'Meteo e Droni: Quando Volare e Quando Restare a Terra',
+      excerpt:'Vento, pioggia, nebbia e temperature estreme cambiano le condizioni di volo. Guida pratica alle condizioni meteorologiche.',
+      tags:['Meteo','Vento','Sicurezza','Condizioni'],
+      author:'Redazione Droni',date:'20 Maggio 2026',readtime:'8 min',color:'#2a3a5a',
+      body:`<p>Il meteo è la variabile più sottovalutata nel volo con drone. Condizioni accettabili a terra possono essere pericolose in quota.</p><h2>Vento</h2><p>Limite operativo: 10-12 m/s per i droni consumer. In quota il vento è sempre più forte che a terra.</p><h2>Temperatura</h2><p>Le batterie LiPo perdono capacità sotto i 10°C. Preriscalda la batteria nel taschino prima del volo invernale.</p><h2>Pioggia</h2><p>Quasi nessun drone consumer è impermeabile. Dopo voli in umidità elevata, apri il vano batteria e lascia asciugare.</p><blockquote>Il pilota esperto sa quando è il meteo che rinuncia per lui.</blockquote>`
+    }
+
   ],
 
   radio: [
@@ -2762,6 +2896,33 @@ const ARTICLES = {
       <p>N1MM Logger+ è il software di contest più usato al mondo — gratuito e potente. Gestisce automaticamente i duplicati e calcola il punteggio in tempo reale.</p>
       <blockquote>In 48 ore di contest impari più sulla propagazione radio che in sei mesi di attività normale.</blockquote>`
     }
+    ,{id:'r9',cat:'Radioamatori',subcat:'Modi Digitali',title:'APRS: Tracciamento GPS e Messaggistica Radio',
+      excerpt:'APRS combina radio e GPS per tracciare veicoli e inviare messaggi. Visibile in tempo reale su aprs.fi.',
+      tags:['APRS','GPS','Tracking','Digitale'],
+      author:'Sandro Cinquegrana',date:'27 Maggio 2026',readtime:'10 min',color:'#1a4a2a',
+      body:`<p>APRS trasmette posizioni GPS e messaggi via radio VHF visibili su aprs.fi in tempo reale.</p><h2>Come Funziona</h2><p>Tracker VHF+GPS trasmette pacchetti sulla frequenza 144.800 MHz. I digipeater li inoltrano su internet via iGate.</p><h2>Hardware</h2><p>Baofeng UV-5R + Mobilinkd TNC4 + APRSDroid: meno di 100€ per un tracker funzionante.</p><blockquote>APRS dimostra che radio e internet possono lavorare insieme invece di competere.</blockquote>`
+    },{id:'r10',cat:'Radioamatori',subcat:'Apparati',title:'QRP: Comunicazioni Mondiali con Soli 5 Watt',
+      excerpt:'Con 5 watt e un\'antenna fatta in casa si fanno contatti intercontinentali. La filosofia del fare di più con meno.',
+      tags:['QRP','Bassa Potenza','HF','SOTA'],
+      author:'Sandro Cinquegrana',date:'25 Maggio 2026',readtime:'9 min',color:'#3a5a1a',
+      body:`<p>QRP: trasmissioni sotto 5W in fonia. Contatti mondiali con meno energia di una lampadina LED.</p><h2>Apparati Consigliati</h2><p>Icom IC-705: 10W, GPS, Bluetooth. Elecraft KX3: standard di riferimento. Xiegu G90: 20W sotto 300€.</p><h2>QRP e FT8</h2><p>Con 1-2W si fanno contatti transoceanici. La combinazione QRP+FT8 è l'approccio più efficiente per postazioni remote.</p><blockquote>Il QRP insegna più radio di qualsiasi altro approccio. Quando i watt sono pochi, conta tutto il resto.</blockquote>`
+    },{id:'r11',cat:'Radioamatori',subcat:'Antenne',title:'Antenne Verticali Multibanda: Guida alla Scelta',
+      excerpt:'La verticale multibanda copre più bande HF senza cambiare antenna. Ideale per chi ha poco spazio.',
+      tags:['Antenna','Verticale','Multibanda','HF'],
+      author:'Sandro Cinquegrana',date:'23 Maggio 2026',readtime:'10 min',color:'#4a6a2a',
+      body:`<p>La verticale multibanda è la soluzione ideale per appartamenti e balconi. Copre le principali bande HF occupando poco spazio.</p><h2>Modelli Consigliati</h2><p>Cushcraft R8: 8 bande, ottime prestazioni. Diamond CP6: compatta per balconi. Hustler 6-BTV: economica e affidabile.</p><h2>I Radiali</h2><p>Senza radiali una verticale perde metà delle prestazioni. Anche 4 radiali da 2-3 metri migliorano significativamente il rendimento.</p><blockquote>Un buon piano di radiali vale più di un preamplificatore da 200 euro.</blockquote>`
+    },{id:'r12',cat:'Radioamatori',subcat:'Modi Digitali',title:'Satelliti Amatoriali LEO: Come Fare QSO dallo Spazio',
+      excerpt:'Con antenna direttiva e radio VHF/UHF si fanno contatti via satellite. I satelliti passano ogni 90 minuti.',
+      tags:['Satellite','LEO','VHF','Oscar','ISS'],
+      author:'Sandro Cinquegrana',date:'21 Maggio 2026',readtime:'11 min',color:'#1a2a5a',
+      body:`<p>Fare un QSO attraverso un satellite in orbita bassa, con 10 minuti di finestra di passaggio, è un'esperienza unica.</p><h2>Satelliti Attivi</h2><p>AO-91, AO-92 e ISS hanno ripetitori amatoriali attivi. Il programma OSCAR gestisce decine di satelliti.</p><h2>Il Doppler</h2><p>Shift di ±4 kHz da compensare durante il passaggio. Gpredict gestisce la compensazione automaticamente via CAT control.</p><blockquote>Quando senti la tua voce tornare dallo spazio dopo 240ms, capisci cosa significa radioamatura.</blockquote>`
+    },{id:'r13',cat:'Radioamatori',subcat:'Apparati',title:'SDR Avanzata: Oltre il Dongle RTL-SDR',
+      excerpt:'HackRF, SDRplay RSP1C e Airspy: cosa offrono rispetto al dongle base e per chi ha davvero senso acquistarli.',
+      tags:['SDR','HackRF','Airspy','SDRplay'],
+      author:'Sandro Cinquegrana',date:'19 Maggio 2026',readtime:'10 min',color:'#2a4a3a',
+      body:`<p>Il dongle RTL-SDR è ottimo per iniziare ma ha limiti. Chi vuole fare sul serio valuta hardware più capace.</p><h2>SDRplay RSP1C</h2><p>1 kHz-2 GHz, 14 bit ADC. Circa 120€. Ottimo per HF senza converter esterno.</p><h2>Airspy HF+</h2><p>Sensibilità semiprofessionale per HF e VHF. Circa 200€. Per segnali deboli che RTL-SDR non sente.</p><h2>HackRF One</h2><p>Full-duplex 1 MHz-6 GHz. Per ricerca sicurezza e sperimentazione. Circa 300€.</p><blockquote>L'SDR giusto è quello adatto a ciò che vuoi fare davvero.</blockquote>`
+    }
+
   ],
 
   ai: [
@@ -2943,6 +3104,33 @@ const ARTICLES = {
       <p>Claude Haiku costa circa 0,25 dollari per milione di token. Una conversazione media costa meno di 0,01 dollari. Per 1000 conversazioni al giorno il costo mensile è tra 50 e 200 dollari.</p>
       <blockquote>Un chatbot ben configurato può gestire il 70-80% delle richieste standard senza intervento umano.</blockquote>`
     }
+    ,{id:'a11',cat:'AI',subcat:'Strumenti',title:'Ollama: Esegui LLM Localmente sul Tuo PC Gratis',
+      excerpt:'Ollama permette di far girare modelli AI come Llama 3 e Mistral direttamente sul computer. Zero costi, privacy totale.',
+      tags:['Ollama','LLM','Locale','Open Source','Privacy'],
+      author:'Redazione AI',date:'28 Maggio 2026',readtime:'10 min',color:'#2a4a6a',
+      body:`<p>Ollama è il modo più semplice per eseguire modelli linguistici direttamente sul proprio PC senza inviare dati a server esterni.</p><h2>Cosa Serve</h2><p>GPU NVIDIA con almeno 8GB VRAM per modelli medi, o 16GB RAM per modelli leggeri. Gira su Windows, Mac e Linux.</p><h2>Modelli Consigliati</h2><ul><li>Llama 3.1 8B: ottimo uso generale</li><li>Mistral 7B: veloce in italiano</li><li>Gemma 2 9B: ragionamento e codice</li><li>Phi-3 Mini: per PC meno potenti</li></ul><h2>Interfaccia Web</h2><p>Open WebUI con Docker aggiunge un'interfaccia simile a ChatGPT collegata automaticamente a Ollama.</p><blockquote>Con Ollama le conversazioni restano sul tuo disco. Nessuna azienda le usa per addestrare modelli.</blockquote>`
+    },{id:'a12',cat:'AI',subcat:'Strumenti',title:'Cursor AI: L\'Editor che Cambia il Modo di Programmare',
+      excerpt:'Cursor è un fork di VS Code con AI integrata profondamente. Capisce l\'intero progetto e genera codice contestuale.',
+      tags:['Cursor','Codice','AI','Developer','VS Code'],
+      author:'Redazione AI',date:'26 Maggio 2026',readtime:'9 min',color:'#1a2a4a',
+      body:`<p>Cursor legge l'intero codebase e genera codice contestuale all'architettura del progetto.</p><h2>Funzioni Chiave</h2><p>Chat con codice selezionato (Ctrl+L). Composer per generare file interi. Agent mode per operazioni autonome su più file.</p><h2>Costo</h2><p>Gratuito 2000 completamenti/mese. Pro 20$/mese con Claude Sonnet e GPT-4o illimitati.</p><blockquote>Cursor non sostituisce il programmatore. Elimina il 70% del codice boilerplate che nessuno vuole scrivere.</blockquote>`
+    },{id:'a13',cat:'AI',subcat:'AI Immagini',title:'Sora e la Generazione Video AI nel 2026: Confronto Completo',
+      excerpt:'Sora, Runway, Kling e Pika a confronto. La generazione video AI è uscita dalla fase sperimentale nel 2026.',
+      tags:['Sora','Video AI','Runway','Kling','2026'],
+      author:'Redazione AI',date:'24 Maggio 2026',readtime:'11 min',color:'#6a1a3a',
+      body:`<p>La generazione video AI nel 2026 è nella produzione reale. Agenzie creative e content creator la usano per abbattere i costi.</p><h2>Sora (OpenAI)</h2><p>Video fino a 60 secondi con coerenza temporale eccellente. Nel piano Pro di ChatGPT. Limite: mani e testi ancora imperfetti.</p><h2>Runway Gen-3</h2><p>Preferito dai videomaker. Controllo telecamera preciso, stili cinematografici. Da 12$/mese.</p><h2>Kling AI</h2><p>Qualità alta e movimento fluido. Gratuito con limiti generosi.</p><blockquote>Nel 2026 un video pubblicitario di 30 secondi si produce con AI in 2 ore. Prima richiedeva 3 giorni e 5 persone.</blockquote>`
+    },{id:'a14',cat:'AI',subcat:'Business',title:'AI per il Marketing Digitale: Strumenti che Funzionano',
+      excerpt:'Dal social al SEO: gli strumenti AI concreti che fanno risparmiare ore ogni settimana.',
+      tags:['Marketing','AI','Social','SEO','Email'],
+      author:'Sandro Cinquegrana',date:'22 Maggio 2026',readtime:'10 min',color:'#4a2a0a',
+      body:`<p>Il marketing digitale è uno dei campi dove l'AI ha avuto l'impatto più immediato.</p><h2>Social Media</h2><p>Buffer AI Assistant genera varianti di post per piattaforme diverse. Canva Magic Studio crea grafiche ottimizzate con un prompt.</p><h2>SEO</h2><p>Semrush e Ahrefs integrano AI per cluster di keyword e gap analysis.</p><h2>Email</h2><p>Mailchimp usa AI per ottimizzare orari e personalizzare oggetti. I tassi di apertura migliorano del 15-25%.</p><blockquote>L'AI nel marketing non crea la strategia. Esegue la tattica più velocemente e con meno errori.</blockquote>`
+    },{id:'a15',cat:'AI',subcat:'News',title:'Riconoscere i Deepfake nel 2026: Guida Pratica',
+      excerpt:'I deepfake sono sempre più convincenti. Segnali da cercare e strumenti per verificare foto e video sospetti.',
+      tags:['Deepfake','Sicurezza','Verifica','Disinformazione'],
+      author:'Redazione AI',date:'20 Maggio 2026',readtime:'9 min',color:'#3a1a1a',
+      body:`<p>Nel 2026 riconoscere un deepfake ad occhio nudo è quasi impossibile per i video di alta qualità.</p><h2>Segnali da Cercare</h2><p>Bordi irregolari attorno ai capelli. Denti innaturali. Movimenti occhi sfasati. Illuminazione inconsistente. Mani con dita sbagliate.</p><h2>Strumenti di Verifica</h2><p>Intel FakeCatcher analizza microsegnali biologici. Hive Moderation ha un detector gratuito. Google Images e TinEye per tracciare la fonte originale.</p><blockquote>Il deepfake più pericoloso è quello che conferma qualcosa che vogliamo già credere.</blockquote>`
+    }
+
   ]
 };
 
@@ -3049,6 +3237,28 @@ function getArticleImg(id) {
     a8:  P('claude-api-chatbot-code'),   // API Claude chatbot
     a9:  P('stable-diffusion-local-gpu'),// Stable Diffusion
     a10: P('ai-productivity-workflow'),  // AI produttività
+      // Nuovi articoli 2026
+    a11: P('ollama-llm-local-pc'),    a12: P('cursor-ai-code-editor'),
+    a13: P('sora-video-ai-2026'),     a14: P('ai-marketing-digital'),
+    a15: P('deepfake-detect-2026'),
+    r9:  P('aprs-gps-radio-tracking'),r10: P('qrp-low-power-hf'),
+    r11: P('vertical-antenna-hf'),    r12: P('satellite-leo-amateur'),
+    r13: P('sdr-advanced-hackrf'),
+    d9:  P('drone-photo-composition'),d10: P('dji-mini4-vs-air3'),
+    d11: P('drone-insurance-law'),    d12: P('drone-maintenance-check'),
+    d13: P('drone-weather-fly'),
+    s9:  P('android-to-iphone-transfer'),s10: P('best-free-apps-2026'),
+    s11: P('smartphone-accessories'),  s12: P('phone-screen-repair'),
+    s13: P('smartphone-camera-compare'),
+    t9:  P('ipad-2026-models'),       t10: P('gaming-monitor-hz-panel'),
+    t11: P('vpn-guide-2026'),         t12: P('3d-printer-home-bambu'),
+    t13: P('windows-security-tips'),
+    sf11:P('airsoft-mask-protection'), sf12:P('sniper-bolt-action-airsoft'),
+    sf13:P('airsoft-event-organize'),  sf14:P('tactical-gear-clothing'),
+    sf15:P('hpa-airsoft-system'),
+    v11: P('iceland-aurora-winter'),  v12: P('istanbul-bosphorus-city'),
+    v13: P('amsterdam-canals-bikes'), v14: P('dolomites-trekking-italy'),
+    v15: P('kenya-safari-wildlife'),
   };
   return map[id] || P(`article-${id}`); // fallback: foto per ID articolo
 }
@@ -3061,7 +3271,7 @@ function getArticleEmoji(id) {
     "s1":"📲","s2":"⚙️","s3":"🔋","s4":"💰","s5":"🔐","s6":"⚡","s7":"⌚","s8":"📷",
     "d1":"🚁","d2":"🕹️","d3":"📋","d4":"🎬","d5":"🆚","d6":"⚠️","d7":"🥽","d8":"🎞️",
     "r1":"📡","r2":"📶","r3":"📚","r4":"📻","r5":"🔌","r6":"🏆","r7":"🌐","r8":"🎙️",
-    "a1":"🤖","a2":"💬","a3":"🎨","a4":"🧠","a5":"💼","a6":"🇪🇺","a7":"🔍","a8":"🤖","a9":"🖼️","a10":"⚡"
+    "a1":"🤖","a2":"💬","a3":"🎨","a4":"🧠","a5":"💼","a6":"🇪🇺","a7":"🔍","a8":"🤖","a9":"🖼️","a10":"⚡","a11":"🦙","a12":"⌨️","a13":"🎬","a14":"📣","a15":"🎭","r9":"📡","r10":"📻","r11":"🗼","r12":"🛸","r13":"🔭","d9":"🖼️","d10":"🆚","d11":"📄","d12":"🔧","d13":"🌦️","s9":"🔄","s10":"📲","s11":"🎧","s12":"🔨","s13":"📸","t9":"📟","t10":"🖥️","t11":"🔐","t12":"🖨️","t13":"🛡️","sf11":"🥽","sf12":"🎯","sf13":"📋","sf14":"👗","sf15":"💨","v11":"🌌","v12":"🕌","v13":"🚲","v14":"⛰️","v15":"🦁"
   };
   return map[id] || '📄';
 }
