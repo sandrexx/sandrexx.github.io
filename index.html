@@ -1707,7 +1707,7 @@ footer {
           <li><a href="#" onclick="openWip('Collabora con noi');return false;">Collabora con noi</a></li>
           <li><a href="#" onclick="openWip('Pubblicità');return false;">Pubblicità</a></li>
           <li><a href="#" onclick="openWip('Contatti');return false;">Contatti</a></li>
-          <li><a href="#" onclick="openWip('Sitemap');return false;">Sitemap</a></li>
+          <li><a href="#" onclick="openSitemap();return false;">Sitemap</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1735,6 +1735,26 @@ footer {
       <div id="legal-body" style="font-size:15px;line-height:1.85;color:var(--text2);"></div>
       <div style="margin-top:28px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text3);">
         Sandro Cinquegrana Blog — Ultimo aggiornamento: Giugno 2026
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SITEMAP MODAL -->
+<div class="modal-overlay" id="sitemap-modal" onclick="closeSitemapModal(event)" style="display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:40px 20px;">
+  <div class="modal-box" style="max-width:860px;position:relative;width:100%;">
+    <button class="modal-close" onclick="closeSitemapBtn()">✕</button>
+    <div style="padding:36px 36px 28px;">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:3px solid var(--accent);">
+        <span style="font-size:36px;">🗺️</span>
+        <div>
+          <h2 style="font-family:var(--font-display);font-size:28px;font-weight:900;color:var(--text);margin:0;">Mappa del Sito</h2>
+          <p style="font-size:13px;color:var(--text3);margin:4px 0 0;">Tutti gli articoli del blog organizzati per categoria</p>
+        </div>
+      </div>
+      <div id="sitemap-body" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:24px;"></div>
+      <div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text3);text-align:center;">
+        sandrexx.github.io — <span id="sitemap-total"></span>
       </div>
     </div>
   </div>
@@ -3422,6 +3442,59 @@ function searchByTag(tag) {
   document.getElementById('search-dropdown').classList.add('open');
 }
 
+// ===== SITEMAP MODAL =====
+const CAT_META = {
+  viaggi:     { icon:'✈️',  label:'Viaggi' },
+  softair:    { icon:'🎯',  label:'Softair' },
+  tech:       { icon:'💻',  label:'Tecnologia' },
+  smartphone: { icon:'📱',  label:'Smartphone' },
+  droni:      { icon:'🚁',  label:'Droni' },
+  radio:      { icon:'📻',  label:'Radioamatori' },
+  ai:         { icon:'🤖',  label:'Intelligenza Artificiale' },
+};
+
+function openSitemap() {
+  const body = document.getElementById('sitemap-body');
+  const total = Object.values(ARTICLES).reduce((s, a) => s + a.length, 0);
+  document.getElementById('sitemap-total').textContent = `${total} articoli totali`;
+
+  body.innerHTML = Object.entries(ARTICLES).map(([key, arts]) => {
+    const m = CAT_META[key] || { icon:'📄', label: key };
+    const items = arts.map(a => `
+      <li style="border-bottom:1px solid var(--border);padding:8px 0;last-child:border:none;">
+        <a href="#" onclick="closeSitemapBtn();openArticle('${a.id}');return false;"
+           style="display:flex;align-items:flex-start;gap:10px;text-decoration:none;color:var(--text2);font-size:13px;line-height:1.4;transition:color 0.2s;"
+           onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text2)'">
+          <span style="flex-shrink:0;font-size:16px;margin-top:1px;">${getArticleEmoji(a.id)}</span>
+          <span>${a.title}</span>
+        </a>
+      </li>`).join('');
+
+    return `
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+        <div style="background:var(--accent);padding:12px 16px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:20px;">${m.icon}</span>
+          <span style="font-family:var(--font-display);font-weight:800;font-size:15px;color:white;">${m.label}</span>
+          <span style="margin-left:auto;background:rgba(255,255,255,0.2);color:white;font-size:11px;font-weight:700;padding:2px 10px;border-radius:50px;">${arts.length}</span>
+        </div>
+        <ul style="list-style:none;margin:0;padding:8px 16px;">${items}</ul>
+      </div>`;
+  }).join('');
+
+  const modal = document.getElementById('sitemap-modal');
+  modal.style.display = 'flex';
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSitemapModal(e) {
+  if (e.target === document.getElementById('sitemap-modal')) closeSitemapBtn();
+}
+function closeSitemapBtn() {
+  document.getElementById('sitemap-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
 // ===== LEGAL MODAL =====
 const LEGAL_CONTENT = {
   privacy: {
@@ -3746,7 +3819,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   sliderTimer = setInterval(()=>goSlide(currentSlide+1), 5000);
 
   // Keyboard close modal
-  document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeModalBtn(); closeWipBtn(); closeLegalBtn(); } });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeModalBtn(); closeWipBtn(); closeLegalBtn(); closeSitemapBtn(); } });
 });
 </script>
 </body>
