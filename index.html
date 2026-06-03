@@ -211,14 +211,16 @@ header {
 }
 .header-actions { display: flex; align-items: center; gap: 12px; }
 .btn-theme {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 50px;
   background: var(--bg3);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  gap: 6px;
+  font-size: 22px;
+  white-space: nowrap;
   transition: background 0.2s;
 }
 .btn-theme:hover { background: var(--border); }
@@ -1243,7 +1245,7 @@ footer {
         <div class="search-results-overlay" id="search-dropdown"></div>
       </div>
       <div class="header-actions">
-        <button class="btn-theme" id="theme-btn" title="Cambia tema" aria-label="Tema">🌙</button>
+        <button class="btn-theme" id="theme-btn" title="Passa alla modalità scura" aria-label="Cambia tema">🌙 Tema</button>
       </div>
     </div>
   </div>
@@ -3617,7 +3619,7 @@ let isDark = false;
 document.getElementById('theme-btn').addEventListener('click', ()=>{
   isDark = !isDark;
   document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-  document.getElementById('theme-btn').textContent = isDark ? '☀️' : '🌙';
+  document.getElementById('theme-btn').textContent = isDark ? '☀️ Chiaro' : '🌙 Tema';
 });
 
 // ===== SEARCH =====
