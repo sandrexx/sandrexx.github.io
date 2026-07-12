@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -1718,13 +1718,13 @@ const APP_GALLERIES = {
   portale: {
     title: '👔 Portale Dipendenti — Anteprime',
     shots: [
-      { file: 'img/portale-1.png', label: 'Dashboard Amministratore' },
-      { file: 'img/portale-2.png', label: 'Buste Paga' },
-      { file: 'img/portale-3.png', label: 'Comunicazioni' },
-      { file: 'img/portale-4.png', label: 'Read & Sign' },
-      { file: 'img/portale-5.png', label: 'Report e accessi' },
-      { file: 'img/portale-6.png', label: 'Notifiche' },
-      { file: 'img/portale-7.png', label: 'Profilo e cambio password' }
+      { file: 'img/portale-1.jpg', label: 'Dashboard Amministratore' },
+      { file: 'img/portale-2.jpg', label: 'Buste Paga' },
+      { file: 'img/portale-3.jpg', label: 'Comunicazioni' },
+      { file: 'img/portale-4.jpg', label: 'Read & Sign' },
+      { file: 'img/portale-5.jpg', label: 'Report e accessi' },
+      { file: 'img/portale-6.jpg', label: 'Notifiche' },
+      { file: 'img/portale-7.jpg', label: 'Profilo e cambio password' }
     ]
   }
 };
@@ -1735,7 +1735,7 @@ function openAppGallery(key) {
   document.getElementById('app-gallery-title').textContent = g.title;
   document.getElementById('app-gallery-grid').innerHTML = g.shots.map(s =>
     `<figure style="margin:0;background:#161b22;border:1px solid #30363d;border-radius:10px;overflow:hidden;cursor:zoom-in;" onclick="openAppLightbox('${s.file}')">
-      <img src="${s.file}" alt="${s.label}" loading="lazy" style="width:100%;height:150px;object-fit:cover;object-position:top;display:block;" onerror="this.style.display='none';this.nextElementSibling.textContent='Immagine non trovata: ${s.file}';">
+      <img src="${s.file}" alt="${s.label}" style="width:100%;height:150px;object-fit:cover;object-position:top;display:block;" onerror="this.style.display='none';this.nextElementSibling.textContent='Immagine non trovata: ${s.file}';">
       <figcaption style="color:#8b949e;font-size:12px;padding:8px 10px;">${s.label}</figcaption>
     </figure>`).join('');
   document.getElementById('app-gallery').style.display = 'block';
