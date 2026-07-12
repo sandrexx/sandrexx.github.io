@@ -1718,9 +1718,12 @@ footer {
 </div>
 
 <!-- LIGHTBOX IMMAGINE GRANDE -->
-<div id="app-lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9500;cursor:zoom-out;" onclick="closeAppLightbox()">
-  <img id="app-lightbox-img" src="" alt="Anteprima ingrandita" style="position:absolute;inset:0;margin:auto;max-width:96%;max-height:92%;border-radius:8px;">
+<div id="app-lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9500;cursor:zoom-out;" onclick="if(event.target===this)closeAppLightbox()">
+  <img id="app-lightbox-img" src="" alt="Anteprima ingrandita" style="position:absolute;inset:0;margin:auto;max-width:88%;max-height:88%;border-radius:8px;">
+  <div id="app-lightbox-label" style="position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#e6edf3;font-size:14px;"></div>
   <button onclick="closeAppLightbox()" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.1);border:1px solid #555;color:#fff;border-radius:8px;padding:6px 14px;font-size:14px;cursor:pointer;">✕ Chiudi</button>
+  <button onclick="event.stopPropagation();stepAppLightbox(-1)" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:1px solid #555;color:#fff;border-radius:50%;width:52px;height:52px;font-size:22px;cursor:pointer;">◀</button>
+  <button onclick="event.stopPropagation();stepAppLightbox(1)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:1px solid #555;color:#fff;border-radius:50%;width:52px;height:52px;font-size:22px;cursor:pointer;">▶</button>
 </div>
 
 <script>
@@ -1767,12 +1770,16 @@ const APP_GALLERIES = {
   }
 };
 
+let currentGalleryKey = null;
+let currentShotIndex = 0;
+
 function openAppGallery(key) {
   const g = APP_GALLERIES[key];
   if (!g) return;
+  currentGalleryKey = key;
   document.getElementById('app-gallery-title').textContent = g.title;
-  document.getElementById('app-gallery-grid').innerHTML = g.shots.map(s =>
-    `<figure style="margin:0;background:#161b22;border:1px solid #30363d;border-radius:10px;overflow:hidden;cursor:zoom-in;" onclick="openAppLightbox('${s.file}')">
+  document.getElementById('app-gallery-grid').innerHTML = g.shots.map((s, i) =>
+    `<figure style="margin:0;background:#161b22;border:1px solid #30363d;border-radius:10px;overflow:hidden;cursor:zoom-in;" onclick="openAppLightbox(${i})">
       <img src="${s.file}" alt="${s.label}" style="width:100%;height:150px;object-fit:cover;object-position:top;display:block;" onerror="this.style.display='none';this.nextElementSibling.textContent='Immagine non trovata: ${s.file}';">
       <figcaption style="color:#8b949e;font-size:12px;padding:8px 10px;">${s.label}</figcaption>
     </figure>`).join('');
@@ -1785,9 +1792,18 @@ function closeAppGallery() {
   document.body.style.overflow = '';
 }
 
-function openAppLightbox(src) {
-  document.getElementById('app-lightbox-img').src = src;
+function openAppLightbox(index) {
+  const g = APP_GALLERIES[currentGalleryKey];
+  if (!g) return;
+  currentShotIndex = (index + g.shots.length) % g.shots.length;
+  const s = g.shots[currentShotIndex];
+  document.getElementById('app-lightbox-img').src = s.file;
+  document.getElementById('app-lightbox-label').textContent = s.label + '  (' + (currentShotIndex + 1) + '/' + g.shots.length + ')';
   document.getElementById('app-lightbox').style.display = 'block';
+}
+
+function stepAppLightbox(dir) {
+  openAppLightbox(currentShotIndex + dir);
 }
 
 function closeAppLightbox() {
@@ -1795,7 +1811,10 @@ function closeAppLightbox() {
 }
 
 document.addEventListener('keydown', e => {
+  const lbOpen = document.getElementById('app-lightbox').style.display === 'block';
   if (e.key === 'Escape') { closeAppLightbox(); closeAppGallery(); }
+  if (lbOpen && e.key === 'ArrowLeft') stepAppLightbox(-1);
+  if (lbOpen && e.key === 'ArrowRight') stepAppLightbox(1);
 });
 </script>
 
