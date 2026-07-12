@@ -1663,7 +1663,10 @@ footer {
               <span style="font-size:10px;padding:2px 9px;border-radius:20px;color:#d29922;border:1px solid #d2992266;background:#d2992222;">◐ IN ARRIVO</span>
               <span style="font-size:10px;padding:2px 9px;border-radius:20px;color:#3fb950;border:1px solid #2ea04366;background:#2ea04322;">Android</span>
             </div>
-            <span style="color:#8b949e;font-size:13px;">Presto disponibile</span>
+            <div style="display:flex;gap:14px;align-items:center;">
+              <a href="#" onclick="openAppGallery('rifiuti');return false;" style="color:#58a6ff;font-size:13px;font-weight:600;text-decoration:none;">📸 Vedi anteprime →</a>
+              <span style="color:#8b949e;font-size:12px;">Presto disponibile</span>
+            </div>
           </div>
 
           <!-- Quadrato Magico -->
@@ -1675,7 +1678,10 @@ footer {
               <span style="font-size:10px;padding:2px 9px;border-radius:20px;color:#d29922;border:1px solid #d2992266;background:#d2992222;">◐ IN ARRIVO</span>
               <span style="font-size:10px;padding:2px 9px;border-radius:20px;color:#3fb950;border:1px solid #2ea04366;background:#2ea04322;">Android</span>
             </div>
-            <span style="color:#8b949e;font-size:13px;">Presto disponibile</span>
+            <div style="display:flex;gap:14px;align-items:center;">
+              <a href="#" onclick="openAppGallery('quadrato');return false;" style="color:#58a6ff;font-size:13px;font-weight:600;text-decoration:none;">📸 Vedi anteprime →</a>
+              <span style="color:#8b949e;font-size:12px;">Presto disponibile</span>
+            </div>
           </div>
 
           <!-- Scadenzario -->
@@ -1738,6 +1744,25 @@ const APP_GALLERIES = {
       { file: 'img/scadenzario-2.jpg', label: 'Le tue scadenze' },
       { file: 'img/scadenzario-3.jpg', label: 'Calendario' },
       { file: 'img/scadenzario-4.jpg', label: 'Template scadenze' }
+    ]
+  },
+  quadrato: {
+    title: '🔢 Quadrato Magico — Anteprime',
+    shots: [
+      { file: 'img/quadrato-1.jpg', label: 'Home' },
+      { file: 'img/quadrato-2.jpg', label: 'Partita in corso' },
+      { file: 'img/quadrato-3.jpg', label: 'Statistiche' },
+      { file: 'img/quadrato-4.jpg', label: 'Vittoria e punteggio' },
+      { file: 'img/quadrato-5.jpg', label: 'Impostazioni' }
+    ]
+  },
+  rifiuti: {
+    title: '♻️ Rifiuti Wars — Anteprime',
+    shots: [
+      { file: 'img/rifiuti-1.jpg', label: 'Missione: Campania' },
+      { file: 'img/rifiuti-2.jpg', label: 'Schermata iniziale' },
+      { file: 'img/rifiuti-3.jpg', label: 'Gameplay — Livello 1' },
+      { file: 'img/rifiuti-4.jpg', label: 'Game Over e record' }
     ]
   }
 };
