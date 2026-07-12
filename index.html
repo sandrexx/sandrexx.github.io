@@ -1647,7 +1647,10 @@ footer {
               <span style="font-size:10px;padding:2px 9px;border-radius:20px;color:#d29922;border:1px solid #d2992266;background:#d2992222;">🔒 APP AZIENDALE</span>
               <span style="font-size:10px;padding:2px 9px;border-radius:20px;color:#58a6ff;border:1px solid #58a6ff44;background:#58a6ff15;">Web App</span>
             </div>
-            <span style="color:#8b949e;font-size:13px;">Su richiesta</span>
+            <div style="display:flex;gap:14px;align-items:center;">
+              <a href="#" onclick="openAppGallery('portale');return false;" style="color:#58a6ff;font-size:13px;font-weight:600;text-decoration:none;">📸 Vedi anteprime →</a>
+              <span style="color:#8b949e;font-size:12px;">Su richiesta</span>
+            </div>
           </div>
 
           <!-- Rifiuti Wars -->
@@ -1691,6 +1694,72 @@ footer {
     </div>
   </div>
 </div>
+
+<!-- GALLERIA APP -->
+<div id="app-gallery" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9000;overflow-y:auto;padding:30px 16px;" onclick="if(event.target===this)closeAppGallery()">
+  <div style="max-width:900px;margin:0 auto;background:#0d1117;border:1px solid #30363d;border-radius:16px;padding:24px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <h3 id="app-gallery-title" style="color:#e6edf3;font-size:18px;margin:0;">Anteprime</h3>
+      <button onclick="closeAppGallery()" style="background:none;border:1px solid #30363d;color:#8b949e;border-radius:8px;padding:4px 12px;font-size:14px;cursor:pointer;">✕ Chiudi</button>
+    </div>
+    <p style="color:#8b949e;font-size:12.5px;margin:0 0 16px;">Clicca su un'anteprima per ingrandirla</p>
+    <div id="app-gallery-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX IMMAGINE GRANDE -->
+<div id="app-lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9500;cursor:zoom-out;" onclick="closeAppLightbox()">
+  <img id="app-lightbox-img" src="" alt="Anteprima ingrandita" style="position:absolute;inset:0;margin:auto;max-width:96%;max-height:92%;border-radius:8px;">
+  <button onclick="closeAppLightbox()" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.1);border:1px solid #555;color:#fff;border-radius:8px;padding:6px 14px;font-size:14px;cursor:pointer;">✕ Chiudi</button>
+</div>
+
+<script>
+const APP_GALLERIES = {
+  portale: {
+    title: '👔 Portale Dipendenti — Anteprime',
+    shots: [
+      { file: 'img/portale-1.png', label: 'Dashboard Amministratore' },
+      { file: 'img/portale-2.png', label: 'Buste Paga' },
+      { file: 'img/portale-3.png', label: 'Comunicazioni' },
+      { file: 'img/portale-4.png', label: 'Read & Sign' },
+      { file: 'img/portale-5.png', label: 'Report e accessi' },
+      { file: 'img/portale-6.png', label: 'Notifiche' },
+      { file: 'img/portale-7.png', label: 'Profilo e cambio password' }
+    ]
+  }
+};
+
+function openAppGallery(key) {
+  const g = APP_GALLERIES[key];
+  if (!g) return;
+  document.getElementById('app-gallery-title').textContent = g.title;
+  document.getElementById('app-gallery-grid').innerHTML = g.shots.map(s =>
+    `<figure style="margin:0;background:#161b22;border:1px solid #30363d;border-radius:10px;overflow:hidden;cursor:zoom-in;" onclick="openAppLightbox('${s.file}')">
+      <img src="${s.file}" alt="${s.label}" loading="lazy" style="width:100%;height:150px;object-fit:cover;object-position:top;display:block;" onerror="this.style.display='none';this.nextElementSibling.textContent='Immagine non trovata: ${s.file}';">
+      <figcaption style="color:#8b949e;font-size:12px;padding:8px 10px;">${s.label}</figcaption>
+    </figure>`).join('');
+  document.getElementById('app-gallery').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAppGallery() {
+  document.getElementById('app-gallery').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function openAppLightbox(src) {
+  document.getElementById('app-lightbox-img').src = src;
+  document.getElementById('app-lightbox').style.display = 'block';
+}
+
+function closeAppLightbox() {
+  document.getElementById('app-lightbox').style.display = 'none';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeAppLightbox(); closeAppGallery(); }
+});
+</script>
 
 <div class="page" id="page-tech">
   <div class="container">
