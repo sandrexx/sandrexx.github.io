@@ -1332,7 +1332,7 @@ footer {
       <div class="category-pill" onclick="showPage('app');setNavByName('Le Mie Applicazioni')">
         <span class="emoji">⚡</span>
         <span class="name">Le Mie Applicazioni</span>
-        <span class="count">7 app</span>
+        <span class="count">8 app</span>
       </div>
       <div class="category-pill" onclick="showPage('chisono');setNavByName('Chi Sono')">
         <span class="emoji">👤</span>
@@ -1706,6 +1706,21 @@ footer {
             </div>
           </div>
 
+          <!-- MateAmica -->
+          <div style="background:#161b22;border:1px solid #30363d;border-radius:12px;padding:18px;display:flex;flex-direction:column;">
+            <div style="width:52px;height:52px;border-radius:12px;background:#8250df;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:12px;">🎓</div>
+            <p style="color:#e6edf3;font-size:15px;font-weight:600;margin-bottom:5px;">MateAmica</p>
+            <p style="color:#8b949e;font-size:12.5px;line-height:1.55;margin-bottom:12px;flex:1;">Matematica divertente per la Scuola Primaria: quiz a punti dalla 1ª alla 5ª, funziona anche offline.</p>
+            <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px;">
+              <span style="font-size:10px;padding:2px 9px;border-radius:20px;color:#d29922;border:1px solid #d2992266;background:#d2992222;">◐ IN ARRIVO</span>
+              <span style="font-size:10px;padding:2px 9px;border-radius:20px;color:#58a6ff;border:1px solid #58a6ff44;background:#58a6ff15;">Web App</span>
+            </div>
+            <div style="display:flex;gap:14px;align-items:center;">
+              <a href="#" onclick="openAppGallery('mateamica');return false;" style="color:#58a6ff;font-size:13px;font-weight:600;text-decoration:none;">📸 Vedi anteprime →</a>
+              <span style="color:#8b949e;font-size:12px;">Presto disponibile</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -1773,6 +1788,15 @@ const APP_GALLERIES = {
       { file: 'img/rifiuti-2.jpg', label: 'Schermata iniziale' },
       { file: 'img/rifiuti-3.jpg', label: 'Gameplay — Livello 1' },
       { file: 'img/rifiuti-4.jpg', label: 'Game Over e record' }
+    ]
+  },
+  mateamica: {
+    title: '🎓 MateAmica — Anteprime',
+    shots: [
+      { file: 'img/mateamica-1.jpg', label: 'Home — scegli nome e classe' },
+      { file: 'img/mateamica-2.jpg', label: 'Quiz 1ª — conta le stelle' },
+      { file: 'img/mateamica-3.jpg', label: 'Scelta della classe (4ª)' },
+      { file: 'img/mateamica-4.jpg', label: 'Quiz 4ª — le frazioni' }
     ]
   }
 };
