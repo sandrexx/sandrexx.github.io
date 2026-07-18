@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎓 MateAmica – Matematica per la Scuola Primaria</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* ===== FONT & RESET ===== */
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+  * { font-family: 'Nunito', sans-serif; box-sizing: border-box; }
+  body { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 25%, #a1c4fd 75%, #c2e9fb 100%); min-height: 100vh; }
+
+  /* ===== ANIMAZIONI ===== */
+  @keyframes bounceIn {
+    0%   { transform: scale(0.3); opacity: 0; }
+    50%  { transform: scale(1.1); opacity: 0.9; }
+    70%  { transform: scale(0.95); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+  @keyframes popIn {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.08); }
+    100% { transform: scale(1); }
+  }
+  @keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 200, 50, 0.4); }
+    50%       { box-shadow: 0 0 0 12px rgba(255, 200, 50, 0); }
+  }
+
+  .bounce-in  { animation: bounceIn 0.5s cubic-bezier(0.68,-0.55,0.27,1.55) both; }
+  .slide-up   { animation: slideUp 0.4s ease-out both; }
+  .pop        { animation: popIn 0.25s ease-in-out both; }
+
+  /* ===== SCHERMATA ===== */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ===== PROGRESS BAR ===== */
+  #progress-fill {
+    background: linear-gradient(90deg, #f093fb, #f5576c, #fda085, #f6d365);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+    transition: width 0.5s ease-in-out;
+    border-radius: 999px;
+  }
+
+  /* ===== BOTTONI RISPOSTA ===== */
+  .answer-btn {
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 3px solid transparent;
+  }
+  .answer-btn:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  .answer-btn:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+  .answer-btn.correct {
+    background: linear-gradient(135deg, #84fab0, #8fd3f4) !important;
+    border-color: #22c55e !important;
+    color: #14532d !important;
+    animation: popIn 0.3s ease-in-out;
+  }
+  .answer-btn.wrong {
+    background: linear-gradient(135deg, #fda085, #f6d365) !important;
+    border-color: #ef4444 !important;
+    color: #7f1d1d !important;
+    animation: popIn 0.3s ease-in-out;
+  }
+
+  /* ===== CLASSE SELECTOR ===== */
+  .class-btn {
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  .class-btn:hover {
+    transform: scale(1.1) rotate(-2deg);
+  }
+  .class-btn.selected {
+    ring: 4px;
+    transform: scale(1.15);
+    animation: pulse-glow 1.5s ease-in-out infinite;
+  }
+
+  /* ===== CONFETTI ===== */
+  .confetti-piece {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    border-radius: 2px;
+    animation: confettiFall linear forwards;
+    pointer-events: none;
+  }
+
+  /* ===== MEDAGLIE ===== */
+  .medal { font-size: 5rem; animation: bounceIn 0.6s cubic-bezier(0.68,-0.55,0.27,1.55) both; }
+
+  /* ===== INPUT NOME ===== */
+  input[type="text"] {
+    outline: none;
+    transition: all 0.2s ease;
+  }
+  input[type="text"]:focus {
+    box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.4);
+    transform: scale(1.01);
+  }
+</style>
+</head>
+<body class="flex items-center justify-center p-4">
+
+<!-- ████████████████████████████████████████ -->
+<!-- ██  SCHERMATA 1 – BENVENUTO             ██ -->
+<!-- ████████████████████████████████████████ -->
+<div id="screen-welcome" class="screen active w-full max-w-lg">
+  <div class="bg-white rounded-3xl shadow-2xl p-8 slide-up">
+
+    <!-- Logo / Titolo -->
+    <div class="text-center mb-6">
+      <div class="text-6xl mb-2">🎓</div>
+      <h1 class="text-4xl font-black text-purple-600 tracking-tight">MateAmica</h1>
+      <p class="text-gray-500 font-semibold mt-1">Matematica divertente per la Scuola Primaria</p>
+    </div>
+
+    <!-- Decorazione stella -->
+    <div class="flex justify-center gap-2 mb-6 text-2xl">
+      <span>⭐</span><span>🌈</span><span>🚀</span><span>🌟</span><span>🎉</span>
+    </div>
+
+    <!-- Campo Nome -->
+    <div class="mb-5">
+      <label class="block text-sm font-bold text-gray-600 mb-2 ml-1">
+        👦 Il tuo nome
+      </label>
+      <input
+        type="text"
+        id="student-name"
+        placeholder="Scrivi il tuo nome qui..."
+        class="w-full px-5 py-4 rounded-2xl border-2 border-purple-200 text-lg font-bold text-gray-700 bg-purple-50 focus:border-purple-400"
+        maxlength="30"
+      />
+    </div>
+
+    <!-- Selezione Classe -->
+    <div class="mb-6">
+      <label class="block text-sm font-bold text-gray-600 mb-3 ml-1">
+        📚 La tua Classe
+      </label>
+      <div class="flex justify-between gap-2">
+        <!-- Bottone per ogni classe 1-5 con colore diverso -->
+        <button class="class-btn flex-1 py-4 rounded-2xl font-black text-lg text-white bg-gradient-to-b from-pink-400 to-pink-600 shadow-lg"
+                data-class="1" onclick="selectClass(1)">
+          1ª<br><span class="text-xs font-bold opacity-80">Prima</span>
+        </button>
+        <button class="class-btn flex-1 py-4 rounded-2xl font-black text-lg text-white bg-gradient-to-b from-orange-400 to-orange-600 shadow-lg"
+                data-class="2" onclick="selectClass(2)">
+          2ª<br><span class="text-xs font-bold opacity-80">Seconda</span>
+        </button>
+        <button class="class-btn flex-1 py-4 rounded-2xl font-black text-lg text-white bg-gradient-to-b from-yellow-400 to-yellow-600 shadow-lg"
+                data-class="3" onclick="selectClass(3)">
+          3ª<br><span class="text-xs font-bold opacity-80">Terza</span>
+        </button>
+        <button class="class-btn flex-1 py-4 rounded-2xl font-black text-lg text-white bg-gradient-to-b from-green-400 to-green-600 shadow-lg"
+                data-class="4" onclick="selectClass(4)">
+          4ª<br><span class="text-xs font-bold opacity-80">Quarta</span>
+        </button>
+        <button class="class-btn flex-1 py-4 rounded-2xl font-black text-lg text-white bg-gradient-to-b from-blue-400 to-blue-600 shadow-lg"
+                data-class="5" onclick="selectClass(5)">
+          5ª<br><span class="text-xs font-bold opacity-80">Quinta</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Errore validazione -->
+    <p id="welcome-error" class="text-red-500 text-sm font-bold text-center mb-3 hidden">
+      ⚠️ Inserisci il tuo nome e seleziona la classe!
+    </p>
+
+    <!-- Bottone Inizia -->
+    <button onclick="startGame()"
+      class="w-full py-5 rounded-2xl font-black text-xl text-white
+             bg-gradient-to-r from-purple-500 via-pink-500 to-red-400
+             shadow-xl hover:shadow-2xl transition-all duration-200
+             hover:-translate-y-1 active:translate-y-0">
+      🚀 Inizia a Giocare!
+    </button>
+
+    <p class="text-center text-xs text-gray-400 mt-4">10 domande • +10 punti per risposta giusta • Funziona offline</p>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████ -->
+<!-- ██  SCHERMATA 2 – GIOCO                 ██ -->
+<!-- ████████████████████████████████████████ -->
+<div id="screen-game" class="screen w-full max-w-lg">
+  <div class="bg-white rounded-3xl shadow-2xl p-6">
+
+    <!-- Header: Nome + Punteggio -->
+    <div class="flex justify-between items-center mb-4">
+      <div class="flex items-center gap-2 bg-purple-100 rounded-2xl px-4 py-2">
+        <span class="text-xl">👤</span>
+        <span id="display-name" class="font-black text-purple-700 text-sm"></span>
+      </div>
+      <div class="flex items-center gap-2 bg-yellow-100 rounded-2xl px-4 py-2">
+        <span class="text-xl">⭐</span>
+        <span class="font-black text-yellow-700 text-sm">Punti:</span>
+        <span id="display-score" class="font-black text-yellow-600 text-lg">0</span>
+      </div>
+    </div>
+
+    <!-- Barra Progresso -->
+    <div class="mb-1 flex justify-between text-xs font-bold text-gray-500">
+      <span>Domanda <span id="question-num">1</span> di 10</span>
+      <span id="progress-label">0%</span>
+    </div>
+    <div class="w-full bg-gray-100 rounded-full h-4 mb-5 overflow-hidden">
+      <div id="progress-fill" class="h-4 rounded-full" style="width: 0%"></div>
+    </div>
+
+    <!-- Card Domanda -->
+    <div id="question-card" class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl p-6 mb-5 min-h-[120px] flex flex-col justify-center">
+      <!-- Emoji/icona categoria -->
+      <div id="question-emoji" class="text-4xl text-center mb-2"></div>
+      <!-- Testo domanda -->
+      <p id="question-text" class="text-xl font-black text-gray-800 text-center leading-snug"></p>
+    </div>
+
+    <!-- Bottoni Risposta (griglia 2x2) -->
+    <div class="grid grid-cols-2 gap-3" id="answers-grid">
+      <!-- I 4 bottoni vengono riempiti via JS -->
+      <button id="btn-A" class="answer-btn bg-pink-100 border-pink-200 rounded-2xl p-4 text-left font-bold text-gray-700 text-sm" onclick="selectAnswer(0)">
+        <span class="text-xs font-black text-pink-400 block mb-1">A</span>
+        <span id="ans-A"></span>
+      </button>
+      <button id="btn-B" class="answer-btn bg-blue-100 border-blue-200 rounded-2xl p-4 text-left font-bold text-gray-700 text-sm" onclick="selectAnswer(1)">
+        <span class="text-xs font-black text-blue-400 block mb-1">B</span>
+        <span id="ans-B"></span>
+      </button>
+      <button id="btn-C" class="answer-btn bg-green-100 border-green-200 rounded-2xl p-4 text-left font-bold text-gray-700 text-sm" onclick="selectAnswer(2)">
+        <span class="text-xs font-black text-green-400 block mb-1">C</span>
+        <span id="ans-C"></span>
+      </button>
+      <button id="btn-D" class="answer-btn bg-orange-100 border-orange-200 rounded-2xl p-4 text-left font-bold text-gray-700 text-sm" onclick="selectAnswer(3)">
+        <span class="text-xs font-black text-orange-400 block mb-1">D</span>
+        <span id="ans-D"></span>
+      </button>
+    </div>
+
+    <!-- Feedback Risposta -->
+    <div id="feedback-box" class="mt-4 p-4 rounded-2xl text-center font-black text-lg hidden transition-all duration-300"></div>
+
+    <!-- Bottone Prossima -->
+    <button id="btn-next" onclick="nextQuestion()"
+      class="hidden w-full mt-4 py-4 rounded-2xl font-black text-lg text-white
+             bg-gradient-to-r from-indigo-500 to-purple-600
+             shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1">
+      Prossima Domanda ➡️
+    </button>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████ -->
+<!-- ██  SCHERMATA 3 – RISULTATI / DIPLOMA   ██ -->
+<!-- ████████████████████████████████████████ -->
+<div id="screen-results" class="screen w-full max-w-lg">
+  <div class="bg-white rounded-3xl shadow-2xl p-8 text-center">
+
+    <!-- Medaglia / Diploma -->
+    <div id="medal-display" class="medal mb-2"></div>
+    <h2 id="result-title" class="text-3xl font-black mb-2"></h2>
+    <p id="result-subtitle" class="text-gray-500 font-semibold mb-6"></p>
+
+    <!-- Score card -->
+    <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-6 mb-6 border-2 border-yellow-200">
+      <p class="text-gray-500 font-bold text-sm mb-1">Punteggio Finale</p>
+      <p id="final-score" class="text-5xl font-black text-yellow-600"></p>
+      <p class="text-gray-400 text-sm mt-1">su 100 punti possibili</p>
+
+      <!-- Risposte giuste / sbagliate -->
+      <div class="flex justify-center gap-6 mt-4">
+        <div class="text-center">
+          <span class="text-2xl">✅</span>
+          <p id="correct-count" class="font-black text-green-600 text-xl"></p>
+          <p class="text-xs text-gray-400">Corrette</p>
+        </div>
+        <div class="text-center">
+          <span class="text-2xl">❌</span>
+          <p id="wrong-count" class="font-black text-red-500 text-xl"></p>
+          <p class="text-xs text-gray-400">Sbagliate</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Messaggio personalizzato -->
+    <p id="final-message" class="text-gray-600 font-semibold text-base mb-6 leading-relaxed"></p>
+
+    <!-- Bottoni azione -->
+    <div class="flex flex-col gap-3">
+      <button onclick="restartGame()"
+        class="w-full py-4 rounded-2xl font-black text-lg text-white
+               bg-gradient-to-r from-purple-500 via-pink-500 to-red-400
+               shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1">
+        🔄 Gioca ancora!
+      </button>
+      <button onclick="goHome()"
+        class="w-full py-4 rounded-2xl font-black text-lg text-purple-600
+               bg-purple-50 border-2 border-purple-200
+               transition-all duration-200 hover:bg-purple-100">
+        🏠 Torna al Menu
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████ -->
+<!-- ██  JAVASCRIPT – LOGICA APPLICAZIONE    ██ -->
+<!-- ████████████████████████████████████████ -->
+<script>
+
+// ════════════════════════════════════════════
+// CURRICULUM COMPLETO – 15 DOMANDE PER CLASSE
+// Ogni domanda: { emoji, text, answers[4], correct(0-3) }
+// correct = indice della risposta corretta nell'array answers
+// ════════════════════════════════════════════
+const curriculum = {
+
+  // ─────────────────────────────────────────
+  // CLASSE 1 – Numeri fino a 20, addizioni e sottrazioni semplici
+  // ─────────────────────────────────────────
+  1: [
+    { emoji: "🍎", text: "Hai 3 mele 🍎🍎🍎 e ne prendi altre 2. Quante mele hai in tutto?", answers: ["4", "5", "6", "3"], correct: 1 },
+    { emoji: "🐢", text: "Ci sono 7 tartarughe. 2 vanno via. Quante restano?", answers: ["4", "6", "5", "3"], correct: 2 },
+    { emoji: "✏️", text: "Qual è il numero che viene DOPO l'8?", answers: ["7", "10", "9", "11"], correct: 2 },
+    { emoji: "⭐", text: "Quante stelle: ⭐⭐⭐⭐⭐?", answers: ["4", "6", "5", "3"], correct: 2 },
+    { emoji: "🦆", text: "4 + 4 = ?", answers: ["6", "7", "9", "8"], correct: 3 },
+    { emoji: "🍓", text: "Luca ha 10 fragole. Ne mangia 3. Quante gliene rimangono?", answers: ["8", "7", "6", "9"], correct: 1 },
+    { emoji: "🔵", text: "Qual è il numero che viene PRIMA del 15?", answers: ["16", "14", "13", "17"], correct: 1 },
+    { emoji: "🐛", text: "3 + 0 = ?", answers: ["0", "30", "3", "1"], correct: 2 },
+    { emoji: "🎈", text: "Ci sono 6 palloncini. Arrivano altri 4. Quanti ce ne sono in tutto?", answers: ["11", "9", "8", "10"], correct: 3 },
+    { emoji: "🌼", text: "Quale numero è il più grande tra questi?", answers: ["12", "9", "7", "11"], correct: 0 },
+    { emoji: "🐟", text: "9 - 5 = ?", answers: ["3", "5", "4", "6"], correct: 2 },
+    { emoji: "🍦", text: "Maria ha 2 gelati. Il fratello ne ha 5. Quanti gelati in totale?", answers: ["8", "6", "9", "7"], correct: 3 },
+    { emoji: "🔢", text: "Conta i numeri pari: quale di questi è pari?", answers: ["3", "7", "9", "6"], correct: 3 },
+    { emoji: "🐝", text: "5 + 3 + 2 = ?", answers: ["9", "11", "10", "8"], correct: 2 },
+    { emoji: "🌟", text: "Ho 0 dolci. Me ne regalano 8. Quanti ne ho ora?", answers: ["0", "9", "7", "8"], correct: 3 }
+  ],
+
+  // ─────────────────────────────────────────
+  // CLASSE 2 – Numeri fino a 100, moltiplicazioni semplici, misure
+  // ─────────────────────────────────────────
+  2: [
+    { emoji: "🍕", text: "Una pizza ha 8 fette. Quante fette ci sono in 3 pizze?", answers: ["20", "24", "18", "16"], correct: 1 },
+    { emoji: "🐜", text: "5 × 4 = ?", answers: ["15", "25", "20", "9"], correct: 2 },
+    { emoji: "📏", text: "Un righello è lungo 30 cm. Un altro è lungo 15 cm. Quanto sono lunghi insieme?", answers: ["40", "55", "45", "50"], correct: 2 },
+    { emoji: "🎲", text: "27 + 13 = ?", answers: ["39", "41", "38", "40"], correct: 3 },
+    { emoji: "🐠", text: "Nell'acquario ci sono 50 pesci. 18 nuotano via. Quanti restano?", answers: ["33", "28", "32", "30"], correct: 2 },
+    { emoji: "🍒", text: "6 × 3 = ?", answers: ["21", "15", "18", "24"], correct: 2 },
+    { emoji: "🌍", text: "Quante decine ci sono nel numero 70?", answers: ["7", "70", "17", "0"], correct: 0 },
+    { emoji: "🕐", text: "Sono le 8:00. Passano 30 minuti. Che ora è adesso?", answers: ["8:30", "9:00", "7:30", "8:45"], correct: 0 },
+    { emoji: "💰", text: "Hai 50 centesimi. Compri una caramella da 20 centesimi. Quanto ti resta?", answers: ["20", "25", "35", "30"], correct: 3 },
+    { emoji: "🍌", text: "4 × 6 = ?", answers: ["20", "28", "22", "24"], correct: 3 },
+    { emoji: "📦", text: "In una scatola ci sono 100 matite. Ne togli 35. Quante rimangono?", answers: ["55", "75", "65", "60"], correct: 2 },
+    { emoji: "🐇", text: "Un coniglio fa 3 salti al giorno. Quanti salti fa in 7 giorni?", answers: ["18", "24", "21", "14"], correct: 2 },
+    { emoji: "🔵", text: "63 - 28 = ?", answers: ["35", "45", "41", "31"], correct: 0 },
+    { emoji: "🌻", text: "Qual è la metà di 16?", answers: ["6", "9", "8", "4"], correct: 2 },
+    { emoji: "🚗", text: "2 × 9 = ?", answers: ["16", "18", "11", "20"], correct: 1 }
+  ],
+
+  // ─────────────────────────────────────────
+  // CLASSE 3 – Moltiplicazioni, divisioni, geometria, frazioni semplici
+  // ─────────────────────────────────────────
+  3: [
+    { emoji: "🍕", text: "Dividi 24 pizzette tra 4 amici. Quante ne tocca a ciascuno?", answers: ["5", "8", "7", "6"], correct: 3 },
+    { emoji: "📐", text: "Un quadrato ha il lato di 5 cm. Quanto è il suo perimetro?", answers: ["10 cm", "25 cm", "15 cm", "20 cm"], correct: 3 },
+    { emoji: "🔢", text: "7 × 8 = ?", answers: ["63", "54", "56", "49"], correct: 2 },
+    { emoji: "🍰", text: "Hai mangiato 1/2 di una torta. Quanta torta è rimasta?", answers: ["1/4", "1/3", "2/3", "1/2"], correct: 3 },
+    { emoji: "📏", text: "1 metro = quanti centimetri?", answers: ["10", "1000", "100", "500"], correct: 2 },
+    { emoji: "⏰", text: "Luca parte alle 14:00 e arriva alle 16:30. Quanto ha viaggiato?", answers: ["3 ore", "2 ore e 30 min", "1 ora e 30 min", "2 ore"], correct: 1 },
+    { emoji: "🌈", text: "45 ÷ 9 = ?", answers: ["4", "6", "7", "5"], correct: 3 },
+    { emoji: "📦", text: "Un rettangolo è lungo 8 cm e largo 3 cm. Qual è il suo perimetro?", answers: ["24 cm", "11 cm", "22 cm", "16 cm"], correct: 2 },
+    { emoji: "🍎", text: "Qual è 1/4 di 20?", answers: ["10", "8", "5", "4"], correct: 2 },
+    { emoji: "⭐", text: "9 × 6 = ?", answers: ["56", "48", "63", "54"], correct: 3 },
+    { emoji: "🎯", text: "In una gara ci sono 63 partecipanti divisi in 7 squadre. Quanti in ogni squadra?", answers: ["7", "9", "8", "6"], correct: 1 },
+    { emoji: "🌍", text: "1 chilogrammo = quanti grammi?", answers: ["100", "10 000", "1 000", "500"], correct: 2 },
+    { emoji: "📐", text: "Quanti angoli ha un triangolo?", answers: ["4", "5", "2", "3"], correct: 3 },
+    { emoji: "🔵", text: "Qual è il doppio di 35?", answers: ["65", "75", "70", "60"], correct: 2 },
+    { emoji: "🐝", text: "56 ÷ 8 = ?", answers: ["9", "6", "8", "7"], correct: 3 }
+  ],
+
+  // ─────────────────────────────────────────
+  // CLASSE 4 – Frazioni, decimali, grandi numeri, geometria avanzata
+  // ─────────────────────────────────────────
+  4: [
+    { emoji: "🌡️", text: "La temperatura era 12°C. È scesa di 8 gradi. Che temperatura fa ora?", answers: ["6°C", "2°C", "4°C", "20°C"], correct: 2 },
+    { emoji: "📐", text: "L'area di un rettangolo 6 cm × 4 cm è:", answers: ["20 cm²", "24 cm²", "10 cm²", "28 cm²"], correct: 1 },
+    { emoji: "🍰", text: "Quale frazione equivale a 0,5?", answers: ["1/4", "2/5", "1/5", "1/2"], correct: 3 },
+    { emoji: "🔢", text: "12 × 12 = ?", answers: ["132", "124", "144", "122"], correct: 2 },
+    { emoji: "💧", text: "1 litro = quanti millilitri?", answers: ["100", "10 000", "10", "1 000"], correct: 3 },
+    { emoji: "🍕", text: "3/4 + 1/4 = ?", answers: ["4/8", "3/8", "1", "2/4"], correct: 2 },
+    { emoji: "📏", text: "Un quadrato ha area 36 cm². Quanto misura il suo lato?", answers: ["9 cm", "8 cm", "7 cm", "6 cm"], correct: 3 },
+    { emoji: "🔵", text: "Scrivi in cifre: duecentocinquantasei", answers: ["2560", "265", "256", "2506"], correct: 2 },
+    { emoji: "🎲", text: "Qual è il 25% di 80?", answers: ["25", "16", "40", "20"], correct: 3 },
+    { emoji: "🌍", text: "Quanti lati ha un pentagono?", answers: ["4", "6", "3", "5"], correct: 3 },
+    { emoji: "⏰", text: "Quante ore ci sono in 3 giorni?", answers: ["36", "48", "60", "72"], correct: 3 },
+    { emoji: "📦", text: "480 ÷ 12 = ?", answers: ["50", "30", "40", "45"], correct: 2 },
+    { emoji: "🔢", text: "Quale numero è primo?", answers: ["15", "9", "13", "21"], correct: 2 },
+    { emoji: "🌈", text: "2/3 di 30 = ?", answers: ["15", "25", "10", "20"], correct: 3 },
+    { emoji: "🏃", text: "Un atleta corre 8 km al giorno. Quanti km corre in una settimana?", answers: ["48", "64", "56", "40"], correct: 2 }
+  ],
+
+  // ─────────────────────────────────────────
+  // CLASSE 5 – Frazioni complesse, percentuali, geometria 3D, proporzioni
+  // ─────────────────────────────────────────
+  5: [
+    { emoji: "📐", text: "Il volume di un cubo con lato 3 cm è:", answers: ["9 cm³", "18 cm³", "27 cm³", "12 cm³"], correct: 2 },
+    { emoji: "🏦", text: "Un libro costa 20€. Uno sconto del 30% quanto fa risparmiare?", answers: ["3 €", "6 €", "10 €", "8 €"], correct: 1 },
+    { emoji: "🔢", text: "Qual è il M.C.D. di 12 e 18?", answers: ["2", "6", "3", "9"], correct: 1 },
+    { emoji: "🌍", text: "Come si esprime 3/5 in percentuale?", answers: ["35%", "53%", "30%", "60%"], correct: 3 },
+    { emoji: "⚖️", text: "Risolvi la proporzione: 3 : 6 = X : 18. Quanto vale X?", answers: ["12", "6", "9", "3"], correct: 2 },
+    { emoji: "📏", text: "L'area di un triangolo con base 10 cm e altezza 6 cm è:", answers: ["60 cm²", "16 cm²", "30 cm²", "50 cm²"], correct: 2 },
+    { emoji: "🔵", text: "Qual è il minimo comune multiplo (m.c.m.) di 4 e 6?", answers: ["24", "10", "8", "12"], correct: 3 },
+    { emoji: "🌡️", text: "Da -5°C la temperatura sale di 13 gradi. Quanto fa?", answers: ["18°C", "10°C", "8°C", "6°C"], correct: 2 },
+    { emoji: "🍕", text: "5/6 - 1/3 = ? (riduci allo stesso denominatore)", answers: ["4/6", "1/2", "2/3", "1/6"], correct: 1 },
+    { emoji: "🚀", text: "Un razzo percorre 1 200 km in 3 ore. Qual è la velocità media?", answers: ["300 km/h", "500 km/h", "400 km/h", "600 km/h"], correct: 2 },
+    { emoji: "📦", text: "Il perimetro di un cerchio si chiama:", answers: ["Area", "Diametro", "Raggio", "Circonferenza"], correct: 3 },
+    { emoji: "🎯", text: "In una classe di 25 alunni, il 40% sono ragazze. Quante ragazze ci sono?", answers: ["8", "12", "15", "10"], correct: 3 },
+    { emoji: "🌈", text: "Qual è il risultato di 2,5 × 4?", answers: ["8", "12", "6,5", "10"], correct: 3 },
+    { emoji: "🔢", text: "Scrivi come frazione ridotta ai minimi termini: 18/24", answers: ["9/12", "6/8", "3/4", "2/3"], correct: 2 },
+    { emoji: "🏆", text: "Una vasca contiene 200 litri. Viene riempita al 75%. Quanti litri ci sono?", answers: ["150", "175", "100", "125"], correct: 0 }
+  ]
+};
+
+// ════════════════════════════════════════════
+// MESSAGGI FEEDBACK PERSONALIZZATI
+// ════════════════════════════════════════════
+const feedbackCorrect = [
+  "🎉 Fantastico! Sei un genio!",
+  "🌟 Bravissimo! Risposta perfetta!",
+  "🚀 Wow, stai volando! Corretto!",
+  "✨ Esatto! Sei incredibile!",
+  "🏆 Super! Stai spacciando!",
+  "🎯 Nel segno! Ottimo lavoro!",
+  "🌈 Perfetto! Continua così!",
+  "🥇 Campione! Risposta giusta!"
+];
+const feedbackWrong = [
+  "😊 Quasi! Riprova la prossima volta!",
+  "💪 Non mollare! Ci puoi riuscire!",
+  "🌱 Sbagliare è imparare! Vai avanti!",
+  "🎈 Peccato! La prossima la prendi!",
+  "😄 Ci vuole pratica! Stai migliorando!"
+];
+
+// ════════════════════════════════════════════
+// STATO GLOBALE DELL'APP
+// ════════════════════════════════════════════
+let state = {
+  studentName: "",       // Nome alunno
+  selectedClass: null,   // Classe selezionata (1-5)
+  questions: [],         // 10 domande estratte casualmente
+  currentIndex: 0,       // Indice domanda corrente
+  score: 0,              // Punteggio
+  correctAnswers: 0,     // Contatore risposte giuste
+  answered: false        // Flag: già risposto alla domanda corrente
+};
+
+// ════════════════════════════════════════════
+// FUNZIONE: Selezione classe (UI)
+// ════════════════════════════════════════════
+function selectClass(num) {
+  state.selectedClass = num;
+  // Reset visual di tutti i bottoni
+  document.querySelectorAll('.class-btn').forEach(btn => {
+    btn.classList.remove('selected', 'ring-4', 'ring-offset-2', 'ring-yellow-300');
+    btn.style.transform = '';
+  });
+  // Evidenzia quello selezionato
+  const selected = document.querySelector(`[data-class="${num}"]`);
+  if (selected) {
+    selected.classList.add('selected');
+    selected.style.transform = 'scale(1.15)';
+    selected.style.boxShadow = '0 0 0 4px rgba(250,204,21,0.6)';
+  }
+}
+
+// ════════════════════════════════════════════
+// FUNZIONE: Avvio partita
+// ════════════════════════════════════════════
+function startGame() {
+  const nameInput = document.getElementById('student-name').value.trim();
+  const errorEl = document.getElementById('welcome-error');
+
+  // Validazione
+  if (!nameInput || !state.selectedClass) {
+    errorEl.classList.remove('hidden');
+    return;
+  }
+  errorEl.classList.add('hidden');
+
+  // Salva dati
+  state.studentName = nameInput;
+  state.score = 0;
+  state.currentIndex = 0;
+  state.correctAnswers = 0;
+
+  // Estrai 10 domande casuali dalla classe selezionata
+  const pool = [...curriculum[state.selectedClass]];
+  state.questions = shuffleArray(pool).slice(0, 10);
+
+  // Aggiorna UI header
+  document.getElementById('display-name').textContent = state.studentName;
+  document.getElementById('display-score').textContent = '0';
+
+  // Vai alla schermata di gioco
+  showScreen('screen-game');
+  loadQuestion(0);
+}
+
+// ════════════════════════════════════════════
+// FUNZIONE: Carica una domanda
+// ════════════════════════════════════════════
+function loadQuestion(index) {
+  state.answered = false;
+  const q = state.questions[index];
+
+  // Aggiorna barra progresso
+  const pct = Math.round((index / 10) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = pct + '%';
+  document.getElementById('question-num').textContent = index + 1;
+
+  // Aggiorna card domanda con animazione
+  const card = document.getElementById('question-card');
+  card.classList.remove('slide-up');
+  void card.offsetWidth; // Force reflow per riattivare l'animazione
+  card.classList.add('slide-up');
+
+  document.getElementById('question-emoji').textContent = q.emoji;
+  document.getElementById('question-text').textContent = q.text;
+
+  // Mescola le risposte ma tieni traccia di dove va la corretta
+  const shuffled = shuffleAnswers(q.answers, q.correct);
+
+  // Riempi i 4 bottoni
+  const labels = ['A', 'B', 'C', 'D'];
+  const btnColors = [
+    'bg-pink-100 border-pink-200',
+    'bg-blue-100 border-blue-200',
+    'bg-green-100 border-green-200',
+    'bg-orange-100 border-orange-200'
+  ];
+  shuffled.answers.forEach((ans, i) => {
+    const btn = document.getElementById('btn-' + labels[i]);
+    btn.disabled = false;
+    btn.className = `answer-btn ${btnColors[i]} rounded-2xl p-4 text-left font-bold text-gray-700 text-sm`;
+    btn.querySelector('span:first-child').textContent = labels[i];
+    btn.querySelector('span:last-child').textContent = ans;
+    // Salva l'indice corretto sul bottone per confronto
+    btn.dataset.isCorrect = (i === shuffled.correctIndex) ? "1" : "0";
+  });
+
+  // Nascondi feedback e bottone prossima
+  document.getElementById('feedback-box').classList.add('hidden');
+  document.getElementById('btn-next').classList.add('hidden');
+}
+
+// ════════════════════════════════════════════
+// FUNZIONE: Gestione selezione risposta
+// ════════════════════════════════════════════
+function selectAnswer(btnIndex) {
+  if (state.answered) return; // Ignora doppi click
+  state.answered = true;
+
+  const labels = ['A', 'B', 'C', 'D'];
+  const clickedBtn = document.getElementById('btn-' + labels[btnIndex]);
+  const isCorrect = clickedBtn.dataset.isCorrect === "1";
+
+  // Disabilita tutti i bottoni
+  labels.forEach(l => { document.getElementById('btn-' + l).disabled = true; });
+
+  // Evidenzia corretto e sbagliato
+  labels.forEach((l, i) => {
+    const btn = document.getElementById('btn-' + l);
+    if (btn.dataset.isCorrect === "1") {
+      btn.classList.add('correct');
+      btn.querySelector('span:first-child').textContent = '✅';
+    } else if (i === btnIndex && !isCorrect) {
+      btn.classList.add('wrong');
+      btn.querySelector('span:first-child').textContent = '❌';
+    }
+  });
+
+  // Feedback testuale
+  const feedbackEl = document.getElementById('feedback-box');
+  feedbackEl.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+  if (isCorrect) {
+    state.score += 10;
+    state.correctAnswers++;
+    feedbackEl.className = 'mt-4 p-4 rounded-2xl text-center font-black text-lg bg-green-100 text-green-800';
+    feedbackEl.textContent = randomFrom(feedbackCorrect);
+    document.getElementById('display-score').textContent = state.score;
+  } else {
+    feedbackEl.className = 'mt-4 p-4 rounded-2xl text-center font-black text-lg bg-red-50 text-red-700';
+    feedbackEl.textContent = randomFrom(feedbackWrong);
+  }
+
+  // Mostra bottone prossima / risultati
+  const btnNext = document.getElementById('btn-next');
+  btnNext.classList.remove('hidden');
+  if (state.currentIndex >= 9) {
+    btnNext.textContent = '🏆 Vedi il Risultato!';
+  } else {
+    btnNext.textContent = 'Prossima Domanda ➡️';
+  }
+}
+
+// ════════════════════════════════════════════
+// FUNZIONE: Prossima domanda
+// ════════════════════════════════════════════
+function nextQuestion() {
+  state.currentIndex++;
+  if (state.currentIndex >= 10) {
+    showResults();
+  } else {
+    loadQuestion(state.currentIndex);
+  }
+}
+
+// ════════════════════════════════════════════
+// FUNZIONE: Schermata risultati
+// ════════════════════════════════════════════
+function showResults() {
+  // Barra progresso al 100%
+  document.getElementById('progress-fill').style.width = '100%';
+
+  const score = state.score;
+  const name = state.studentName;
+
+  // Seleziona medaglia, titolo e messaggio in base al punteggio
+  let medal, title, subtitle, message;
+  if (score === 100) {
+    medal = "🏆";
+    title = "Campione Assoluto!";
+    subtitle = "10/10 risposte corrette • Punteggio perfetto!";
+    message = `${name}, sei semplicemente incredibile! 💫 Hai risposto correttamente a TUTTE le domande. Sei un vero genio della matematica! I tuoi professori saranno orgogliosi!`;
+    launchConfetti();
+  } else if (score >= 80) {
+    medal = "🥇";
+    title = "Medaglia d'Oro!";
+    subtitle = "Risultato eccellente! Quasi perfetto!";
+    message = `Bravissimo/a ${name}! 🌟 Hai dimostrato di conoscere molto bene la matematica. Ancora un piccolo sforzo e sarà un perfetto!`;
+    launchConfetti();
+  } else if (score >= 60) {
+    medal = "🥈";
+    title = "Medaglia d'Argento!";
+    subtitle = "Buon lavoro! Sei sulla strada giusta!";
+    message = `Ben fatto ${name}! 💪 Hai superato più della metà delle domande. Con un po' di pratica in più arriverai alla perfezione. Continua così!`;
+  } else if (score >= 40) {
+    medal = "🥉";
+    title = "Medaglia di Bronzo!";
+    subtitle = "Puoi fare ancora meglio!";
+    message = `Coraggio ${name}! 🌱 Hai fatto del tuo meglio oggi. Studia ancora un po' queste operazioni e vedrai che la prossima volta andrà molto meglio. Non arrenderti!`;
+  } else {
+    medal = "📚";
+    title = "Continua a Studiare!";
+    subtitle = "Non mollare, si impara con la pratica!";
+    message = `${name}, non ti scoraggiare! 😊 La matematica richiede tanta pratica. Rileggi i tuoi libri di testo e riprova. Ce la puoi fare! Ogni campione ha iniziato così.`;
+  }
+
+  // Aggiorna DOM schermata risultati
+  document.getElementById('medal-display').textContent = medal;
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-subtitle').textContent = subtitle;
+  document.getElementById('final-score').textContent = score + ' pt';
+  document.getElementById('correct-count').textContent = state.correctAnswers;
+  document.getElementById('wrong-count').textContent = 10 - state.correctAnswers;
+  document.getElementById('final-message').textContent = message;
+
+  showScreen('screen-results');
+}
+
+// ════════════════════════════════════════════
+// FUNZIONE: Ricomincia con stessa configurazione
+// ════════════════════════════════════════════
+function restartGame() {
+  state.score = 0;
+  state.currentIndex = 0;
+  state.correctAnswers = 0;
+  // Estrai nuove 10 domande casuali
+  const pool = [...curriculum[state.selectedClass]];
+  state.questions = shuffleArray(pool).slice(0, 10);
+  document.getElementById('display-score').textContent = '0';
+  showScreen('screen-game');
+  loadQuestion(0);
+}
+
+// ════════════════════════════════════════════
+// FUNZIONE: Torna al menu principale
+// ════════════════════════════════════════════
+function goHome() {
+  state.selectedClass = null;
+  document.querySelectorAll('.class-btn').forEach(btn => {
+    btn.classList.remove('selected');
+    btn.style.transform = '';
+    btn.style.boxShadow = '';
+  });
+  document.getElementById('student-name').value = state.studentName;
+  showScreen('screen-welcome');
+}
+
+// ════════════════════════════════════════════
+// UTILITÀ: Mostra schermata
+// ════════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  // Scroll top
+  window.scrollTo(0, 0);
+}
+
+// ════════════════════════════════════════════
+// UTILITÀ: Mescola un array (Fisher-Yates)
+// ════════════════════════════════════════════
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ════════════════════════════════════════════
+// UTILITÀ: Mescola le risposte mantenendo il riferimento alla corretta
+// ════════════════════════════════════════════
+function shuffleAnswers(answers, correctIndex) {
+  // Crea array di oggetti { text, isCorrect }
+  const objs = answers.map((text, i) => ({ text, isCorrect: i === correctIndex }));
+  // Mescola
+  const shuffled = shuffleArray(objs);
+  return {
+    answers: shuffled.map(o => o.text),
+    correctIndex: shuffled.findIndex(o => o.isCorrect)
+  };
+}
+
+// ════════════════════════════════════════════
+// UTILITÀ: Elemento casuale da array
+// ════════════════════════════════════════════
+function randomFrom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+// ════════════════════════════════════════════
+// EFFETTO CONFETTI (per punteggi alti)
+// ════════════════════════════════════════════
+function launchConfetti() {
+  const colors = ['#ff6b9d', '#c44dff', '#ff9d3d', '#4dffbf', '#4d9fff', '#ffff4d'];
+  for (let i = 0; i < 60; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.backgroundColor = randomFrom(colors);
+    piece.style.width = (Math.random() * 8 + 6) + 'px';
+    piece.style.height = (Math.random() * 8 + 6) + 'px';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    piece.style.animationDelay = (Math.random() * 1.5) + 's';
+    document.body.appendChild(piece);
+    // Rimuovi dopo animazione
+    setTimeout(() => piece.remove(), 4500);
+  }
+}
+
+// ════════════════════════════════════════════
+// AVVIO: Mostra schermata benvenuto
+// ════════════════════════════════════════════
+showScreen('screen-welcome');
+
+</script>
+</body>
+</html>
