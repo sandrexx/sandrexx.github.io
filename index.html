@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- SEO Base -->
-<meta name="description" content="Blog di Sandro Cinquegrana: guide e articoli su viaggi, softair, tecnologia, smartphone, droni, radioamatori e intelligenza artificiale.">
-<meta name="keywords" content="blog, viaggi, softair, tecnologia, smartphone, droni, radioamatori, intelligenza artificiale, AI, Sandro Cinquegrana, Campania">
+<meta name="description" content="Blog di Sandro Cinquegrana: guide e articoli su viaggi, softair, tecnologia, smartphone, droni, radioamatori, e-bike e intelligenza artificiale.">
+<meta name="keywords" content="blog, viaggi, softair, tecnologia, smartphone, droni, radioamatori, e-bike, bici elettriche, intelligenza artificiale, AI, Sandro Cinquegrana, Campania">
 <meta name="author" content="Sandro Cinquegrana">
 <meta name="robots" content="index, follow">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://api.open-meteo.com; font-src 'self'; frame-src 'none'; object-src 'none';">
@@ -1265,6 +1265,7 @@ footer {
       <a class="nav-link" href="#" onclick="showPage('droni');setNav(this);return false;"><span class="icon">🚁</span> Droni</a>
       <a class="nav-link" href="#" onclick="showPage('radio');setNav(this);return false;"><span class="icon">📻</span> Radioamatori</a>
       <a class="nav-link" href="#" onclick="showPage('ai');setNav(this);return false;"><span class="icon">🤖</span> Intelligenza Artificiale</a>
+      <a class="nav-link" href="#" onclick="showPage('ebike');setNav(this);return false;"><span class="icon">🚲</span> E-Bike</a>
       <a class="nav-link" href="#" onclick="showPage('app');setNav(this);return false;"><span class="icon">⚡</span> Le Mie Applicazioni</a>
     </div>
   </div>
@@ -1328,6 +1329,11 @@ footer {
         <span class="emoji">🤖</span>
         <span class="name">AI</span>
         <span class="count" id="pill-count-ai">— articoli</span>
+      </div>
+      <div class="category-pill" onclick="showPage('ebike');setNavByName('E-Bike')">
+        <span class="emoji">🚲</span>
+        <span class="name">E-Bike</span>
+        <span class="count" id="pill-count-ebike">— articoli</span>
       </div>
       <div class="category-pill" onclick="showPage('app');setNavByName('Le Mie Applicazioni')">
         <span class="emoji">⚡</span>
@@ -1925,6 +1931,22 @@ document.addEventListener('keydown', e => {
   </div>
 </div>
 
+<!-- E-BIKE PAGE -->
+<div class="page" id="page-ebike">
+  <div class="container">
+    <div class="section">
+      <div class="section-header" style="margin-top:40px;">
+        <h2 class="section-title">🚲 Blog E-Bike</h2>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;" id="ebike-subcats"></div>
+      <div class="main-layout">
+        <div><div class="grid-3" id="ebike-cards"></div></div>
+        <aside class="sidebar" id="ebike-sidebar"></aside>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="container">
@@ -1937,7 +1959,7 @@ document.addEventListener('keydown', e => {
             <span class="logo-sub">Il Blog Personale</span>
           </div>
         </div>
-        <p>Il blog personale di Sandro Cinquegrana. Viaggi, softair, tecnologia, smartphone, droni, radioamatori e intelligenza artificiale.</p>
+        <p>Il blog personale di Sandro Cinquegrana. Viaggi, softair, tecnologia, smartphone, droni, radioamatori, e-bike e intelligenza artificiale.</p>
         <div class="footer-social">
           <a href="https://www.facebook.com/sandro.cinquegrana.7/" target="_blank" rel="noopener" title="Facebook">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.884v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
@@ -1957,6 +1979,7 @@ document.addEventListener('keydown', e => {
           <li><a href="#" onclick="showPage('droni');return false;">🚁 Droni</a></li>
           <li><a href="#" onclick="showPage('radio');return false;">📻 Radioamatori</a></li>
           <li><a href="#" onclick="showPage('ai');return false;">🤖 AI</a></li>
+          <li><a href="#" onclick="showPage('ebike');return false;">🚲 E-Bike</a></li>
           <li><a href="#" onclick="showPage('app');return false;">⚡ Le Mie Applicazioni</a></li>
         </ul>
       </div>
@@ -3390,6 +3413,136 @@ const ARTICLES = {
       body:`<p>Nel 2026 riconoscere un deepfake ad occhio nudo è quasi impossibile per i video di alta qualità.</p><h2>Segnali da Cercare</h2><p>Bordi irregolari attorno ai capelli. Denti innaturali. Movimenti occhi sfasati. Illuminazione inconsistente. Mani con dita sbagliate.</p><h2>Strumenti di Verifica</h2><p>Intel FakeCatcher analizza microsegnali biologici. Hive Moderation ha un detector gratuito. Google Images e TinEye per tracciare la fonte originale.</p><blockquote>Il deepfake più pericoloso è quello che conferma qualcosa che vogliamo già credere.</blockquote>`
     }
 
+  ],
+
+  ebike: [
+    {
+      id:'eb1', cat:'E-Bike', subcat:'Novità', title:'E-Bike 2026: Novità e Tendenze del Mercato delle Bici Elettriche',
+      excerpt:'Motori più leggeri, batterie integrate più capienti, ABS, cambi automatici e antifurto GPS: ecco le tendenze che stanno cambiando le bici elettriche nel 2026.',
+      tags:['E-Bike','Novità 2026','Motori','Batterie','Tendenze'],
+      author:'', date:'22 Settembre 2026', readtime:'10 min',
+      color:'#1f6f5c',
+      body:`<p>Il mercato delle bici elettriche continua a evolversi a ritmo sostenuto. Nel 2026 le novità non riguardano solo la potenza: i produttori puntano su leggerezza, integrazione, sicurezza e connettività. Ecco le tendenze principali da conoscere prima di acquistare una nuova e-bike.</p>
+      <h2>Motori più leggeri e compatti</h2>
+      <p>Una delle tendenze più evidenti è la diffusione dei motori "light": unità compatte che pesano meno di 2 kg, contro i circa 3 kg dei motori tradizionali a piena potenza. Offrono meno coppia (in genere 50-60 Nm contro gli 85 Nm e oltre dei modelli full-power), ma permettono di costruire e-MTB e bici da strada elettriche che pesano pochi chili in più di una muscolare e che si guidano in modo molto naturale.</p>
+      <p>All'estremo opposto, i motori full-power di ultima generazione hanno superato stabilmente gli 85 Nm di coppia e alcuni vanno oltre i 100 Nm in modalità boost: sono pensati per l'e-MTB più impegnativa e per le cargo bike cariche.</p>
+      <h2>Batterie integrate e più capienti</h2>
+      <p>La batteria "a vista" sul portapacchi è ormai rara nelle fasce medie e alte: oggi è quasi sempre integrata nel tubo obliquo del telaio, estraibile dal basso o di lato. Le capacità sono cresciute: 500 Wh è diventato il minimo sulle trekking di buon livello, mentre 750-800 Wh sono sempre più comuni su e-MTB e bici da turismo. Molti sistemi offrono anche un range extender, una seconda batteria più piccola da montare sul portaborraccia per le uscite lunghe.</p>
+      <h2>ABS e sicurezza</h2>
+      <p>Con velocità medie più alte e bici più pesanti, frenare bene è fondamentale. Per questo si stanno diffondendo sistemi ABS sviluppati apposta per le e-bike, già presenti su diversi modelli trekking e cargo. Evitano il bloccaggio della ruota anteriore sul bagnato o sullo sterrato e riducono il rischio che la ruota posteriore si sollevi in una frenata brusca.</p>
+      <h2>Cambi automatici e motore-cambio integrati</h2>
+      <p>Un'altra novità interessante sono i sistemi che cambiano marcia da soli in base a velocità, cadenza e sforzo, oppure che permettono di cambiare anche senza pedalare. Alcuni produttori propongono unità che integrano motore e cambio in un unico blocco nel movimento centrale: meno parti esposte allo sporco e manutenzione ridotta, spesso con una trasmissione a cinghia al posto della catena.</p>
+      <h2>App, aggiornamenti e antifurto GPS</h2>
+      <p>Le e-bike sono diventate dispositivi connessi. Tramite app per smartphone si possono personalizzare le modalità di assistenza, controllare lo stato della batteria, registrare i percorsi e ricevere aggiornamenti software che a volte migliorano l'erogazione del motore. Sempre più sistemi integrano moduli di localizzazione GPS e funzioni antifurto con allarme e blocco del motore: un aspetto importante, visto il valore di questi mezzi.</p>
+      <h2>Cargo bike e mobilità urbana</h2>
+      <p>In città crescono le cargo bike elettriche, usate per trasportare bambini, spesa o merci. Sono pesanti, ma con l'assistenza diventano facili da guidare e in molti casi sostituiscono la seconda auto di famiglia.</p>
+      <h2>Prezzi: cosa aspettarsi</h2>
+      <p>Indicativamente, una buona e-bike da città con motore di marca parte da circa 1.500-2.000 euro, le trekking di qualità si collocano tra 2.500 e 4.000 euro, mentre le e-MTB di fascia alta superano facilmente i 6.000 euro. Sotto i 1.000 euro si trovano soprattutto modelli con motore nel mozzo e sensore di cadenza, adatti a un uso semplice.</p>
+      <h2>Consigli prima di comprare</h2>
+      <ul><li>Prova la bici prima di acquistarla, soprattutto in salita e in partenza.</li><li>Valuta la rete di assistenza: motore e batteria richiedono centri autorizzati.</li><li>Scegli la capacità della batteria in base ai tuoi percorsi reali, non al massimo possibile.</li><li>Controlla che ricambi e batterie sostitutive restino disponibili negli anni.</li></ul>
+      <p>Le e-bike del 2026 sono più leggere, più sicure e più intelligenti che mai: capire queste tendenze aiuta a scegliere il modello giusto senza spendere per funzioni che non servono.</p>`
+    },{id:'eb2',cat:'E-Bike',subcat:'Guide Tecniche',title:'Batteria dell\'E-Bike: Wh, Volt, Ah e Autonomia Reale Spiegati Semplice',
+      excerpt:'Cosa significano Wh, Volt e Ah, quanti km si fanno davvero con una carica e come far durare la batteria della bici elettrica per molti anni.',
+      tags:['Batteria','Autonomia','Wh','Ricarica','Manutenzione'],
+      author:'',date:'21 Settembre 2026',readtime:'11 min',color:'#2a5a8a',
+      body:`<p>La batteria è il componente più costoso di una e-bike e quello che determina quanti chilometri puoi percorrere. Capire come funziona aiuta a scegliere il modello giusto e a farla durare più a lungo.</p>
+      <h2>Volt, Ah e Wh: le tre sigle da conoscere</h2>
+      <ul><li><strong>Volt (V)</strong>: la tensione del sistema. La maggior parte delle e-bike usa batterie a 36 V; alcune, soprattutto con motore nel mozzo, lavorano a 48 V.</li><li><strong>Ampere-ora (Ah)</strong>: la quantità di carica che la batteria può fornire.</li><li><strong>Wattora (Wh)</strong>: l'energia totale immagazzinata, cioè il dato che conta davvero. Si ottiene moltiplicando i Volt per gli Ah.</li></ul>
+      <p>Esempio: una batteria da 36 V e 14 Ah contiene circa 500 Wh (36 × 14 = 504). Per confrontare due batterie guarda sempre i Wh: una 48 V da 10 Ah (480 Wh) ha praticamente la stessa energia di una 36 V da 13,4 Ah.</p>
+      <h2>Quanti chilometri si fanno davvero?</h2>
+      <p>L'autonomia dichiarata va presa con cautela, perché dipende da moltissimi fattori. Come ordine di grandezza, una e-bike consuma indicativamente da 5 a 20 Wh per chilometro: pochi in pianura con assistenza minima, molti in salita con l'assistenza al massimo. Con una batteria da 500 Wh si possono quindi percorrere da circa 30 a oltre 90 km.</p>
+      <p>I fattori che incidono di più sono:</p>
+      <ul><li><strong>Livello di assistenza</strong>: la modalità più potente può consumare il triplo di quella più leggera.</li><li><strong>Dislivello</strong>: le salite sono il vero "mangia-batteria".</li><li><strong>Peso</strong> del ciclista, della bici e del carico.</li><li><strong>Pressione delle gomme</strong>: gomme sgonfie aumentano l'attrito.</li><li><strong>Vento e temperatura</strong>.</li><li><strong>Cadenza</strong>: pedalare agile, con marce leggere, fa lavorare meglio il motore.</li></ul>
+      <h2>Le celle: cosa c'è dentro</h2>
+      <p>Una batteria per e-bike è composta da decine di celle agli ioni di litio collegate tra loro, spesso nei formati cilindrici 18650 o 21700 (i numeri indicano diametro e lunghezza in millimetri). Le celle 21700, più grandi, permettono di accumulare più energia a parità di ingombro. A controllare tutto c'è il BMS (Battery Management System), un circuito elettronico che bilancia le celle e protegge la batteria da sovraccarica, scarica eccessiva, cortocircuiti e temperature anomale.</p>
+      <h2>Ricarica: tempi e buone abitudini</h2>
+      <p>Con il caricatore standard una batteria da 500 Wh si ricarica in genere in 3-5 ore; le batterie più grandi richiedono più tempo, mentre i caricatori rapidi lo riducono. Alcune regole semplici:</p>
+      <ul><li>Usa sempre il caricatore originale o uno approvato dal produttore.</li><li>Ricarica a temperatura ambiente, mai sotto zero: se la batteria è fredda, lasciala scaldare in casa prima di collegarla.</li><li>Le ricariche parziali non fanno danni: le batterie al litio non hanno "effetto memoria".</li><li>Ricarica su una superficie non infiammabile, lontano da fonti di calore, e non lasciarla collegata per giorni.</li></ul>
+      <h2>Come farla durare di più</h2>
+      <p>Una batteria di qualità sopporta in genere diverse centinaia di cicli completi di carica (spesso tra 500 e 1.000) prima di scendere a circa il 70-80% della capacità iniziale. Per allungarne la vita:</p>
+      <ul><li>Evita di lasciarla a lungo completamente scarica o sempre al 100%.</li><li>Per le soste lunghe, ad esempio in inverno, conservala carica a circa metà, in un luogo fresco e asciutto, e controllala ogni tanto.</li><li>Non esporla al sole diretto e non lasciarla in auto d'estate.</li><li>Tieni puliti i contatti e proteggila dagli urti.</li></ul>
+      <h2>Batteria e inverno</h2>
+      <p>Con il freddo le reazioni chimiche rallentano e l'autonomia può calare sensibilmente, anche del 20-30% nelle giornate più rigide. È un calo temporaneo: con temperature miti torna normale. Conviene tenere la batteria in casa e montarla sulla bici solo al momento di partire.</p>
+      <h2>Sicurezza e smaltimento</h2>
+      <p>Non acquistare batterie economiche non certificate e non far "rigenerare" le celle da laboratori non qualificati: una batteria al litio danneggiata può surriscaldarsi e prendere fuoco. Se la batteria ha subito un urto forte, si deforma o si scalda in modo anomalo, smetti di usarla e falla controllare. A fine vita va consegnata al rivenditore o a un centro di raccolta autorizzato: non va mai gettata nei rifiuti indifferenziati.</p>`
+    },{id:'eb3',cat:'E-Bike',subcat:'Guide Tecniche',title:'Sensore di Coppia o di Cadenza? Differenze e Quale Scegliere per la Tua E-Bike',
+      excerpt:'Il sensore decide come e quando il motore ti aiuta. Ecco come funzionano sensore di cadenza e sensore di coppia, pregi, difetti e quale conviene in base all\'uso.',
+      tags:['Sensore di coppia','Cadenza','Motore','Guida','Acquisto'],
+      author:'',date:'19 Settembre 2026',readtime:'9 min',color:'#6a3a8a',
+      body:`<p>Due e-bike con la stessa potenza possono dare sensazioni completamente diverse. Il motivo, spesso, è il sensore che comanda il motore: è lui a decidere quando partire con l'assistenza e quanta spinta dare. I sistemi principali sono due: il sensore di cadenza e il sensore di coppia.</p>
+      <h2>Come funziona il sensore di cadenza</h2>
+      <p>Il sensore di cadenza rileva semplicemente se i pedali stanno girando, di solito tramite un disco con dei magneti montato vicino alla pedivella. Appena rileva la rotazione, il motore interviene con una potenza che dipende dal livello di assistenza scelto, non da quanto forte spingi.</p>
+      <p>In pratica funziona quasi come un interruttore: pedali e il motore spinge, smetti e il motore si ferma.</p>
+      <h2>Pregi e difetti della cadenza</h2>
+      <ul><li><strong>Pro</strong>: costa poco, è semplice e affidabile, richiede pochissimo sforzo.</li><li><strong>Pro</strong>: adatto a chi vuole faticare il meno possibile su percorsi pianeggianti.</li><li><strong>Contro</strong>: c'è un piccolo ritardo alla partenza e allo stop, perché il sensore deve "vedere" la rotazione.</li><li><strong>Contro</strong>: la spinta può risultare brusca e meno naturale in curva o su terreni scivolosi.</li><li><strong>Contro</strong>: di solito consuma più batteria, perché il motore lavora anche quando non servirebbe.</li></ul>
+      <h2>Come funziona il sensore di coppia</h2>
+      <p>Il sensore di coppia misura la forza che applichi sui pedali, espressa in newton metro (Nm), centinaia di volte al secondo. Il motore aggiunge una spinta proporzionale al tuo sforzo: se pedali piano ti aiuta poco, se spingi forte (ad esempio in salita) ti aiuta molto. Il risultato è una pedalata che somiglia a quella di una bici normale, solo con "gambe più forti".</p>
+      <p>I motori centrali delle marche più note, come Bosch, Shimano, Yamaha o Brose, usano sensori di coppia, spesso combinati con sensori di cadenza e di velocità per rendere l'erogazione ancora più fluida.</p>
+      <h2>Pregi e difetti della coppia</h2>
+      <ul><li><strong>Pro</strong>: sensazione naturale e controllo preciso, ideale in salita, in fuoristrada e nelle partenze.</li><li><strong>Pro</strong>: il motore lavora solo quanto serve, quindi l'autonomia è in genere migliore.</li><li><strong>Pro</strong>: risposta immediata, senza ritardi.</li><li><strong>Contro</strong>: costo più alto.</li><li><strong>Contro</strong>: bisogna comunque pedalare con un minimo di impegno per ricevere tanta assistenza.</li></ul>
+      <h2>E i motori nel mozzo?</h2>
+      <p>Molte e-bike economiche con motore nel mozzo posteriore usano il sensore di cadenza, ma non è una regola: esistono anche modelli con motore nel mozzo abbinato a un sensore di coppia nel movimento centrale, che offrono un buon compromesso tra prezzo e naturalezza.</p>
+      <h2>Quale scegliere?</h2>
+      <ul><li><strong>Città in pianura, spostamenti brevi, budget contenuto</strong>: il sensore di cadenza va benissimo.</li><li><strong>Salite, percorsi misti, uscite lunghe</strong>: meglio il sensore di coppia.</li><li><strong>e-MTB e fuoristrada</strong>: il sensore di coppia è praticamente indispensabile, per avere controllo e trazione.</li><li><strong>Chi vuole fare attività fisica</strong>: il sensore di coppia premia l'impegno e fa allenare di più.</li></ul>
+      <h2>Il test da fare in negozio</h2>
+      <p>Prova una partenza da fermo in leggera salita e una curva stretta a bassa velocità. Con un buon sensore di coppia la bici parte subito e in modo dolce; con un sensore di cadenza noterai un attimo di ritardo seguito da una spinta più decisa. È il modo più semplice per capire quale sistema fa per te.</p>`
+    },{id:'eb4',cat:'E-Bike',subcat:'Guide Tecniche',title:'Motore Centrale o nel Mozzo? Coppia, Potenza e Cambio sull\'E-Bike',
+      excerpt:'Dove è montato il motore cambia tutto: guida, salite, manutenzione e prezzo. Cosa significano davvero i 250 W e i Nm e come usare bene il cambio.',
+      tags:['Motore','Coppia','Nm','Cambio','Cadenza'],
+      author:'',date:'17 Settembre 2026',readtime:'10 min',color:'#8a5a1a',
+      body:`<p>Quando si confrontano due e-bike, le prime domande sono sempre le stesse: dov'è il motore, quanta coppia ha, quanti watt? Ecco cosa significano davvero questi dati e perché il cambio conta più di quanto si pensi.</p>
+      <h2>Motore nel mozzo anteriore</h2>
+      <p>È la soluzione più semplice ed economica, usata su molte bici da città di base e sui kit di conversione. Il motore "tira" la bici dalla ruota davanti.</p>
+      <ul><li><strong>Pro</strong>: prezzo basso, lascia libera la trasmissione, facile da installare.</li><li><strong>Contro</strong>: sullo sterrato o sul bagnato la ruota anteriore può slittare, lo sterzo diventa più pesante e il peso è sbilanciato in avanti.</li></ul>
+      <h2>Motore nel mozzo posteriore</h2>
+      <p>Il motore è integrato nella ruota dietro e spinge la bici. La sensazione è più naturale rispetto al mozzo anteriore.</p>
+      <ul><li><strong>Pro</strong>: buona trazione, costo contenuto, funzionamento silenzioso.</li><li><strong>Contro</strong>: peso concentrato sul retro, smontare la ruota (ad esempio per una foratura) è più scomodo, e il motore non sfrutta il cambio, quindi sulle salite ripide rende meno.</li></ul>
+      <h2>Motore centrale</h2>
+      <p>Il motore è montato nel movimento centrale, dove girano le pedivelle. È la soluzione tipica delle e-bike di fascia media e alta e di quasi tutte le e-MTB.</p>
+      <ul><li><strong>Pro</strong>: baricentro basso e centrale, guida equilibrata e, soprattutto, sfrutta il cambio: in salita, scalando una marcia, anche il motore lavora in condizioni migliori.</li><li><strong>Pro</strong>: quasi sempre abbinato a un sensore di coppia, per una pedalata naturale.</li><li><strong>Contro</strong>: costo più alto e maggiore usura di catena e pignoni, che ricevono insieme la forza delle gambe e quella del motore.</li></ul>
+      <h2>Watt: perché tutte dicono "250 W"</h2>
+      <p>In Europa una bici a pedalata assistita può avere una potenza nominale continua massima di 250 W. Questo non significa che il motore non possa erogare di più: la potenza di picco, per brevi momenti, può essere anche doppia o superiore. Per questo due motori "da 250 W" possono comportarsi in modo molto diverso.</p>
+      <h2>Coppia (Nm): il dato che conta in salita</h2>
+      <p>La coppia, misurata in newton metro, indica la forza di spinta del motore. È il valore che si sente di più nelle partenze e nelle salite. Come riferimento indicativo:</p>
+      <ul><li><strong>40-50 Nm</strong>: bici da città per percorsi pianeggianti.</li><li><strong>50-70 Nm</strong>: trekking e uso misto, motori "light" per e-MTB leggere.</li><li><strong>85 Nm e oltre</strong>: e-MTB full-power e cargo bike cariche.</li></ul>
+      <p>Più coppia non è sempre meglio: consuma più batteria e il motore pesa di più. Conviene sceglierla in base al proprio percorso.</p>
+      <h2>Il cambio sulla e-bike</h2>
+      <p>Sulle e-bike si trovano tre soluzioni principali:</p>
+      <ul><li><strong>Deragliatore</strong> con pignoni posteriori: leggero ed efficiente, il più diffuso, ma richiede pulizia e regolazione.</li><li><strong>Cambio al mozzo interno</strong>, anche a variazione continua: ingranaggi protetti dallo sporco, si può cambiare da fermi, poca manutenzione. Ideale in città, spesso abbinato alla trasmissione a cinghia.</li><li><strong>Cambi elettronici e automatici</strong>: cambiano marcia da soli in base a velocità e cadenza, oppure con un semplice pulsante.</li></ul>
+      <h2>Come usare bene il cambio (e risparmiare batteria)</h2>
+      <ul><li>Scala la marcia <strong>prima</strong> della salita, non a metà quando sei già sotto sforzo.</li><li>Quando cambi, alleggerisci per un attimo la spinta sui pedali: catena e pignoni ringraziano, soprattutto con il motore centrale.</li><li>Mantieni una cadenza agile, indicativamente tra 70 e 90 pedalate al minuto: i motori centrali rendono meglio a cadenze medio-alte.</li><li>Parti da fermo con una marcia leggera.</li></ul>
+      <h2>Manutenzione della trasmissione</h2>
+      <p>Con il motore centrale la catena si allunga più in fretta. Controllala periodicamente con un calibro per catene e sostituiscila in tempo: una catena troppo allungata consuma rapidamente anche pignoni e corona. Esistono catene e pacchi pignoni rinforzati pensati apposta per le e-bike.</p>`
+    },{id:'eb5',cat:'E-Bike',subcat:'Normativa',title:'E-Bike e Legge in Italia: 25 km/h, 250 W, Casco, Assicurazione e Rischi dello Sblocco',
+      excerpt:'Quando una bici elettrica è considerata una bicicletta, cosa è obbligatorio, cosa no e perché sbloccare il limite dei 25 km/h può costare molto caro.',
+      tags:['Normativa','Codice della Strada','25 km/h','Speed pedelec','Sicurezza'],
+      author:'',date:'15 Settembre 2026',readtime:'9 min',color:'#7a2a2a',
+      body:`<p>Le e-bike sono sempre più diffuse, ma sulle regole c'è ancora molta confusione. Ecco cosa prevede la normativa italiana ed europea per le bici a pedalata assistita, spiegato in modo semplice.</p>
+      <h2>Quando una e-bike è una "bicicletta"</h2>
+      <p>Per la legge, una bici a pedalata assistita (in sigla EPAC, o pedelec) è equiparata a una normale bicicletta se rispetta tre condizioni:</p>
+      <ul><li>il motore aiuta <strong>solo mentre pedali</strong>;</li><li>la potenza nominale continua del motore non supera i <strong>250 W</strong>;</li><li>l'assistenza si riduce progressivamente e si interrompe al raggiungimento dei <strong>25 km/h</strong>.</li></ul>
+      <p>Il riferimento tecnico è la norma europea EN 15194. Oltre i 25 km/h puoi andare più veloce, ma solo con la forza delle gambe.</p>
+      <h2>E l'acceleratore?</h2>
+      <p>Sulle EPAC è ammessa solo la funzione di assistenza alla spinta (walk assist), che aiuta a spingere la bici a mano fino a 6 km/h, ad esempio in salita o su una rampa. Un acceleratore che fa muovere la bici senza pedalare a velocità superiori la fa uscire dalla categoria delle biciclette.</p>
+      <h2>Cosa non serve</h2>
+      <p>Se la tua e-bike rispetta i requisiti, valgono le stesse regole della bicicletta:</p>
+      <ul><li>niente targa e niente immatricolazione;</li><li>nessuna patente;</li><li>nessuna assicurazione obbligatoria;</li><li>il casco non è obbligatorio per legge, ma è fortemente consigliato.</li></ul>
+      <p>Il nuovo Codice della Strada, in vigore da fine 2024, ha introdotto casco, contrassegno e assicurazione obbligatori per i <strong>monopattini elettrici</strong>, non per le bici a pedalata assistita.</p>
+      <h2>Cosa è obbligatorio</h2>
+      <p>Come ogni bicicletta, anche la e-bike deve avere:</p>
+      <ul><li>freni efficienti su entrambe le ruote;</li><li>campanello;</li><li>luce bianca anteriore e rossa posteriore, da accendere di sera e quando la visibilità è scarsa;</li><li>catadiottri posteriori, sui pedali e sui lati.</li></ul>
+      <p>Di notte fuori dai centri abitati, e sempre nelle gallerie, è obbligatorio indossare il giubbotto o le bretelle retroriflettenti.</p>
+      <h2>Speed pedelec: un'altra categoria</h2>
+      <p>Esistono e-bike che assistono fino a 45 km/h, chiamate speed pedelec o S-pedelec. Per la legge <strong>non sono biciclette ma ciclomotori</strong>: servono omologazione, targa, assicurazione, casco e patente (almeno AM). Non possono circolare sulle piste ciclabili.</p>
+      <h2>Lo sblocco: perché è una pessima idea</h2>
+      <p>In rete si trovano dispositivi e "chip" che eliminano il limite dei 25 km/h. Montarli trasforma di fatto la e-bike in un ciclomotore non omologato. Le conseguenze possono essere pesanti:</p>
+      <ul><li>sanzioni previste dal Codice della Strada per chi circola con un veicolo non conforme, che nei casi più gravi possono arrivare al sequestro del mezzo;</li><li>in caso di incidente l'assicurazione, ad esempio la RC del capofamiglia, può rifiutarsi di coprire i danni, che restano a tuo carico;</li><li>decade la garanzia del produttore su motore e batteria;</li><li>freni, telaio e componenti non sono progettati per velocità più alte: aumenta il rischio di guasti e cadute.</li></ul>
+      <h2>Assicurazione: obbligatoria no, utile sì</h2>
+      <p>Anche se non è obbligatoria, un'assicurazione di responsabilità civile è consigliata: se causi un danno a qualcuno ne rispondi personalmente. Spesso basta la polizza RC del capofamiglia, ma conviene verificare che copra l'uso della bici elettrica. Per mezzi di valore esistono anche polizze specifiche contro furto e danni.</p>
+      <h2>Consigli per pedalare sicuri</h2>
+      <ul><li>Indossa sempre il casco, anche se non è obbligatorio.</li><li>Ricorda che le e-bike accelerano più delle bici normali: pedoni e automobilisti potrebbero sottovalutare la tua velocità.</li><li>Usa le luci anche di giorno quando la visibilità è ridotta.</li><li>Controlla spesso freni e pneumatici: la bici è più pesante e frena in più spazio.</li></ul>
+      <p><em>Le informazioni di questo articolo hanno scopo divulgativo: per casi specifici fai sempre riferimento al testo aggiornato del Codice della Strada o chiedi alle autorità competenti.</em></p>`
+    }
   ]
 };
 
@@ -3518,6 +3671,11 @@ function getArticleImg(id) {
     v11: P('iceland-aurora-winter'),  v12: P('istanbul-bosphorus-city'),
     v13: P('amsterdam-canals-bikes'), v14: P('dolomites-trekking-italy'),
     v15: P('kenya-safari-wildlife'),
+    eb1: U('1563990308267-cd6d3cc09318'), // e-MTB rossa in montagna
+    eb2: U('1621394457665-6e6d4961f686'), // estrazione batteria dal telaio
+    eb3: U('1635816048695-51dc43a7b24c'), // pedalata in salita su sterrato
+    eb4: U('1641546088653-825bebd28fe2'), // primo piano motore centrale
+    eb5: U('1625090665908-9e61b01aba6c'), // e-bike nel traffico cittadino con casco
   };
   return map[id] || P(`article-${id}`); // fallback: foto per ID articolo
 }
@@ -3530,7 +3688,8 @@ function getArticleEmoji(id) {
     "s1":"📲","s2":"⚙️","s3":"🔋","s4":"💰","s5":"🔐","s6":"⚡","s7":"⌚","s8":"📷",
     "d1":"🚁","d2":"🕹️","d3":"📋","d4":"🎬","d5":"🆚","d6":"⚠️","d7":"🥽","d8":"🎞️",
     "r1":"📡","r2":"📶","r3":"📚","r4":"📻","r5":"🔌","r6":"🏆","r7":"🌐","r8":"🎙️",
-    "a1":"🤖","a2":"💬","a3":"🎨","a4":"🧠","a5":"💼","a6":"🇪🇺","a7":"🔍","a8":"🤖","a9":"🖼️","a10":"⚡","a11":"🦙","a12":"⌨️","a13":"🎬","a14":"📣","a15":"🎭","r9":"📡","r10":"📻","r11":"🗼","r12":"🛸","r13":"🔭","d9":"🖼️","d10":"🆚","d11":"📄","d12":"🔧","d13":"🌦️","s9":"🔄","s10":"📲","s11":"🎧","s12":"🔨","s13":"📸","t9":"📟","t10":"🖥️","t11":"🔐","t12":"🖨️","t13":"🛡️","sf11":"🥽","sf12":"🎯","sf13":"📋","sf14":"👗","sf15":"💨","v11":"🌌","v12":"🕌","v13":"🚲","v14":"⛰️","v15":"🦁"
+    "a1":"🤖","a2":"💬","a3":"🎨","a4":"🧠","a5":"💼","a6":"🇪🇺","a7":"🔍","a8":"🤖","a9":"🖼️","a10":"⚡","a11":"🦙","a12":"⌨️","a13":"🎬","a14":"📣","a15":"🎭","r9":"📡","r10":"📻","r11":"🗼","r12":"🛸","r13":"🔭","d9":"🖼️","d10":"🆚","d11":"📄","d12":"🔧","d13":"🌦️","s9":"🔄","s10":"📲","s11":"🎧","s12":"🔨","s13":"📸","t9":"📟","t10":"🖥️","t11":"🔐","t12":"🖨️","t13":"🛡️","sf11":"🥽","sf12":"🎯","sf13":"📋","sf14":"👗","sf15":"💨","v11":"🌌","v12":"🕌","v13":"🚲","v14":"⛰️","v15":"🦁",
+    "eb1":"🚲","eb2":"🔋","eb3":"🦵","eb4":"⚙️","eb5":"⚖️"
   };
   return map[id] || '📄';
 }
@@ -3552,7 +3711,7 @@ function cardHTML(art, extraClass='') {
       <div class="card-title">${art.title}</div>
       <div class="card-excerpt">${art.excerpt}</div>
       <div class="card-meta">
-        <span class="author">✍️ ${art.author}</span>
+        ${art.author ? `<span class="author">✍️ ${art.author}</span>` : ''}
         <span>📅 ${art.date}</span>
         <span>⏱ ${art.readtime}</span>
       </div>
@@ -3573,7 +3732,7 @@ function listCardHTML(art, num='') {
     <div class="card-list-img" style="${imgStyle}">${emoji}</div>
     <div class="card-list-body">
       <div class="card-list-title">${art.title}</div>
-      <div class="card-list-meta">✍️ ${art.author} · ${art.date}</div>
+      <div class="card-list-meta">${art.author ? `✍️ ${art.author} · ` : ''}${art.date}</div>
     </div>
   </div>`;
 }
@@ -3660,7 +3819,7 @@ function renderHome() {
   // Categories sidebar
   const cats = Object.entries({
     viaggi:'✈️ Viaggi', softair:'🎯 Softair', tech:'💻 Tecnologia',
-    smartphone:'📱 Smartphone', droni:'🚁 Droni', radio:'📻 Radioamatori', ai:'🤖 AI'
+    smartphone:'📱 Smartphone', droni:'🚁 Droni', radio:'📻 Radioamatori', ai:'🤖 AI', ebike:'🚲 E-Bike'
   }).map(([key,name]) => ({name, count: ARTICLES[key].length}));
   document.getElementById('cat-list').innerHTML = cats.map(c=>`
     <li style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);">
@@ -3705,6 +3864,7 @@ function renderSharedSidebar(key) {
     droni:      { icon:'🚁', label:'Blog Droni',               desc:'Pilotaggio, normativa, recensioni e tecniche cinematiche.' },
     radio:      { icon:'📻', label:'Blog Radioamatori',        desc:'HF, VHF, modi digitali, antenne e normativa italiana.' },
     ai:         { icon:'🤖', label:'Blog Intelligenza Artificiale', desc:'Strumenti, guide e notizie sull\'intelligenza artificiale.' },
+    ebike:      { icon:'🚲', label:'Blog E-Bike',              desc:'Novità, batterie, motori, sensori e normativa delle bici elettriche.' },
   };
   const m = catMeta[key] || { icon:'📄', label:'Blog', desc:'' };
 
@@ -3770,7 +3930,7 @@ function renderSharedSidebar(key) {
       <div class="widget-header">📁 Tutte le Categorie</div>
       <div class="widget-body">
         <ul style="display:flex;flex-direction:column;gap:8px;">
-          ${Object.entries({viaggi:'✈️ Viaggi',softair:'🎯 Softair',tech:'💻 Tecnologia',smartphone:'📱 Smartphone',droni:'🚁 Droni',radio:'📻 Radioamatori',ai:'🤖 AI'}).map(([k,name]) => `
+          ${Object.entries({viaggi:'✈️ Viaggi',softair:'🎯 Softair',tech:'💻 Tecnologia',smartphone:'📱 Smartphone',droni:'🚁 Droni',radio:'📻 Radioamatori',ai:'🤖 AI',ebike:'🚲 E-Bike'}).map(([k,name]) => `
             <li style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);">
               <a href="#" onclick="showPage('${k}');return false;" style="font-size:14px;font-weight:${k===key?'700':'500'};color:${k===key?'var(--accent)':'var(--text2)'};">${name}</a>
               <span style="background:var(--bg3);padding:2px 10px;border-radius:50px;font-size:11px;font-weight:700;color:var(--text3);">${ARTICLES[k].length}</span>
@@ -3840,9 +4000,9 @@ function openArticle(id) {
     <span class="article-category">${art.cat}</span>
     <h1 class="article-title">${art.title}</h1>
     <div class="article-meta">
-      <div class="article-author-avatar">${art.author.charAt(0)}</div>
+      ${art.author ? `<div class="article-author-avatar">${art.author.charAt(0)}</div>` : ''}
       <div>
-        <strong style="display:block;">${art.author}</strong>
+        ${art.author ? `<strong style="display:block;">${art.author}</strong>` : ''}
         <span style="font-size:12px;color:var(--text3);">${art.date}</span>
       </div>
       <span style="margin-left:auto;">⏱ ${art.readtime} di lettura</span>
@@ -3922,6 +4082,7 @@ const CAT_META = {
   droni:      { icon:'🚁',  label:'Droni' },
   radio:      { icon:'📻',  label:'Radioamatori' },
   ai:         { icon:'🤖',  label:'Intelligenza Artificiale' },
+  ebike:      { icon:'🚲',  label:'E-Bike' },
 };
 
 function openSitemap() {
@@ -4202,7 +4363,7 @@ function initVisitCounter() {
 
 // ===== UPDATE PILL COUNTS =====
 function updatePillCounts() {
-  ['viaggi','softair','tech','smartphone','droni','radio','ai'].forEach(key => {
+  ['viaggi','softair','tech','smartphone','droni','radio','ai','ebike'].forEach(key => {
     const el = document.getElementById(`pill-count-${key}`);
     if (el) el.textContent = `${ARTICLES[key].length} articoli`;
   });
